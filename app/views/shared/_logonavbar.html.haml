@@ -1,21 +1,13 @@
 .row#top
   .col-md-6#logo
-    = image_tag "logo.png"
-    %p
-      Tablica
+    =link_to image_tag("logo.png",), root_url
+    %p= link_to "Tablica", root_url
   .col-md-6.text-right#nav
     %ul
-      %li
-        logged as
-        %b Edziu Nowak
-      %li
-      log out
+      %li=link_to raw('logged as <b>Edziu Nowak</b>'), root_url #link do profilu użytkownika
+      %li=link_to "log out", root_url
     %ul
-      %li
-        My week plan
-      %li
-        Holidays
-      %li
-        Raports
-      %li
-        Calendar
+      %li=link_to "My week plan", root_url
+      %li=link_to "Holidays", root_url
+      %li=link_to "Raports", root_url
+      %li=link_to "Calendar", root_url

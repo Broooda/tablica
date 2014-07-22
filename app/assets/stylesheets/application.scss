@@ -24,10 +24,13 @@ body {
 
 #top {
   margin: 15px 0px;
+  a{color: #FFF;}
+  a:hover{color: #FFF; text-decoration: none;}
+
+
   #logo {
 
     padding-left: 70px;
-    
 
     p{
       position: relative;
@@ -51,15 +54,17 @@ body {
 
       li {
         display: inline-block;
-        margin-left: 30px;
+        margin: -5px 0px -5px 15px;
+        padding: 5px;
+      }
+      li:hover {
+        background: rgba(0, 0, 0, 0.5);
       }
     }
   }
 }
 
 #content {
-
-
   background: rgba(220, 220, 220, 0.85  );
 
 
