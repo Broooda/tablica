@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20140722102514) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+<<<<<<< HEAD
   create_table "hours_plans", force: true do |t|
     t.datetime "start_date"
     t.datetime "end_date"
@@ -26,6 +27,8 @@ ActiveRecord::Schema.define(version: 20140722102514) do
 
 =======
 
+=======
+>>>>>>> 4f6b2bc7d7e892463e136ae424677420736dfd8f
   enable_extension "plpgsql"
 
 
