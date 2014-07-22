@@ -13,7 +13,7 @@
  *= require_tree .
  *= require_self
  */
-
+html, body {height: 100%;}
 body {
   font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
 
@@ -58,7 +58,7 @@ body {
 }
 
 #content {
-  min-height:  600px;
+
 
   background: rgba(220, 220, 220, 0.85  );
 
@@ -69,6 +69,8 @@ body {
 }
 
 #footer {
+  position: absolute;
+  bottom: 0px;
   padding: 10px;
   color: #EEE;
 }
