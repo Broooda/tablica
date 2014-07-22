@@ -26,14 +26,6 @@ ActiveRecord::Schema.define(version: 20140722102514) do
 
 =======
 
-
-ActiveRecord::Schema.define(version: 20140722125557) do
-
-
-ActiveRecord::Schema.define(version: 20140722100405) do
-
-
-
   enable_extension "plpgsql"
 
 
