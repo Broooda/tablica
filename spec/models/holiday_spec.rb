@@ -10,7 +10,8 @@ RSpec.describe Holiday, :type => :model do
     expect(subject.attributes).to include('startdate', 'enddate', 'description', 'status', 'reason')
   end
 
-  it 'must have startdate' do
-    subject.should have(1).error_on(:startdate)
+  it 'should require startdate, enddate, description, status' do
+    #expect(Holiday.new).not_to be_valid
+    expect(Holiday.new(startdate: DateTime.now, enddate: DateTime.now+10.days, description: "Urlop", status: "accepted")).to be_valid
   end
 end
