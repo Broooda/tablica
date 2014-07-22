@@ -16,6 +16,16 @@ ActiveRecord::Schema.define(version: 20140722104208) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "holidays", force: true do |t|
+    t.datetime "StartDate"
+    t.datetime "EndDate"
+    t.text     "Description"
+    t.string   "Status"
+    t.text     "Reason"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
