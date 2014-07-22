@@ -4,8 +4,14 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :rememberable, :trackable, :validatable
 
-         validates :name, presence: true
-         validates :surname, presence: true
-         validates :defaultWorkTime_id, presence: true
-         validates :admin, presence: true
+        validates :name, presence: true
+        validates :surname, presence: true
+        validates :default_work_time_id, presence: true
+
+
+        has_one :default_work_time
+
+        has_many :work_time_request
+        has_many :hours_plan
+        has_many :holiday
 end
