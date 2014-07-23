@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   devise_scope :user do  #tymczasowe rozwiązanie
       root 'devise/sessions#new'
   end
-
+  resources :holiday
   get 'week' => 'week#show' 
 
   # The priority is based upon order of creation: first created -> highest priority.
