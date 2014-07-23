@@ -36,8 +36,7 @@ class HolidayController < ApplicationController
 	private
 		def holdiay_params
 		params.require(:holiday).permit(:StartDate,:EndDate,:Description,:Status,:Reason) 
-
-	private
+	end
 
 end
 	
