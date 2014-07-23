@@ -5,7 +5,7 @@
   #nowline
     #nowlinetext.text-center
   -(0..5).each do |day_num|
-    -comercial_date = Date.commercial(Date.today.year, Date.today.cweek, day_num) unless day_num==0
+    -comercial_date = Date.commercial(@year, @week_num, day_num) unless day_num==0
     .col-xs-2.day{:class => ("today" if comercial_date==Date.today)}
       .weekday
         -if day_num==0

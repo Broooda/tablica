@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
         validates :surname, presence: true
 
         has_one :default_work_time
-
+        has_many :hours_plan
         has_many :work_time_request
         has_many :hours_plan
         has_many :holiday
