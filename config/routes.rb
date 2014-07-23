@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  devise_scope :user do  #tymczasowe rozwiązanie
-      root 'devise/sessions#new'
-  end
+  root 'week#showtime'
 
   get 'week/time' => 'week#showtime'
   get 'week/people' => 'week#showpeople' 

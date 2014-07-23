@@ -14,6 +14,8 @@
     .col-xs-2.day{:class => ("today" if comercial_date==Date.today)}
       .weekday
         -if day_num==0 
+          by time
+          %br
           =link_to "by people", week_people_url
         -else
           .dayname=raw(days[day_num])

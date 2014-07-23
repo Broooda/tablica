@@ -10,6 +10,8 @@
       .weekday
         -if day_num==0
           =link_to "by time", week_time_url
+          %br
+          by people
         -else
           .dayname=raw(days[day_num])
           .daydate=comercial_date
@@ -17,7 +19,7 @@
       -@users.each do |user|
         -if day_num==0
           .hour.text-center
-            %span
+            %span.man
               =user.name
               =user.surname
         -else

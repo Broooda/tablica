@@ -21,7 +21,7 @@
     height: 50px;
     border-top: 2px dashed #d2d2d2;
 
-    span.bighour, span.smallhour {
+    span.bighour, span.smallhour, span.man {
       position: relative;
       z-index: 3; 
     }
@@ -33,7 +33,12 @@
       left: -2px;
       font-size: 17px;      
     }
+    span.man{
+      top: 10px;
+    }
   }
+
+
 
   #nowline {
     display: none;
