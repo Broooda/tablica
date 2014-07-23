@@ -3,6 +3,11 @@
 
   .weekday {
       padding: 15px 15px;
+      height: 70px;
+
+      .dayname {
+        font-weight: bold;
+      }
   }
 
   .day {
