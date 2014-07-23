@@ -9,7 +9,7 @@
     .col-xs-2.day{:class => ("today" if comercial_date==Date.today)}
       .weekday
         -if day_num==0
-          =link_to "by time", week_time_url
+          =link_to "by time", week_time_date_url(@year,@week_num)
           %br
           by people
         -else

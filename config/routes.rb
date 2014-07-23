@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   root 'week#showtime'
 
   get 'week/time' => 'week#showtime'
-  get 'week/people' => 'week#showpeople' 
+  get 'week/time/:year/:week' => 'week#showtime', as: "week_time_date"
+  get 'week/people' => 'week#showpeople'
+  get 'week/people/:year/:week' => 'week#showpeople', as: "week_people_date"
 
   resources :default_work_times, only: [:show]
 

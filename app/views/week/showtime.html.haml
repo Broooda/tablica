@@ -16,7 +16,7 @@
         -if day_num==0 
           by time
           %br
-          =link_to "by people", week_people_url
+          =link_to "by people", week_people_date_url(@year,@week_num)
         -else
           .dayname=raw(days[day_num])
           .daydate=comercial_date
