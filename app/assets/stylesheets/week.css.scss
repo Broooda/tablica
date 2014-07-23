@@ -3,11 +3,18 @@
 
   .weekday {
       padding: 15px 15px;
+      height: 70px;
+
+      .dayname {font-weight: bold;}
   }
 
   .day {
-   background: #eee;
-   border-left: 2px dashed #ccc;
+    background: #eee;
+    border-left: 2px dashed #ccc;
+  }
+
+  .today {
+    background: #ddb2a9;
   }
 
   .hour {

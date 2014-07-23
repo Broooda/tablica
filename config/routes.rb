@@ -5,7 +5,8 @@ Rails.application.routes.draw do
       root 'devise/sessions#new'
   end
 
-  get 'week' => 'week#show' 
+  get 'week/time' => 'week#showtime'
+  get 'week/people' => 'week#showpeople' 
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

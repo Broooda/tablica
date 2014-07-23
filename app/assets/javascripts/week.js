@@ -1,7 +1,10 @@
 function moveNowLine() {
+  startHour = startHour || 7;
+  endHour = endHour || 23;
+
   now = new Date();
-  if(now.getHours()>7 && now.getHours()<23 ) {
-    offset = (now.getHours()+now.getMinutes()/60+now.getSeconds()/3600-7)*50+50;
+  if(now.getHours()>startHour && now.getHours()<(endHour+1) ) {
+    offset = (now.getHours()+now.getMinutes()/60+now.getSeconds()/3600-startHour)*50+70;
     $('#nowline').css('display','block');
     $('#nowline').css('top',offset+'px');
     $('#nowlinetext').text(now.toLocaleTimeString());
@@ -12,6 +15,8 @@ function moveNowLine() {
 }
 
 $(function(){
-  moveNowLine();
-  setInterval(function(){moveNowLine();}, 1000);
+  if(startHour && endHour) {
+    moveNowLine();
+    setInterval(function(){moveNowLine();}, 1000);
+  }
 })
