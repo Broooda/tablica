@@ -11,35 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140722102514) do
+ActiveRecord::Schema.define(version: 20140723080419) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "hours_plans", force: true do |t|
-    t.datetime "start_date"
-    t.datetime "end_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-
-ActiveRecord::Schema.define(version: 20140722105733) do
-
-
-  enable_extension "plpgsql"
-
-
-
-  create_table "holidays", force: true do |t|
-    t.datetime "StartDate"
-    t.datetime "EndDate"
-    t.text     "Description"
-    t.string   "Status"
-    t.text     "Reason"
-
   create_table "default_work_times", force: true do |t|
-    t.string "week", default: [], array: true
+    t.string  "week",    default: [], array: true
+    t.integer "user_id"
   end
 
   create_table "holidays", force: true do |t|
@@ -48,7 +27,13 @@ ActiveRecord::Schema.define(version: 20140722105733) do
     t.text     "description"
     t.string   "status"
     t.text     "reason"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
+  create_table "hours_plans", force: true do |t|
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -68,7 +53,7 @@ ActiveRecord::Schema.define(version: 20140722105733) do
     t.datetime "updated_at"
     t.string   "name"
     t.string   "surname"
-    t.integer  "default_work_time_id"
+    t.integer  "defaultWorkTime_id"
     t.boolean  "admin"
   end
 
