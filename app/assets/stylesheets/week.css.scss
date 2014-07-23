@@ -12,6 +12,19 @@
   .day {
     background: #eee;
     border-left: 2px dashed #ccc;
+    position: relative;
+
+    .hours-plan {
+      position: absolute;
+      left: 0px;
+      top: 0px;
+
+      width: 8px;
+      height: 5px;
+
+      background: #F00;
+      z-index: 4;
+    }
   }
 
   .today {
