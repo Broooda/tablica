@@ -8,7 +8,7 @@ class HolidayController < ApplicationController
 		@holiday =Holiday.find(params[:id])
 	end
 	def destroy
-		@holiday.find(params:id))
+		@holiday.find(params:id)
 		@holiday.destroy
 		redirect_to root_url, alert: "Removed Holiday "
 	end
