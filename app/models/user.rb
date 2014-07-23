@@ -6,8 +6,6 @@ class User < ActiveRecord::Base
 
         validates :name, presence: true
         validates :surname, presence: true
-        validates :default_work_time_id, presence: true
-
 
         has_one :default_work_time
 

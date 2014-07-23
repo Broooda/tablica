@@ -1,0 +1,33 @@
+- days = [nil,'monday', 'tuesday','wednesday','thursday','friday']
+
+-# przekazanie zmiennych do JS
+:javascript
+  var startHour=#{@start_hour};
+  var endHour=#{@end_hour};
+
+-#generowanie tabeli
+.row.timetable
+  #nowline
+    #nowlinetext.text-center
+  -(0..5).each do |day_num|
+    -comercial_date = Date.commercial(Date.today.year, Date.today.cweek, day_num) unless day_num==0
+    .col-xs-2.day{:class => ("today" if comercial_date==Date.today)}
+      .weekday
+        -if day_num==0 
+          by time
+          %br
+          =link_to "by people", week_people_url
+        -else
+          .dayname=raw(days[day_num])
+          .daydate=comercial_date
+      -now_hour = @start_hour
+      -while now_hour <= @end_hour
+        -if day_num==0
+          .hour.text-center
+            %span.bighour=now_hour
+            %span.smallhour 00
+        -else
+          .hour
+        -now_hour += 1
+
+
