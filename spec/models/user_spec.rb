@@ -15,6 +15,10 @@ end
     expect(User.new(name: "Jan", surname: "Kowalski", password: "haslohaslo", email: "mail@mail.com")).to be_valid
 end
 
+it "should have one default_work_time" do
+    t = User.reflect_on_association(:default_work_time)
+    expect(t.macro).to equal :has_one
+end
 
 it "should have many hours_plan" do
     t = User.reflect_on_association(:hours_plan)
