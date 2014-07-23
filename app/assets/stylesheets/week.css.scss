@@ -3,18 +3,40 @@
 
   .weekday {
       padding: 15px 15px;
+      height: 70px;
+
+
+      .dayname {font-weight: bold;}
   }
 
   .day {
-   background: #eee;
-   border-left: 2px dashed #ccc;
+    background: #eee;
+    border-left: 2px dashed #ccc;
+    position: relative;
+
+    .hours-plan {
+      position: absolute;
+      left: 0px;
+      top: 0px;
+
+      width: 8px;
+      height: 5px;
+
+      background: #F00;
+      z-index: 4;
+      opacity: 0.8;
+    }
+  }
+
+  .today {
+    background: #ddb2a9;
   }
 
   .hour {
     height: 50px;
     border-top: 2px dashed #d2d2d2;
 
-    span.bighour, span.smallhour {
+    span.bighour, span.smallhour, span.man {
       position: relative;
       z-index: 3; 
     }
@@ -26,7 +48,12 @@
       left: -2px;
       font-size: 17px;      
     }
+    span.man{
+      top: 10px;
+    }
   }
+
+
 
   #nowline {
     display: none;
@@ -35,7 +62,7 @@
     left: 0px;
     width: 100%;
     height: 0px;
-    border-top: #8b4637 dashed 4px;
+    border-top: #8b4637 solid 4px;
     z-index: 2;
 
     #nowlinetext {
