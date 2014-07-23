@@ -1,14 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  devise_scope :user do  #tymczasowe rozwiązanie
-      root 'devise/sessions#new'
-  end
+  root 'week#showtime'
 
-  get 'week' => 'week#show' 
-  get 'profile' => 'users#show'
 
-  resource :users
+  get 'week/time' => 'week#showtime'
+  get 'week/people' => 'week#showpeople' 
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

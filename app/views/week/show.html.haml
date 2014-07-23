@@ -11,7 +11,9 @@
   -(0..5).each do |day_num|
     .col-xs-2.day
       .weekday
-        =raw(days[day_num])
+        .dayname=raw(days[day_num])
+        -unless day_num==0
+          .daydate=Date.commercial(Date.today.year, Date.today.cweek, day_num)
       -now_hour = start_hour
       -while now_hour <= end_hour
         -if day_num==0
