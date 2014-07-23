@@ -11,7 +11,12 @@ end
 
 
 class DefaultWorkTime < ActiveRecord::Base
+
+  #pola: tablica arraów
   validates_with WeekValidator
+  validates :user_id, presence: true
+
+  belongs_to :users
 end
 
 
