@@ -36,18 +36,18 @@ class WeekController < ApplicationController
       else
         redirect_to week_people_date_url(@year,@week_num)
       end
-    end  
+    else 
+      #sprawdz czy mozna wygenerowac date, jesli tak to wpisz ja
+      begin
+        @week = DateTime.commercial(params[:year].to_i,params[:week].to_i,1)
+        @year = params[:year].to_i
+        @week_num = params[:week].to_i
+      rescue
+      end
 
-
-    #sprawdz czy mozna wygenerowac date, jesli tak to wpisz ja
-    begin
-      DateTime.commercial(params[:year].to_i,params[:week].to_i,1)
-      @year = params[:year].to_i
-      @week_num = params[:week].to_i
-    rescue
+      if @week.nil? or @year.nil? or @week_num.nil? #jesli nie dalo sie stworzyc daty
+        redirect_to week_time_url # TODO: prawdopodobnie jakis lepszy redirect by sie tu przydal
+      end
     end
-
-
   end
-
 end

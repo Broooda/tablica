@@ -3,7 +3,13 @@
   .container-fluid
     = render "shared/logonavbar"
     .row
-      .col-md-4.col-md-offset-4.text-center#weekpicker
+      %a.bl(href="#{url_for :controller => 'week', :action => action_name, :year => (@week-7).year, :week => (@week-7).cweek}")
+        .col-md-3.col-md-offset-2.text-center.weekpicker.rotate-l3
+          week #{(@week-7).cweek}, #{(@week-7).year}
+      .col-md-3.text-center.weekpicker(style="z-index: 1")
         week #{@week_num}, #{@year}
+      %a.bl(href="#{url_for :controller => 'week', :action => action_name, :year => (@week+7).year, :week => (@week+7).cweek}")
+        .col-md-3.text-center.weekpicker.rotate-r3
+          week #{(@week+7).cweek}, #{(@week+7).year}
     = yield
     = render "shared/footer"

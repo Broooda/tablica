@@ -1,5 +1,6 @@
 .timetable {
   position: relative;
+  box-shadow: 0px 0px 10px rgba(0,0,0,1);
 
   .weekday {
       padding: 15px 15px;
@@ -87,9 +88,14 @@
 
 }
 
-#weekpicker {
+.bl {color: #555;}
+.bl:hover {color: #333;}
+
+.weekpicker {
   font-size: 23px;
   background: #eee;
+
+  z-index: 0;
 
   -webkit-border-top-left-radius: 10px;
   -webkit-border-top-right-radius: 10px;
@@ -98,3 +104,40 @@
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
+
+.rotate-l3 {
+  position: relative; left: -5px;
+
+  transform-origin: right bottom;
+  -webkit-transform-origin: right bottom;
+
+  transform:rotate(-3deg);
+  -webkit-transform:rotate(-3deg);
+
+  transition: 0.3s ease-out;
+  -webkit-transition: 0.3s ease-out;
+}
+
+.rotate-l3:hover {
+  transform:rotate(0deg);
+  -webkit-transform:rotate(0deg);
+}
+
+.rotate-r3 {
+  position: relative; left: 5px;
+
+  transform-origin: left bottom;
+  -webkit-transform-origin: left bottom;
+
+  transform:rotate(3deg);
+  -webkit-transform:rotate(3deg);
+
+  transition: 0.3s ease-out;
+  -webkit-transition: 0.3s ease-out;
+}
+
+.rotate-r3:hover {
+  transform:rotate(0deg);
+  -webkit-transform:rotate(0deg);
+}
+
