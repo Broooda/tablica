@@ -18,8 +18,8 @@ class WeekController < ApplicationController
   end
 
   def gethoursplan
-    get_from = DateTime.commercial(@year, @week_num, 1) #od poniedzialek polnoc 
-    get_to = DateTime.commercial(@year, @week_num, 6) #do piatek polnoc
+    get_from = DateTime.commercial(@year, @week_num, 1) #od poniedzialek 0:00
+    get_to = DateTime.commercial(@year, @week_num, 6) #do sobota 0:00
 
     @hours_plans = HoursPlan.where("start_date > :from and start_date < :to", { from: get_from, to: get_to})
 

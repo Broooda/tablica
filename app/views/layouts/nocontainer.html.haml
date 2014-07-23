@@ -2,11 +2,8 @@
 %body
   .container-fluid
     = render "shared/logonavbar"
-    .row#weekheader
-      .col-md-4
-
-      .col-md-4
-        bla bla
-      .col-md-4
+    .row
+      .col-md-4.col-md-offset-4.text-center#weekpicker
+        week #{@week_num}, #{@year}
     = yield
     = render "shared/footer"
