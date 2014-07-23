@@ -9,18 +9,13 @@ class WeekValidator < ActiveModel::Validator
   end
 end
 
-
-class DefaultWorkTime < ActiveRecord::Base
-
-  #pola: tablica arraów
+class DefaultWorkTimeRequest < ActiveRecord::Base
+     #pola: tablica arraów, string: description, string: status
   validates_with WeekValidator
   validates :user_id, presence: true
+  validates :description, presence: true
+  validates :status, inclusion: {in: %w(pending accepted rejected)}
 
   belongs_to :user
+
 end
-
-
-
-
-
-
