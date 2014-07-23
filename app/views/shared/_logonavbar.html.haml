@@ -1,7 +1,7 @@
 .row#top
   .col-md-6#logo
     =link_to image_tag("logo.png",), root_url
-    %p= link_to "Tablica", root_url
+    %p= link_to "#binar-planner", root_url
   .col-md-6.text-right#nav
     %ul
       -if user_signed_in?
