@@ -21,13 +21,10 @@ class ApplicationController < ActionController::Base
 
   def unaccepted_user
     if current_user
-      @user=User.find(current_user.id)
-      if @user.accepted==false
+      if current_user.accepted==false
         #redirect_to destroy_user_session_path, method: :delete, notice: 'Your account is not accepted yet.'
         sign_out current_user
         flash[:alert] = "Your account is not accepted yet."
-      else
-        redirect_to root_path
       end
     end
   end
