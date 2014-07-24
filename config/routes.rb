@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
 
+
   root 'week#showtime'
 
 
@@ -17,6 +18,7 @@ Rails.application.routes.draw do
 
   resources :users
 
+  resources :holiday
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
