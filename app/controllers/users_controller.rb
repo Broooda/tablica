@@ -35,6 +35,8 @@ class UsersController < ApplicationController
   def make_admin
     @user = User.find(params[:id])
     @user.admin = true
+    @user.save
+    redirect_to users_url
   end
 
   private
