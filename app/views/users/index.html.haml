@@ -28,4 +28,4 @@
 
       %td
         -if current_user.admin == true or user.id == current_user.id
-          =link_to "Edit User"
+          =link_to "Edit User", edit_user_path(user.id)
