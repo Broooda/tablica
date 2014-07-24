@@ -1,6 +1,13 @@
 %h1 Users List:
 
 %table.table
+  %tr
+    %td
+      Name:
+    %td
+    %td
+      Join Date:
+
   -@users.each do |user|
     %tr
       %td      
@@ -12,3 +19,5 @@
         -elsif user.accepted == true and current_user.admin == true  
           user accepted.
         -else
+      %td
+        =user.created_at.strftime("%Y:%m:%d")
