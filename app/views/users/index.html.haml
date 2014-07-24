@@ -5,11 +5,15 @@
     %td
       Name:
     %td
+      Show:
+    %td
     %td
       Join Date:
     %td
       Edit:
     %td
+    %td
+      Delete:
     
 
   -@users.each do |user|
@@ -17,6 +21,9 @@
       %td      
         =user.name
         =user.surname
+
+      %td
+        =link_to "Show", user_path(user.id)
 
       %td
         -if user.accepted == false and current_user.admin == true
@@ -36,3 +43,7 @@
         -if current_user.admin == true and user.admin == false
           =link_to "Make Admin", make_admin_path(user.id)
         -else
+
+      %td
+        -if current_user.admin == true or user.id == current_user.id
+          =link_to "Delete", user_path(user.id), method: :delete
