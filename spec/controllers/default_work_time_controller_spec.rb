@@ -4,6 +4,9 @@ require 'rails_helper'
 RSpec.describe DefaultWorkTimesController, type: :controller do
 
   before(:each) do
+    @user=User.create(name: "Jan", surname: "Kowalski", email: "test@mail.pl", password: "razdwatrzycztery")
+    sign_in @user
+
     @default=DefaultWorkTime.create(week: [['9:00','16:00'],['9:00','16:00'],['9:00','16:00'],['9:00','16:00'],['9:00','16:00']], user_id: 1)
    end
 
