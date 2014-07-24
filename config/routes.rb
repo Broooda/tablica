@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get 'users/makeadmin/:id' => 'users#make_admin', as: "make_admin"
 
   resources :default_work_times, only: [:show]
+  resources :default_work_times_request, only: [:destroy]
 
   post 'update_work_time' => 'default_work_times#update_work_time', as: :update_work_time
 
