@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
 
+<<<<<<< HEAD
   root 'week#showtime'
 
 
@@ -15,6 +16,13 @@ Rails.application.routes.draw do
 
   resources :users
 
+=======
+  devise_scope :user do  #tymczasowe rozwiązanie
+      root 'devise/sessions#new'
+  end
+  resources :holiday
+  get 'week' => 'week#show' 
+>>>>>>> Holiday_Controller
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
