@@ -1,0 +1,12 @@
+%h1 Edit profile
+= form_for(@user) do |f|
+  = f.label "Name"
+  = f.text_field :name
+  %br/
+  = f.label "Surname"
+  = f.text_field :surname
+  %br/
+  = f.label "E-mail"
+  = f.text_field :email
+  %br/
+  = f.submit "Save"
