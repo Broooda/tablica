@@ -1,47 +1,37 @@
 class DefaultWorkTimesController < ApplicationController
-  def new
-    @d=DefaultWorkTime.new
-  end
-
-  def create
-    @d=DefaultWorkTime.new(defaultworktime_params)
-     if @d.save
-      redirect_to root_url, notice:"Uzytkownik stworzony"
-    else
-      render 'new'
-    end 
-  end
 
   def show 
     @d=DefaultWorkTime.find(params[:id])
    
   end
-
-  def edit
-    @default_work_time=DefaultWorkTime.find(params[:id])
-  end
-
-  def update
-     @default_work_time=DefaultWorkTime.find(params[:id])
-    if @default_work_time.update(defaultworktime_params)
-      redirect_to root_url
-    else
-      render 'edit'
-    end 
-  end
-
   def update_work_time
-    if User.find(params['user_id']).default_work_time_request.first.status="pending"
-      redirect_to default_work_time_path(User.find(params['user_id']).default_work_time.id), notice: "Request already exists"
+    #If user has DefaultWorkTimeRequest object
+    if User.find(params['user_id']).default_work_time_request
+      #If this object's status is 'pending'
+      if User.find(params['user_id']).default_work_time_request.status="pending"
+        #Error, redirect 
+        redirect_to default_work_time_path(User.find(params['user_id']).default_work_time.id), notice: "Request already exists"
+      else
+        create_new_request
+      end
+    #If user has no DefaultWorkTimeRequest object
     else
-    DefaultWorkTimeRequest.create(week: [[params['monday_start'],params['monday_end']],[params['tuesday_start'], params['tuesday_end']],[params['wednesday_start'], params['wednesday_end']],[params['thursday_start'],params['thursday_end']],[params['friday_start'],params['friday_end']]],description: params['description'], user_id: params['user_id'], status: 'pending')
-    redirect_to root_url
-  end
+        create_new_request
+      end
   end
 
   private
-  def defaultworktime_params
-    params.require(:default_work_time).permit(:week, :user_id)
+  def create_new_request
+      #Create object with params
+        new_default=DefaultWorkTimeRequest.new(week: [[params['monday_start'],params['monday_end']],[params['tuesday_start'], params['tuesday_end']],[params['wednesday_start'], params['wednesday_end']],[params['thursday_start'],params['thursday_end']],[params['friday_start'],params['friday_end']]],description: params['description'], user_id: params['user_id'], status: 'pending')
+        #If valid save object and redirect
+        if new_default.valid?
+          new_default.save
+          redirect_to default_work_time_path(User.find(params['user_id']).default_work_time.id), notice: "Request added"
+        #If not valid redirect with notice
+        else
+          redirect_to default_work_time_path(User.find(params['user_id']).default_work_time.id), notice: new_default.errors.full_messages.first
+        end
   end
 
 end

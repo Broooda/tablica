@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'week/people' => 'week#showpeople' 
 
   resources :default_work_times, only: [:show]
+  resources :default_work_times_request, only: [:destroy]
 
   post 'update_work_time' => 'default_work_times#update_work_time', as: :update_work_time
 
