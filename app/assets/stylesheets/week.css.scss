@@ -41,6 +41,14 @@
     height: 50px;
     border-top: 2px dashed #d2d2d2;
 
+    .man-in-work {
+      background: #c78172;
+
+      -webkit-border-radius: 7px;
+      -moz-border-radius: 7px;
+      border-radius: 7px;
+    }
+
     span.bighour, span.smallhour, span.man {
       position: relative;
       z-index: 3; 
@@ -55,6 +63,15 @@
     }
     span.man{
       top: 10px;
+    }
+
+    p.from-to {
+      margin: 5px auto 0px auto;
+    }
+
+    span.hour-text {
+        font-size: 15px;
+        font-weight: bold;
     }
   }
 
