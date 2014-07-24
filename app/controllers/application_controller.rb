@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
       if current_user.accepted==false
         #redirect_to destroy_user_session_path, method: :delete, notice: 'Your account is not accepted yet.'
         sign_out current_user
-        flash[:alert] = "Your account is not accepted yet."
+        flash[:error] = "Your account is not accepted yet."
       end
     end
   end
