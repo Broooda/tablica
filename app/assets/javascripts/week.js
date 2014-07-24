@@ -70,8 +70,13 @@ function setUpHoursPlans() {
 }
 
 $(function(){
+  $('.man-in-work').tooltip();
+
+  startHour = startHour || false;
+  endHour = endHour || false;
+
   if(startHour && endHour) {
-    setUpHoursPlans();
+    setUpHoursPlans();  
 
     moveNowLine();
     setInterval(function(){moveNowLine();}, 1000);

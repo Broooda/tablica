@@ -42,7 +42,11 @@
     border-top: 2px dashed #d2d2d2;
 
     .man-in-work {
-      background: #FFF;
+      background: #c78172;
+
+      -webkit-border-radius: 7px;
+      -moz-border-radius: 7px;
+      border-radius: 7px;
     }
 
     span.bighour, span.smallhour, span.man {
@@ -62,8 +66,7 @@
     }
 
     p.from-to {
-      padding-top: 5px;
-      margin-bottom: 0px;
+      margin: 5px auto 0px auto;
     }
 
     span.hour-text {

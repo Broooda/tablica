@@ -27,7 +27,7 @@
             -user_hours_plans = @hours_plans.where('user_id = :user_id', { user_id: user.id})
             -user_hours_plans.each do |user_hours_plan|
               -if user_hours_plan.start_date.strftime('%u').to_i==day_num
-                %div{:class => ("man-in-work" if user_hours_plan.start_date < DateTime.now and DateTime.now < user_hours_plan.end_date)}
+                %div{:class => ("man-in-work" if user_hours_plan.start_date < DateTime.now and DateTime.now < user_hours_plan.end_date), :title => user_hours_plan.user.name+" should be in work right now"}
                   %p.from-to
                     from
                     %span.hour-text=user_hours_plan.start_date.strftime('%k:%M')
