@@ -60,7 +60,7 @@ function setUpHoursPlans() {
       {width=30;}
 
     $(this).css('left', 5+(width*people.indexOf(user)));
-    $(this).css('width', width);
+    $(this).css('width', width-2);
     $(this).css('top', (start.getHours()+start.getMinutes()/60-startHour)*pxPerHour+headerOffset);
 
     $(this).animate({
@@ -86,4 +86,4 @@ $(function(){
       $('.tooltip-arrow').css('border-top-color', $(this).css('background-color'));
     });
   }
-})
+});
