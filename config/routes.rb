@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   root 'week#showtime'
 
+
   get 'week/time' => 'week#showtime'
   get 'week/time/:year/:week' => 'week#showtime', as: "week_time_date"
   get 'week/people' => 'week#showpeople'
@@ -11,6 +12,9 @@ Rails.application.routes.draw do
   resources :default_work_times, only: [:show]
 
   post 'update_work_time' => 'default_work_times#update_work_time', as: :update_work_time
+
+  resources :users
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
