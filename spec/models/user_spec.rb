@@ -6,13 +6,13 @@ RSpec.describe User, :type => :model do
     expect(subject.attributes).to include('id', 'email', 'encrypted_password')
 end
 
-    it 'should have :name, :surname, :admin attributes' do
-    expect(subject.attributes).to include('name', 'surname', 'admin')
+    it 'should have :name, :surname, :admin, :accepted attributes' do
+    expect(subject.attributes).to include('name', 'surname', 'admin', 'accepted')
 end
 
-    it 'should require name, surname, email' do
+    it 'should require name, surname, email, admin, accepted' do
     expect(User.new).not_to be_valid
-    expect(User.new(name: "Jan", surname: "Kowalski", password: "haslohaslo", email: "mail@mail.com")).to be_valid
+    expect(User.new(name: "Jan", surname: "Kowalski", password: "haslohaslo", email: "mail@mail.com", admin: false, accepted: true)).to be_valid
 end
 
 it "should have one default_work_time" do
