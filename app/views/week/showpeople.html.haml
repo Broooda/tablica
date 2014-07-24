@@ -23,4 +23,17 @@
               =user.name
               =user.surname
         -else
-          .hour
+          .hour.text-center()
+            -user_hours_plans = @hours_plans.where('user_id = :user_id', { user_id: user.id})
+            -user_hours_plans.each do |user_hours_plan|
+              -if user_hours_plan.start_date.strftime('%u').to_i==day_num
+                %p.from-to
+                  from
+                  %span.hour-text=user_hours_plan.start_date.strftime('%k:%M')
+                  to
+                  %span.hour-text=user_hours_plan.end_date.strftime('%k:%M')
+                -if user_hours_plan.over_hours # TODO: napisać to ładniej po tym jak dodam wartość default 0 w over_hours w bazie
+                  %p.over-hours
+                    %span.hour-text=user_hours_plan.over_hours
+                    over hours
+

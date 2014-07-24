@@ -6,7 +6,7 @@ function moveNowLine() {
   endHour = endHour || 23;
 
   now = new Date();
-  if(now.getHours()>startHour && now.getHours()<(endHour+1) ) {
+  if(now.getHours()>=startHour && now.getHours()<(endHour+1) ) {
     offset = (now.getHours()+now.getMinutes()/60+now.getSeconds()/3600-startHour)*pxPerHour+headerOffset;
     $('#nowline').css('display','block');
     $('#nowline').css('top',offset+'px');
@@ -75,5 +75,10 @@ $(function(){
 
     moveNowLine();
     setInterval(function(){moveNowLine();}, 1000);
+
+    $('.hours-plan').hover(function(){
+      $('.tooltip-inner').css('background-color', $(this).css('background-color'));
+      $('.tooltip-arrow').css('border-top-color', $(this).css('background-color'));
+    });
   }
 })
