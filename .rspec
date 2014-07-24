@@ -1,3 +1,6 @@
 --color
+<<<<<<< HEAD
 
+=======
+>>>>>>> 84c06c8c54f42dfbdcc71fbbc523d7f2c43e0c27
 --require spec_helper
