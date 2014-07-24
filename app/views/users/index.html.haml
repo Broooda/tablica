@@ -1,13 +1,14 @@
 %h1 Users List:
 
 %table.table
-  %tr
-    -@users.each do |user|
-      %td
+  -@users.each do |user|
+    %tr
+      %td      
         =user.name
         =user.surname
-        -if user.accepted == false
+      %td
+        -if user.accepted == false and current_user.admin == true
           = link_to "Accept User", user_accept_url(user.id)
+        -elsif user.accepted == true and current_user.admin == true  
+          user accepted.
         -else
-          %td
-            %h6 user accepted.
