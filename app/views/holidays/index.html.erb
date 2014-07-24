@@ -17,9 +17,9 @@
         <td><%= holiday.EndDate %></td>
         <td><%= holiday.Description %></td>
         <td><%= holiday.Status %></td>
-        <td><%= link_to 'Show', holiday %></td>
+        <td><%= link_to 'Show', holidays %></td>
         <td><%= link_to 'Edit', edit_holiday_path(holiday) %></td>
-        <td><%= link_to 'Destroy', holiday, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', holidays, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +28,3 @@
 <br>
 
 <%= link_to 'New holiday', new_holiday_path %>
-

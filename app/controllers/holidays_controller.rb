@@ -1,4 +1,4 @@
-class HolidayController < ApplicationController
+class HolidaysController < ApplicationController
 
 	def index
 		@holiday= Holiday.all
@@ -9,7 +9,7 @@ class HolidayController < ApplicationController
 	end
 
 	def destroy
-		@holiday.find(params:id)
+		@holiday.find(params[:id])
 		@holiday.destroy
 		redirect_to root_url, alert: "Removed Holiday "
 	end
@@ -19,7 +19,8 @@ class HolidayController < ApplicationController
 	end
 
 	def create
-		@holiday=Holiday.new holiday_params
+		@holiday=Holiday.new(holiday_params)
+		# @holiday=Holiday.new(:startdate,:enddate,:description,:status,:reason)
 	if @holiday.save
 			redirect_to root_url notice: "Created Holiday"
 		else
@@ -29,21 +30,23 @@ class HolidayController < ApplicationController
 
 
 	def edit
-		@holiday = Holiday.find params[:id]
+		@holiday = Holiday.find(params[:id])
 	end
 
 	def update
 	@holiday =Holiday.find(params[:id]) 
-		if @post.update(post_params)
+		if @holiday.update(holiday_params)
 		redirect_to root_url
 			else
 			render 'edit'
 		end
 	end
-
+  	def show
+    	@holiday=Holiday.find(params[:id])
+  	end
 	private
 		def holdiay_params
-		params.require(:holiday).permit(:StartDate,:EndDate,:Description,:Status,:Reason) 
+		params.require(:holiday).permit(:startdate, :enddate, :description, :status, :reason) 
 	end
 
 end
