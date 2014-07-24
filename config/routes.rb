@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get 'week/time' => 'week#showtime'
   get 'week/people' => 'week#showpeople' 
 
-  resource :user
+  resources :users
 
 
   # The priority is based upon order of creation: first created -> highest priority.
