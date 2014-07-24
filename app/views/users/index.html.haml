@@ -10,7 +10,7 @@
     %td
       Edit:
     %td
-      Make Admin:
+    
 
   -@users.each do |user|
     %tr
@@ -35,3 +35,4 @@
       %td
         -if current_user.admin == true and user.admin == false
           =link_to "Make Admin", make_admin_path(user.id)
+        -else
