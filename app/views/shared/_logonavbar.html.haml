@@ -15,3 +15,14 @@
       %li=link_to "Holidays", root_url
       %li=link_to "Raports", root_url
       %li=link_to "Calendar", root_url
+.row
+  .col-md-12
+    -if flash[:error]
+      .alert.alert-danger
+        =flash[:error]
+    -if flash[:alert]
+      .alert.alert-warning
+        =flash[:alert]
+    -if flash[:notice]
+      .alert.alert-success
+        =flash[:notice]
