@@ -16,7 +16,7 @@
         -if day_num==0 
           by time
           %br
-          =link_to "by people", week_people_url
+          =link_to "by people", week_people_date_url(@year,@week_num)
         -else
           .dayname=raw(days[day_num])
           .daydate=comercial_date
@@ -24,7 +24,7 @@
 
       -@hours_plans.each do |hours_plan| #wyswietlanie kiedy typek jest w pracy
         -if hours_plan.start_date.strftime('%u').to_i==day_num
-          .hours-plan(start="#{hours_plan.start_date}" end="#{hours_plan.end_date}" user="#{hours_plan.user.name+" "+hours_plan.user.surname}")
+          .hours-plan(start="#{hours_plan.start_date}" end="#{hours_plan.end_date}" user="#{hours_plan.user.name+" "+hours_plan.user.surname}" title="#{hours_plan.user.name+" "+hours_plan.user.surname}")
 
       -while now_hour <= @end_hour #wolne komorki lub godziny
         -if day_num==0

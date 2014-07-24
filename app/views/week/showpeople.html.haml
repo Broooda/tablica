@@ -9,7 +9,7 @@
     .col-xs-2.day{:class => ("today" if comercial_date==Date.today)}
       .weekday
         -if day_num==0
-          =link_to "by time", week_time_url
+          =link_to "by time", week_time_date_url(@year,@week_num)
           %br
           by people
         -else
@@ -23,4 +23,18 @@
               =user.name
               =user.surname
         -else
-          .hour
+          .hour.text-center
+            -user_hours_plans = @hours_plans.where('user_id = :user_id', { user_id: user.id})
+            -user_hours_plans.each do |user_hours_plan|
+              -if user_hours_plan.start_date.strftime('%u').to_i==day_num
+                %div{:class => ("man-in-work" if user_hours_plan.start_date < DateTime.now and DateTime.now < user_hours_plan.end_date), :title => user_hours_plan.user.name+" should be in work right now"}
+                  %p.from-to
+                    from
+                    %span.hour-text=user_hours_plan.start_date.strftime('%k:%M')
+                    to
+                    %span.hour-text=user_hours_plan.end_date.strftime('%k:%M')
+                  -if user_hours_plan.over_hours # TODO: napisać to ładniej po tym jak dodam wartość default 0 w over_hours w bazie
+                    %p.over-hours
+                      %span.hour-text=user_hours_plan.over_hours
+                      over hours
+

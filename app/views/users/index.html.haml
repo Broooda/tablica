@@ -1,0 +1,33 @@
+%h1 Users List:
+
+%table.table
+  %tr
+    %td
+      Name:
+    %td
+    %td
+      Join Date:
+    %td
+      Edit:
+    %td
+      Make Admin:
+
+  -@users.each do |user|
+    %tr
+      %td      
+        =user.name
+        =user.surname
+
+      %td
+        -if user.accepted == false and current_user.admin == true
+          = link_to "Accept User", user_accept_url(user.id)
+        -elsif user.accepted == true and current_user.admin == true  
+          user accepted.
+        -else
+
+      %td
+        =user.created_at.strftime("%Y:%m:%d")
+
+      %td
+        -if current_user.admin == true or user.id == current_user.id
+          =link_to "Edit User", edit_user_path(user.id)

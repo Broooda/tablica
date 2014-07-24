@@ -3,6 +3,9 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  before_action :unaccepted_user
+  before_action :authenticate_user!, except: [:go_to_login]
+  
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
@@ -10,5 +13,19 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) << :name
     devise_parameter_sanitizer.for(:sign_up) << :surname
+  end
+
+  def go_to_login
+  	redirect_to new_user_session_path, notice: 'You must log in.'
+  end
+
+  def unaccepted_user
+    if current_user
+      if current_user.accepted==false
+        #redirect_to destroy_user_session_path, method: :delete, notice: 'Your account is not accepted yet.'
+        sign_out current_user
+        flash[:error] = "Your account is not accepted yet."
+      end
+    end
   end
 end

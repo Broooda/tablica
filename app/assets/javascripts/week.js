@@ -6,7 +6,7 @@ function moveNowLine() {
   endHour = endHour || 23;
 
   now = new Date();
-  if(now.getHours()>startHour && now.getHours()<(endHour+1) ) {
+  if(now.getHours()>=startHour && now.getHours()<(endHour+1) ) {
     offset = (now.getHours()+now.getMinutes()/60+now.getSeconds()/3600-startHour)*pxPerHour+headerOffset;
     $('#nowline').css('display','block');
     $('#nowline').css('top',offset+'px');
@@ -18,6 +18,8 @@ function moveNowLine() {
 }
 
 function setUpHoursPlans() {
+  $('.hours-plan').tooltip();
+
   colors=[
    'hsl(30,75%,50%)',
    'hsl(50,75%,50%)',
@@ -59,17 +61,29 @@ function setUpHoursPlans() {
 
     $(this).css('left', 5+(width*people.indexOf(user)));
     $(this).css('width', width);
+    $(this).css('top', (start.getHours()+start.getMinutes()/60-startHour)*pxPerHour+headerOffset);
 
-    $(this).css('top',(start.getHours()+start.getMinutes()/60-startHour)*pxPerHour+headerOffset);
-    $(this).css('height',(end.getHours()+end.getMinutes()/60-start.getHours()-start.getMinutes()/60)*pxPerHour);
+    $(this).animate({
+      height: (end.getHours()+end.getMinutes()/60-start.getHours()-start.getMinutes()/60)*pxPerHour
+    }, 1000);
   });
 }
 
 $(function(){
+  $('.man-in-work').tooltip();
+
+  startHour = startHour || false;
+  endHour = endHour || false;
+
   if(startHour && endHour) {
-    setUpHoursPlans();
+    setUpHoursPlans();  
 
     moveNowLine();
     setInterval(function(){moveNowLine();}, 1000);
+
+    $('.hours-plan').hover(function(){
+      $('.tooltip-inner').css('background-color', $(this).css('background-color'));
+      $('.tooltip-arrow').css('border-top-color', $(this).css('background-color'));
+    });
   }
 })

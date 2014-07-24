@@ -1,0 +1,31 @@
+<h1> List of holiday requests </h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Description</th>
+      <th>Status</th>
+      <th colspan="4"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @holiday.each do |holiday| %>
+      <tr>
+        <td><%= holiday.StartDate %></td>
+        <td><%= holiday.EndDate %></td>
+        <td><%= holiday.Description %></td>
+        <td><%= holiday.Status %></td>
+        <td><%= link_to 'Show', holiday %></td>
+        <td><%= link_to 'Edit', edit_holiday_path(holiday) %></td>
+        <td><%= link_to 'Destroy', holiday, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New holiday', new_holiday_path %>
+
