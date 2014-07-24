@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
 	def accept
 		@user = User.find(params[:id])
-		@user.accept = true
+		@user.accepted = true
 		@user.save
 		redirect_to users_url
 	end
