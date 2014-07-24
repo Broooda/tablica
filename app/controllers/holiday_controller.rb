@@ -26,19 +26,12 @@ class HolidayController < ApplicationController
 			render 'new'
 		end
 	end
-<<<<<<< HEAD
+
 
 	def edit
 		@holiday = Holiday.find params[:id]
 	end
 
-=======
-	
-	def edit
-		@holiday = Holiday.find params[:id]
-	end
-	
->>>>>>> Holiday_Controller
 	def update
 	@holiday =Holiday.find(params[:id]) 
 		if @post.update(post_params)
@@ -47,16 +40,9 @@ class HolidayController < ApplicationController
 			render 'edit'
 		end
 	end
-	end
 
 	private
 		def holdiay_params
 		params.require(:holiday).permit(:StartDate,:EndDate,:Description,:Status,:Reason) 
-<<<<<<< HEAD
 	end
-
-=======
-		end
->>>>>>> Holiday_Controller
-end
 	
