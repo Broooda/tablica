@@ -1,11 +1,15 @@
 .row#top
   .col-md-6#logo
     =link_to image_tag("logo.png",), root_url
-    %p= link_to "Tablica", root_url
+    %p= link_to "#binar-planner", root_url
   .col-md-6.text-right#nav
     %ul
-      %li=link_to raw('logged as <b>Edziu Nowak</b>'), root_url #link do profilu użytkownika
-      %li=link_to "log out", root_url
+      -if user_signed_in?
+        %li=link_to raw('logged as <b>'+current_user.name+' '+current_user.surname+'</b>'), root_url #link do profilu użytkownika
+        %li=link_to "sign out", destroy_user_session_url, :method => :delete
+      -else
+        %li=link_to "sign in", new_user_session_url
+        %li=link_to "sign up", new_user_registration_url
     %ul
       %li=link_to "My week plan", week_time_url
       %li=link_to "Holidays", root_url

@@ -5,7 +5,13 @@ Rails.application.routes.draw do
 
 
   get 'week/time' => 'week#showtime'
-  get 'week/people' => 'week#showpeople' 
+  get 'week/time/:year/:week' => 'week#showtime', as: "week_time_date"
+  get 'week/people' => 'week#showpeople'
+  get 'week/people/:year/:week' => 'week#showpeople', as: "week_people_date"
+
+  resources :default_work_times, only: [:show]
+
+  post 'update_work_time' => 'default_work_times#update_work_time', as: :update_work_time
 
   resources :users
 
