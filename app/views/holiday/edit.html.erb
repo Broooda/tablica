@@ -1,0 +1,10 @@
+<h1>Edit Holiday</h1>
+<%= form_for(@holiday) do |holiday| %>
+<%= holiday.label :StartDate %>
+<%= f.text_field :StartDate %>
+<%= f.label :EndDate %>
+<%= f.text_field :EndDate %>
+<%= f.label :Description %>
+<%= f.text_field :Description %>
+<%= f.submit "Edycja" %>>
+<% end %>
