@@ -5,7 +5,7 @@
   .col-md-6.text-right#nav
     %ul
       -if user_signed_in?
-        %li=link_to raw('logged as <b>'+current_user.name+' '+current_user.surname+'</b>'), root_url #link do profilu użytkownika
+        %li=link_to raw('logged as <b>'+current_user.name+' '+current_user.surname+'</b>'), user_url(current_user.id) #link do profilu użytkownika
         %li=link_to "sign out", destroy_user_session_url, :method => :delete
       -else
         %li=link_to "sign in", new_user_session_url
