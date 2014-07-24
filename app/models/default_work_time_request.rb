@@ -6,6 +6,7 @@ class WeekValidator < ActiveModel::Validator
     record.errors[:week] << "Must have 5 days" unless record.week.length==5
     record.week.each { |day| record.errors[:week] << "Day #{Hash[record.week.map.with_index.to_a][day]+1} must start and end" unless day.length==2 }
 end
+end
 
 class HoursValidator < ActiveModel::Validator
   def validate(record)

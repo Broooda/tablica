@@ -84,6 +84,11 @@ $(function(){
     $('.hours-plan').hover(function(){
       $('.tooltip-inner').css('background-color', $(this).css('background-color'));
       $('.tooltip-arrow').css('border-top-color', $(this).css('background-color'));
+
+      $('.hours-plan').not('[user="'+$(this).attr('user')+'"]').stop(true).fadeTo(500,0.4);
+      $('.hours-plan[user="'+$(this).attr('user')+'"]').stop(true).fadeTo(500,1);
+    }, function() {
+      $('.hours-plan').stop(true).fadeTo(500,0.8);
     });
   }
 });
