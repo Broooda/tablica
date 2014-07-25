@@ -2,41 +2,43 @@
 - days = ['monday', 'tuesday','wednesday','thursday','friday']
 
 %h1 Holidays requests:
--if @holiday.size>0
-  -@holiday.each do |holiday|
-    -if holiday.status=="pending"
-      .inbox-block
-        %b
-          =holiday.user.name
-          =holiday.user.surname
-        wants holidays
-        %br/  
-        from
-        %b=holiday.startdate.strftime('%Y-%-m-%-d %k:%M')
-        to
-        %b=holiday.enddate.strftime('%Y-%-m-%-d %k:%M')
-        %br/
-        %p=holiday.description
-
-        =form_tag holiday_reject_url(holiday.id), method: :get do 
-          .vermid
-            =text_area_tag "description", nil, rows: 1, cols: 30, :placeholder => "Description if rejected", :class => "form-control"
-          .vermid
-            .btn-group
-              =link_to "Accept", holiday_accept_url(holiday.id), :class => "btn btn-success"
-              =submit_tag "Reject", :class => "btn btn-danger", data: { confirm: "This this person will sad because of your decision. Are you sure you want to reject?"}
--else
+-if @holiday.size == 0
   %h3 work, work, work. No holidays requests!
+-else
+  -@holiday.each do |holiday|
+    .inbox-block
+      %b
+        =holiday.user.name
+        =holiday.user.surname
+      wants holidays
+      %br/  
+      from
+      %b=holiday.startdate.strftime('%Y-%-m-%-d %k:%M')
+      to
+      %b=holiday.enddate.strftime('%Y-%-m-%-d %k:%M')
+      %br/
+      %p=holiday.description
+
+      =form_tag holiday_reject_url(holiday.id), method: :get do 
+        .vermid
+          =text_area_tag "description", nil, rows: 1, cols: 30, :placeholder => "Description if rejected", :class => "form-control"
+        .vermid
+          .btn-group
+            =link_to "Accept", holiday_accept_url(holiday.id), :class => "btn btn-success"
+            =submit_tag "Reject", :class => "btn btn-danger", data: { confirm: "This this person will sad because of your decision. Are you sure you want to reject?"}
+
 
 
 
 
 %hr
 %h1 Default work time requests:
--@dr.each do |request|
-  .inbox-block
+-if @dr.size == 0
+  %h3 no default work time requests
+-else
+  -@dr.each do |request|
     -actuall_week = request.user.default_work_time.week
-    -if request.status=="pending"
+    .inbox-block
       %b
         =request.user.name
         =request.user.surname

@@ -1,10 +1,11 @@
 class DefaultWorkTimesController < ApplicationController
 before_action :make_sure_its_mine, only: [:destroy, :show]
+ 
   def show 
     @d=DefaultWorkTime.find(params[:id])
     @dr=DefaultWorkTimeRequest.all
-   
   end
+
   def update_work_time
     #If user has DefaultWorkTimeRequest object
     if User.find(params['user_id']).default_work_time_request
@@ -17,8 +18,8 @@ before_action :make_sure_its_mine, only: [:destroy, :show]
       end
     #If user has no DefaultWorkTimeRequest object
     else
-        create_new_request
-      end
+      create_new_request
+    end
   end
 
   def accept
@@ -41,6 +42,30 @@ before_action :make_sure_its_mine, only: [:destroy, :show]
     redirect_to inboxs_path, notice: "Default hours rejected"
   end
 
+  def generate_hours_plans
+    #funkcja generuje hours_plans
+    week=1
+    #week oznacza dla którego tygodnia ma wygenerować ( 0=dla aktualnego tygodnia, 1=dla następnego, -1=dla poprzedniego itd)
+    
+    monday_midnight_in_current_week = DateTime.commercial(DateTime.now.year, DateTime.now.cweek,1)
+
+    default_work_times = DefaultWorkTime.all
+    default_work_times.each do |default_work_time|
+    day_num = 0;
+      default_work_time.week.each do |day|
+        start_hour = day[0].split(':')
+        end_hour = day[1].split(':')
+        HoursPlan.create(
+          start_date: monday_midnight_in_current_week + week.week + day_num.day + start_hour[0].to_i.hour + start_hour[1].to_i.minute,
+          end_date: monday_midnight_in_current_week + week.week + day_num.day + end_hour[0].to_i.hour + end_hour[1].to_i.minute,
+          user_id: default_work_time.user_id
+          )
+
+      day_num += 1;
+      end
+    end
+    redirect_to root_path
+  end
 
   private
   def create_new_request

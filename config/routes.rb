@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :users
-
-
+  
   root 'week#showtime'
 
+  devise_for :users
+  resources :users
+  get 'users/accept/:id' => 'users#accept', as: "user_accept"
+  get 'users/makeadmin/:id' => 'users#make_admin', as: "make_admin"
+  get 'users/unmakeadmin/:id' => 'users#unmake_admin', as: "unmake_admin"
 
   get 'week/time' => 'week#showtime'
   get 'week/time/:year/:week' => 'week#showtime', as: "week_time_date"
@@ -12,24 +15,26 @@ Rails.application.routes.draw do
   get 'week/people/:fulldate' => 'week#showpeople', as: "week_people_fulldate"
   get 'week/people/:year/:week' => 'week#showpeople', as: "week_people_date"
 
-  get 'users/accept/:id' => 'users#accept', as: "user_accept"
-  get 'users/makeadmin/:id' => 'users#make_admin', as: "make_admin"
-
+  get 'default_work_times/generate' => 'default_work_times#generate_hours_plans', as: "generate_hours_plans"
+  resources :default_work_times, only: [:show]
   get 'default_work_times/accept/:id' => 'default_work_times#accept', as: "default_work_time_accept"
   get 'default_work_times/reject/:id' => 'default_work_times#reject', as: "default_work_time_reject"
+  
 
+  resources :default_work_times_request, only: [:destroy]
+
+  resources :holidays
   get 'holidays/accept/:id' => 'holidays#accept', as: "holiday_accept"
   get 'holidays/reject/:id' => 'holidays#reject', as: "holiday_reject"
-  resources :default_work_times, only: [:show]
-  resources :default_work_times_request, only: [:destroy]
+  
   resources :inboxs, only: [:index]
 
   post 'update_work_time' => 'default_work_times#update_work_time', as: :update_work_time
 
-  resources :users
+  
 
 
-  resources :holidays
+  
 
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -45,6 +45,13 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
+  def unmake_admin
+    @user = User.find(params[:id])
+    @user.admin = false
+    @user.save
+    redirect_to users_url
+  end
+
   private
     def user_params
       params.require(:user).permit(:name, :surname, :email, :password, :password_confirmation)
