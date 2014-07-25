@@ -21,7 +21,7 @@ class HoursValidator < ActiveModel::Validator
 end
 
 class DefaultWorkTimeRequest < ActiveRecord::Base
-     #pola: tablica arraów, string: description, string: status
+     #pola: tablica arraów, string: description, string: status, string: reason
   validates_with WeekValidator
   validates_with HoursValidator
   validates :user_id, presence: true
