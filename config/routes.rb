@@ -17,6 +17,9 @@ Rails.application.routes.draw do
 
   get 'default_work_times/accept/:id' => 'default_work_times#accept', as: "default_work_time_accept"
   get 'default_work_times/reject/:id' => 'default_work_times#reject', as: "default_work_time_reject"
+
+  get 'holidays/accept/:id' => 'holidays#accept', as: "holiday_accept"
+  get 'holidays/reject/:id' => 'holidays#reject', as: "holiday_reject"
   resources :default_work_times, only: [:show]
   resources :default_work_times_request, only: [:destroy]
   resources :inboxs, only: [:index]
