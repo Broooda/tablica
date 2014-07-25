@@ -1,17 +1,5 @@
 %h1 Edit profile
 = form_for(@user) do |f|
-<<<<<<< HEAD
-  = f.label "Name"
-  = f.text_field :name
-  %br/
-  = f.label "Surname"
-  = f.text_field :surname
-  %br/
-  = f.label "E-mail"
-  = f.text_field :email
-  %br/
-  = f.submit "Save"
-=======
   %div.form-group
     = f.label "Name"
     = f.text_field :name, :class => "form-control"
@@ -27,4 +15,4 @@
       = f.text_field :tags, :class => "form-control"
   %div.form-group
     = f.submit "Save", :class => "form-control"
->>>>>>> c41618155251ac68ebb709ce00f3e9aa5b7c31b8
+
