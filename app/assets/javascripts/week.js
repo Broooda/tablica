@@ -60,7 +60,7 @@ function setUpHoursPlans() {
       {width=30;}
 
     $(this).css('left', 5+(width*people.indexOf(user)));
-    $(this).css('width', width);
+    $(this).css('width', width-2);
     $(this).css('top', (start.getHours()+start.getMinutes()/60-startHour)*pxPerHour+headerOffset);
 
     $(this).animate({
@@ -71,6 +71,18 @@ function setUpHoursPlans() {
 
 $(function(){
   $('.man-in-work').tooltip();
+
+  $('#datepicker input').datepicker({format: 'yyyy-mm-dd', weekStart: 1}).on('changeDate', 
+    function(ev){
+      action = $(this).attr('act');
+      if(action=='showtime')
+        $(this).parent('form').attr('action','/week/time/'+$(this).val());
+      else if(action=='showpeople')
+        $(this).parent('form').attr('action','/week/people/'+$(this).val());
+      
+      $(this).parent('form').submit();
+
+    });
 
   startHour = startHour || false;
   endHour = endHour || false;
@@ -84,6 +96,11 @@ $(function(){
     $('.hours-plan').hover(function(){
       $('.tooltip-inner').css('background-color', $(this).css('background-color'));
       $('.tooltip-arrow').css('border-top-color', $(this).css('background-color'));
+
+      $('.hours-plan').not('[user="'+$(this).attr('user')+'"]').stop(true).fadeTo(500,0.4);
+      $('.hours-plan[user="'+$(this).attr('user')+'"]').stop(true).fadeTo(500,1);
+    }, function() {
+      $('.hours-plan').stop(true).fadeTo(500,0.8);
     });
   }
-})
+});

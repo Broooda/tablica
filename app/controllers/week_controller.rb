@@ -27,7 +27,8 @@ class WeekController < ApplicationController
 
   def selectweek
     #sprawdz czy jest jakas data, jesli nie to przekieruj na siebie samego z dzisiejsza data
-    if params[:year].nil? or params[:week].nil?
+    # (użyłem tablicy prawdy więc sam warunek może być trochę nieczytelny na pierwszy rzut oka :\ )
+    if (params[:fulldate].nil? and params[:year].nil?) or (params[:fulldate].nil? and params[:week].nil?)
       @year = Date.today.year
       @week_num = Date.today.cweek
 
@@ -42,6 +43,13 @@ class WeekController < ApplicationController
         @week = DateTime.commercial(params[:year].to_i,params[:week].to_i,1)
         @year = params[:year].to_i
         @week_num = params[:week].to_i
+      rescue
+      end
+
+      begin
+        @week = DateTime.strptime(params[:fulldate], '%Y-%m-%d');
+        @year = @week.year
+        @week_num = @week.cweek
       rescue
       end
 
