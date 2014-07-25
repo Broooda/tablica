@@ -6,6 +6,7 @@
 <br><%= f.text_field :enddate %></br>
 <br><%= f.label "Description"%></br>
 <br><%= f.text_area :description %></br>
+<%= f.hidden_field :user_id , value: current_user.id%>
 <%= f.hidden_field :status ,:value =>"pending"%>
 <br><%= f.submit "Edit Holiday" %>
 <%end%></br>
