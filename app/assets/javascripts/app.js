@@ -5,4 +5,7 @@ $(function() {
     $('#footer .heart').css('color','#ee8279');
     $('#footer .authors').slideDown();
   });
+
+  $('.date-picker').datepicker({format: 'yyyy-mm-dd'});
+
 });

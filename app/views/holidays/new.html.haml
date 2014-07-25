@@ -1,11 +1,11 @@
 %h1 Add holiday request
 = form_for(@holiday) do |f|
   %div.form-group
-    = f.label "Start Date"
-    = f.text_field :startdate, :class => "form-control"
+    = f.label "Start date and time"
+    = f.text_field :startdate, :class => "form-control date-picker"
   %div.form-group
-    = f.label "End Date"
-    = f.text_field :enddate, :class => "form-control"
+    = f.label "End date and time"
+    = f.text_field :enddate, :class => "form-control date-picker"
   %div.form-group
     = f.label "Description"
     = f.text_area :description, :class => "form-control"
