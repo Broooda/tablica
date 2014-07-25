@@ -22,15 +22,16 @@ class HolidaysController < ApplicationController
     @holiday.status = "accepted"
     @holiday.save
    
-    redirect_to inboxs_path
+    redirect_to inboxs_path, notice: "Holiday accepted"
   end
 
   def reject
     @holiday = Holiday.find(params[:id])
     @holiday.status = "rejected"
+    @holiday.reason = params['description']
     @holiday.save
    
-    redirect_to inboxs_path
+    redirect_to inboxs_path, notice: "Holiday rejected"
   end
 
 	def new

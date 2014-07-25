@@ -16,9 +16,14 @@
     Description
     =holiday.description
     %br
-    =link_to "Accept", holiday_accept_url(holiday.id)
-    =link_to "Reject", holiday_reject_url(holiday.id)
-    %br
+
+    =form_tag holiday_reject_url(holiday.id), method: :get do 
+      =label_tag "Description if rejected"
+      =text_area_tag "description"
+      =link_to "Accept", holiday_accept_url(holiday.id)
+      =submit_tag "Reject"
+      %br
+
 
 
 %hr
@@ -46,5 +51,9 @@
       -day_counter+=1
     =request.description
     %br
-    =link_to "Accept", default_work_time_accept_url(request.id)
-    =link_to "Reject", default_work_time_reject_url(request.id)
+    =form_tag default_work_time_reject_url(request.id), method: :get do 
+      =label_tag "Description if rejected"
+      =text_area_tag "description"
+      =link_to "Accept", default_work_time_accept_url(request.id)
+      =submit_tag "Reject"
+      %br

@@ -29,15 +29,16 @@ class DefaultWorkTimesController < ApplicationController
     @request.save
     @request.user.default_work_time.save
     
-    redirect_to inboxs_path
+    redirect_to inboxs_path, notice: "Default hours accepted"
   end
 
   def reject
     @request = DefaultWorkTimeRequest.find(params[:id])
     #DefaultWorkTimeRequest.find(params[:id]).destroy
     @request.status = "rejected"
+    @request.reason = params['description']
     @request.save
-    redirect_to inboxs_path
+    redirect_to inboxs_path, notice: "Default hours rejected"
   end
 
 
