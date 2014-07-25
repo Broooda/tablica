@@ -1,6 +1,11 @@
 .timetable {
+  font-family: 'Open Sans', sans-serif;
+
   position: relative;
   box-shadow: 0px 0px 10px rgba(0,0,0,1);
+
+  a {color: #7e3b2a}
+  a:hover {color: #a54d37}
 
   .weekday {
       padding: 15px 15px;
@@ -41,6 +46,14 @@
     height: 50px;
     border-top: 2px dashed #d2d2d2;
 
+    .man-in-work {
+      background: #c78172;
+
+      -webkit-border-radius: 7px;
+      -moz-border-radius: 7px;
+      border-radius: 7px;
+    }
+
     span.bighour, span.smallhour, span.man {
       position: relative;
       z-index: 3; 
@@ -55,6 +68,15 @@
     }
     span.man{
       top: 10px;
+    }
+
+    p.from-to {
+      margin: 5px auto 0px auto;
+    }
+
+    span.hour-text {
+        font-size: 15px;
+        font-weight: bold;
     }
   }
 
@@ -97,12 +119,33 @@
 
   z-index: 0;
 
+  font-family: 'Open Sans', sans-serif;
+
   -webkit-border-top-left-radius: 10px;
   -webkit-border-top-right-radius: 10px;
   -moz-border-radius-topleft: 10px;
   -moz-border-radius-topright: 10px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+}
+
+#datepicker {
+  position: relative; top: 5px; left: 5px;
+
+  transition: 0.3s ease-out;
+  -webkit-transition: 0.3s ease-out;
+
+  input {
+    width: 100%;
+    border: 0px;
+    height: 100%;
+    background: none;
+    padding: 0px;
+  }
+}
+
+#datepicker:hover {
+  top: 0px;
 }
 
 .rotate-l3 {

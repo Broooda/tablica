@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe HoursPlan, :type => :model do
+
   it 'should belong to user' do
     t = HoursPlan.reflect_on_association(:user)
     expect(t.macro).to equal :belongs_to
@@ -11,6 +12,7 @@ RSpec::Matchers.define :be_the_same_time_as do |expected|
   match do |actual|
     expect(expected.strftime("%Y,%m,%d")).to eq(actual.strftime("%Y,%m,%d"))
   end
+
 end
  
 describe "time comparison" do

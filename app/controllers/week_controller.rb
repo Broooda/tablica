@@ -21,13 +21,14 @@ class WeekController < ApplicationController
     get_from = DateTime.commercial(@year, @week_num, 1) #od poniedzialek 0:00
     get_to = DateTime.commercial(@year, @week_num, 6) #do sobota 0:00
 
-    @hours_plans = HoursPlan.where("start_date > :from and start_date < :to", { from: get_from, to: get_to})
+    @hours_plans = HoursPlan.where('start_date > :from and start_date < :to', { from: get_from, to: get_to})
 
   end
 
   def selectweek
     #sprawdz czy jest jakas data, jesli nie to przekieruj na siebie samego z dzisiejsza data
-    if params[:year].nil? or params[:week].nil?
+    # (użyłem tablicy prawdy więc sam warunek może być trochę nieczytelny na pierwszy rzut oka :\ )
+    if (params[:fulldate].nil? and params[:year].nil?) or (params[:fulldate].nil? and params[:week].nil?)
       @year = Date.today.year
       @week_num = Date.today.cweek
 
@@ -42,6 +43,13 @@ class WeekController < ApplicationController
         @week = DateTime.commercial(params[:year].to_i,params[:week].to_i,1)
         @year = params[:year].to_i
         @week_num = params[:week].to_i
+      rescue
+      end
+
+      begin
+        @week = DateTime.strptime(params[:fulldate], '%Y-%m-%d');
+        @year = @week.year
+        @week_num = @week.cweek
       rescue
       end
 

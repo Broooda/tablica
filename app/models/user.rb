@@ -12,4 +12,12 @@ class User < ActiveRecord::Base
 
         has_many :hours_plan
         has_many :holiday
+
+  def full_name(badge=false)
+    ret = "".html_safe
+    ret << self.name+" "+self.surname
+    ret << ' <span class="label label-danger">admin</span>'.html_safe if badge and self.admin
+    ret
+  end
+
 end

@@ -1,0 +1,18 @@
+%h1 Edit profile
+= form_for(@user) do |f|
+  %div.form-group
+    = f.label "Name"
+    = f.text_field :name, :class => "form-control"
+  %div.form-group
+    = f.label "Surname"
+    = f.text_field :surname, :class => "form-control"
+  %div.form-group
+    = f.label "E-mail"
+    = f.text_field :email, :class => "form-control"
+  -if current_user.admin == true
+    %div.form-group
+      = f.label "Tags"
+      = f.text_field :tags, :class => "form-control"
+  %div.form-group
+    = f.submit "Save", :class => "form-control"
+

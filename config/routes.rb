@@ -7,16 +7,27 @@ Rails.application.routes.draw do
 
   get 'week/time' => 'week#showtime'
   get 'week/time/:year/:week' => 'week#showtime', as: "week_time_date"
+  get 'week/time/:fulldate' => 'week#showtime', as: "week_time_fulldate"
   get 'week/people' => 'week#showpeople'
+  get 'week/people/:fulldate' => 'week#showpeople', as: "week_people_fulldate"
   get 'week/people/:year/:week' => 'week#showpeople', as: "week_people_date"
 
+  get 'users/accept/:id' => 'users#accept', as: "user_accept"
+  get 'users/makeadmin/:id' => 'users#make_admin', as: "make_admin"
+
+  get 'default_work_times/accept/:id' => 'default_work_times#accept', as: "default_work_time_accept"
+  get 'default_work_times/reject/:id' => 'default_work_times#reject', as: "default_work_time_reject"
   resources :default_work_times, only: [:show]
+  resources :default_work_times_request, only: [:destroy]
+  resources :inboxs, only: [:index]
 
   post 'update_work_time' => 'default_work_times#update_work_time', as: :update_work_time
 
   resources :users
 
-  resources :holiday
+
+  resources :holidays
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,13 +1,9 @@
--if notice
-  =notice
-%br
-Default work hours for : 
-%b
-  =@d.user.name
-  =@d.user.surname
-%hr
 - days = ['monday', 'tuesday','wednesday','thursday','friday']
 - start_end = ['_start','_end']
+
+Your default work hours
+%hr
+
 
 -day_counter = 0
 .col-xs-6.day
@@ -21,7 +17,7 @@ Default work hours for :
     =w[1]
     %hr
     -day_counter+=1
--day_counter = 0
+
 .col-xs-6.day
   =form_tag update_work_time_path do
     -(0..4).each do |num| 
@@ -34,4 +30,32 @@ Default work hours for :
     =hidden_field_tag "user_id", @d.user_id
     =submit_tag "Send Request"
 
--if @
+
+
+-if User.find(@d.user_id).default_work_time_request
+  -day_count=0
+  -d_request=User.find(@d.user_id).default_work_time_request
+  %b Your current request:
+  %br
+  =d_request.description
+  %br
+  -d_request.week.each do |w|
+    .col-xs-2.day
+      %b
+        =days[day_count]
+      %br
+      Start: 
+      =w[0]
+      %br
+      End: 
+      =w[1]
+      -day_count+=1
+  .col-xs-2.day
+    %b Status:
+    =d_request.status
+    %br
+    %br
+    =link_to "Delete", default_work_times_request_path(d_request.id), method: :delete
+  -if d_request.reason
+    =d_request.reason
+

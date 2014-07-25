@@ -1,21 +1,13 @@
 class DefaultWorkTimesRequestController < ApplicationController
-def new
-    @dr=DefaultWorkTimeRequest.new
-  end
+def destroy
+    @default_work_time_request=DefaultWorkTimeRequest.find(params[:id])
 
-  def create
-    @dr=DefaultWorkTimeRequest.new(defaultworktimerequest_params)
-     if @dr.save
-      redirect_to root_url, notice:"Uzytkownik stworzony"
+    default_work_time_id=User.find(@default_work_time_request.user_id).default_work_time.id
+
+    if @default_work_time_request.destroy
+      redirect_to default_work_time_path(default_work_time_id), notice:"Request deleted"
     else
-      render 'new'
-    end 
+      redirect_to default_work_time_path(default_work_time_id), alert: "Error"
+    end
   end
-
-  private
-  def defaultworktime_params
-    params.require(:default_work_time).permit(:week, :user_id, :description, :status)
-  end
-
-
 end
