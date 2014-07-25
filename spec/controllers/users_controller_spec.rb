@@ -6,8 +6,8 @@ RSpec.describe UsersController, type: :controller do
    # @user=User.create(name: "Jan", surname: "Kowalski", email: "test@mail.pl", password: "razdwatrzycztery")
     #sign_in @user
 
-    @user=User.create(name: 'name: "Jan", surname: "Kowalski", email: "test@mail.pl", password: "razdwatrzycztery"')
-    #sign_in @user
+    @user=User.create(name: "Jan", surname: "Kowalski", email: "test@mail.pl", password: "razdwatrzycztery")
+    sign_in @user
    end
 
 
