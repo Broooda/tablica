@@ -16,15 +16,9 @@ RSpec.describe Holiday, :type => :model do
   end
 
 
-<<<<<<< HEAD
+
 end
 
 
-=======
-<<<<<<< HEAD
-end
 
 
-=======
->>>>>>> c41618155251ac68ebb709ce00f3e9aa5b7c31b8
->>>>>>> Holiday_Controller
