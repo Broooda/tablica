@@ -72,6 +72,18 @@ function setUpHoursPlans() {
 $(function(){
   $('.man-in-work').tooltip();
 
+  $('#datepicker input').datepicker({format: 'yyyy-mm-dd', weekStart: 1}).on('changeDate', 
+    function(ev){
+      action = $(this).attr('act');
+      if(action=='showtime')
+        $(this).parent('form').attr('action','/week/time/'+$(this).val());
+      else if(action=='showpeople')
+        $(this).parent('form').attr('action','/week/people/'+$(this).val());
+      
+      $(this).parent('form').submit();
+
+    });
+
   startHour = startHour || false;
   endHour = endHour || false;
 

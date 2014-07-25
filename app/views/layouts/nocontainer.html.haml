@@ -3,13 +3,20 @@
   .container-fluid
     = render "shared/logonavbar"
     .row
+      .col-xs-2.text-center.weekpicker#datepicker
+        %form(method="GET")
+          -if params[:fulldate] 
+            -inputdate = params[:fulldate]
+          -else
+            -inputdate = Date.commercial(@year, @week_num, 1).strftime('%Y-%m-%d')
+          %input(value="#{inputdate}" act="#{action_name}")
       %a.bl(href="#{url_for :controller => 'week', :action => action_name, :year => (@week-7).year, :week => (@week-7).cweek}")
-        .col-md-3.col-md-offset-2.text-center.weekpicker.rotate-l3
+        .col-xs-3.col-xs-offset-1.text-center.weekpicker.rotate-l3
           week #{(@week-7).cweek}, #{(@week-7).year}
-      .col-md-3.text-center.weekpicker(style="z-index: 1")
+      .col-xs-3.text-center.weekpicker(style="z-index: 1")
         week #{@week_num}, #{@year}
       %a.bl(href="#{url_for :controller => 'week', :action => action_name, :year => (@week+7).year, :week => (@week+7).cweek}")
-        .col-md-3.text-center.weekpicker.rotate-r3
+        .col-xs-3.text-center.weekpicker.rotate-r3
           week #{(@week+7).cweek}, #{(@week+7).year}
     = yield
     = render "shared/footer"

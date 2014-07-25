@@ -1,14 +1,9 @@
 %h1 Profile
-%h3
-  Name: 
-  = @user.name
-  %br/
-  Surname:
-  = @user.surname
-  %br/
-  E-mail:
+
+%h2
+  =@user.full_name(true)
+  |
   = @user.email
-  %br/
-%h4
-  = link_to "Edit profile", edit_user_path(@user.id) 
-  = link_to "Users list", users_path
+-if current_user.admin or @user.id==current_user.id
+  %p= link_to "Edit profile", edit_user_path(@user.id) 
+

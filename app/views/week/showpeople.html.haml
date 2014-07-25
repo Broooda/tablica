@@ -20,8 +20,7 @@
         -if day_num==0
           .hour.text-center
             %span.man
-              =user.name
-              =user.surname
+              =link_to user.full_name(true), user_path(user.id)
         -else
           .hour.text-center
             -user_hours_plans = @hours_plans.where('user_id = :user_id', { user_id: user.id})
@@ -33,7 +32,7 @@
                     %span.hour-text=user_hours_plan.start_date.strftime('%k:%M')
                     to
                     %span.hour-text=user_hours_plan.end_date.strftime('%k:%M')
-                  -if user_hours_plan.over_hours # TODO: napisać to ładniej po tym jak dodam wartość default 0 w over_hours w bazie
+                  -if user_hours_plan.over_hours and user_hours_plan.over_hours>0 # TODO: napisać to ładniej po tym jak dodam wartość default 0 w over_hours w bazie
                     %p.over-hours
                       %span.hour-text=user_hours_plan.over_hours
                       over hours
