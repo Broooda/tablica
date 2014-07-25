@@ -1,7 +1,7 @@
 class HolidaysController < ApplicationController
 
 	def index
-		@holiday= Holiday.all
+		@holiday= Holiday.where('user_id=:user_id',{user_id: current_user.id})
 	end
 	
 	def show
