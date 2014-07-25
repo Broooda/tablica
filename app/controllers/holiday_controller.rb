@@ -2,6 +2,7 @@ class HolidayController < ApplicationController
 
 	def index
 		@holiday= Holiday.all
+		@default_work_time_requests=DefaultWorkTimeRequest.all
 	end
 	
 	def show

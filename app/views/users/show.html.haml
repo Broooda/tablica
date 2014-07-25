@@ -1,7 +1,9 @@
 %h1 Profile
+
 %h2
   =@user.full_name(true)
   |
   = @user.email
 -if current_user.admin or @user.id==current_user.id
   %p= link_to "Edit profile", edit_user_path(@user.id) 
+

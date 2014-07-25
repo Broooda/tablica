@@ -7,7 +7,7 @@ def destroy
     if @default_work_time_request.destroy
       redirect_to default_work_time_path(default_work_time_id), notice:"Request deleted"
     else
-      redirect_to default_work_time_path(default_work_time_id), notice: "Error"
+      redirect_to default_work_time_path(default_work_time_id), alert: "Error"
     end
   end
 end

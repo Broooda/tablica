@@ -10,11 +10,14 @@
       -else
         %li=link_to "sign in", new_user_session_url
         %li=link_to "sign up", new_user_registration_url
-    %ul
-      %li=link_to "My week plan", week_time_url
-      %li=link_to "Holidays", root_url
-      %li=link_to "Raports", root_url
-      %li=link_to "Calendar", root_url
+    -if current_user
+      %ul
+        %li=link_to "My week plan", week_time_url
+        %li=link_to "Holidays", root_url
+        %li=link_to "Raports", root_url
+        %li=link_to "Default hours", default_work_time_path(current_user.default_work_time.id)
+        -if current_user.admin
+          %li=link_to "Inbox", inboxs_path
 .row
   .col-md-12
     -if flash[:error]

@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :make_sure_its_mine, only: [:destroy, :edit]
 
 
   def edit
@@ -29,6 +30,7 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		@user.accepted = true
 		@user.save
+    DefaultWorkTime.create(week: [['9:00','16:00'],['9:00','16:00'],['9:00','16:00'],['9:00','16:00'],['9:00','16:00']], user_id: @user.id)
 		redirect_to users_url
 	end
   
@@ -46,6 +48,14 @@ class UsersController < ApplicationController
   private
     def user_params
       params.require(:user).permit(:name, :surname, :email, :password, :password_confirmation)
+    end
+
+    def make_sure_its_mine
+      @user = User.find(params[:id])
+      unless current_user.id == @user.id or current_user.admin == true
+        redirect_to user_path, alert: "You can't edit that."
+      end
+      true
     end
 
 end
