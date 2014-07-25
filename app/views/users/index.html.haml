@@ -24,7 +24,7 @@
             =link_to raw('<span class="glyphicon glyphicon-pencil"></span> ')+"edit", edit_user_path(user.id), :class=>"btn btn-default btn-xs"
 
         %td.text-center
-          -if current_user.admin == true and user.admin == false
+          -if current_user.admin == true and user.admin == false and user.accepted == true
             =link_to raw('<span class="glyphicon glyphicon-user"></span> ')+"give rights", make_admin_path(user.id), :class=>"btn btn-default btn-xs", data: { confirm: "Are you sure you want to give admin rights to "+user.full_name+" ?" }
         %td.text-center
           -if current_user.admin == true or user.id == current_user.id
