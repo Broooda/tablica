@@ -1,0 +1,3 @@
+class InboxsController < ApplicationController
+
+end

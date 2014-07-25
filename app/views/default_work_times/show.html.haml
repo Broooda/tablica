@@ -4,7 +4,7 @@
 
 
 -day_counter = 0
--if @current_user.admin
+-if current_user.admin
   -@dr.each do |request|
     -actuall_week = request.user.default_work_time.week
     -if request.status="pending"
