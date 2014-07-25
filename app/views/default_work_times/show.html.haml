@@ -1,15 +1,9 @@
--if notice
-  %b
-    %center
-      =notice
-%br
-Default work hours for : 
-%b
-  =@d.user.name
-  =@d.user.surname
-%hr
 - days = ['monday', 'tuesday','wednesday','thursday','friday']
 - start_end = ['_start','_end']
+
+Your default work hours
+%hr
+
 
 -day_counter = 0
 .col-xs-6.day
@@ -49,6 +43,7 @@ Default work hours for :
     .col-xs-2.day
       %b
         =days[day_count]
+      %br
       Start: 
       =w[0]
       %br
@@ -61,4 +56,6 @@ Default work hours for :
     %br
     %br
     =link_to "Delete", default_work_times_request_path(d_request.id), method: :delete
+  -if d_request.reason
+    =d_request.reason
 
