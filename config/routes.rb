@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get 'users/accept/:id' => 'users#accept', as: "user_accept"
   get 'users/makeadmin/:id' => 'users#make_admin', as: "make_admin"
 
+  get 'default_work_times/accept/:id' => 'default_work_times#accept', as: "default_work_time_accept"
+  get 'default_work_times/reject/:id' => 'default_work_times#reject', as: "default_work_time_reject"
   resources :default_work_times, only: [:show]
   resources :default_work_times_request, only: [:destroy]
 
