@@ -15,16 +15,7 @@ RSpec.describe Holiday, :type => :model do
     expect(Holiday.new(startdate: DateTime.now, enddate: DateTime.now+10.days, description: "Urlop", status: "accepted")).to be_valid
   end
 
-
-<<<<<<< HEAD
 end
 
 
-=======
-<<<<<<< HEAD
-end
 
-
-=======
->>>>>>> c41618155251ac68ebb709ce00f3e9aa5b7c31b8
->>>>>>> Holiday_Controller
