@@ -30,6 +30,7 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		@user.accepted = true
 		@user.save
+    DefaultWorkTime.create(week: [['9:00','16:00'],['9:00','16:00'],['9:00','16:00'],['9:00','16:00'],['9:00','16:00']], user_id: @user.id)
 		redirect_to users_url
 	end
   

@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get 'default_work_times/reject/:id' => 'default_work_times#reject', as: "default_work_time_reject"
   resources :default_work_times, only: [:show]
   resources :default_work_times_request, only: [:destroy]
+  resources :inboxs, only: [:index]
 
   post 'update_work_time' => 'default_work_times#update_work_time', as: :update_work_time
 

@@ -17,7 +17,7 @@
         %li=link_to "Raports", root_url
         %li=link_to "Default hours", default_work_time_path(current_user.default_work_time.id)
         -if current_user.admin
-          %li=link_to "Inbox", default_work_time_path(current_user.default_work_time.id)
+          %li=link_to "Inbox", inboxs_path
 .row
   .col-md-12
     -if flash[:error]

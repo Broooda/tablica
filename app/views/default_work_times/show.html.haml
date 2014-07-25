@@ -1,36 +1,6 @@
 - days = ['monday', 'tuesday','wednesday','thursday','friday']
 - start_end = ['_start','_end']
 
-
-
--day_counter = 0
--if current_user.admin
-  -@dr.each do |request|
-    -actuall_week = request.user.default_work_time.week
-    -if request.status="pending"
-      =request.user.name
-      =request.user.surname
-      wants to change:
-      %br
-      -request.week.each do |day|
-        -unless day[0] == actuall_week[day_counter][0] and day[1] == actuall_week[day_counter][1]
-          %b
-            =days[day_counter]
-          from
-          =actuall_week[day_counter][0]
-          =actuall_week[day_counter][1]
-          to
-          =day[0]
-          =day[1]
-          %br
-        -day_counter+=1
-      =request.description
-      =request.status
-      %br
-      =link_to "Accept", default_work_time_accept_url(request.id)
-      =link_to "Reject", default_work_time_reject_url(request.id)
-
-%hr
 Your default work hours
 %hr
 
