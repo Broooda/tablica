@@ -16,7 +16,23 @@ class HolidaysController < ApplicationController
   			redirect_to holidays_path alert: "Not Removed Holiday "
 		end
 	end
-  	
+
+  	def accept
+    @holiday = Holiday.find(params[:id])
+    @holiday.status = "accepted"
+    @holiday.save
+   
+    redirect_to inboxs_path
+  end
+
+  def reject
+    @holiday = Holiday.find(params[:id])
+    @holiday.status = "rejected"
+    @holiday.save
+   
+    redirect_to inboxs_path
+  end
+
 	def new
 		@holiday=Holiday.new
 	end
@@ -46,7 +62,7 @@ class HolidaysController < ApplicationController
 
 	private
 		def holiday_params
-		params.require(:holiday).permit(:startdate, :enddate, :description, :status) 
+		params.require(:holiday).permit(:startdate, :enddate, :description, :status, :user_id) 
 	end
 
 end

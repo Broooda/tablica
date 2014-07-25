@@ -3,7 +3,22 @@
 
 %b Holidays requests:
 %br
-
+-@holiday.each do |holiday|
+  -if holiday.status=="pending"
+    %b
+      =holiday.user.name
+      =holiday.user.surname
+    From
+    =holiday.startdate
+    To
+    =holiday.enddate
+    %br
+    Description
+    =holiday.description
+    %br
+    =link_to "Accept", holiday_accept_url(holiday.id)
+    =link_to "Reject", holiday_reject_url(holiday.id)
+    %br
 
 
 %hr
@@ -30,7 +45,6 @@
         %br
       -day_counter+=1
     =request.description
-    =request.status
     %br
     =link_to "Accept", default_work_time_accept_url(request.id)
     =link_to "Reject", default_work_time_reject_url(request.id)

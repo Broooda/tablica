@@ -62,6 +62,7 @@ function setUpHoursPlans() {
     $(this).css('left', 5+(width*people.indexOf(user)));
     $(this).css('width', width-2);
     $(this).css('top', (start.getHours()+start.getMinutes()/60-startHour)*pxPerHour+headerOffset);
+    //$(this).css('height', (end.getHours()+end.getMinutes()/60-start.getHours()-start.getMinutes()/60)*pxPerHour);
 
     $(this).animate({
       height: (end.getHours()+end.getMinutes()/60-start.getHours()-start.getMinutes()/60)*pxPerHour
