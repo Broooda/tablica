@@ -17,8 +17,10 @@
         <td><%= holiday.enddate %></td>
         <td><%= holiday.description %></td>
         <td><%= holiday.status %></td>
+        <% if holiday.status=="pending" %> 
         <td><%= link_to 'Edit', edit_holiday_path(holiday) %></td>
         <td><%= link_to 'Destroy', holiday_path(holiday), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>
       </tr>
     <% end %>
   </tbody>
