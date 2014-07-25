@@ -1,0 +1,15 @@
+%h1 Edit holiday request
+= form_for(@holiday) do |f|
+  %div.form-group
+    = f.label "Start Date"
+    = f.text_field :startdate, :class => "form-control"
+  %div.form-group
+    = f.label "End Date"
+    = f.text_field :enddate, :class => "form-control"
+  %div.form-group
+    = f.label "Description"
+    = f.text_area :description, :class => "form-control"
+  %div.form-group
+    = f.hidden_field :user_id , value: current_user.id
+    = f.hidden_field :status ,:value =>"pending"
+    = f.submit "Edit Holiday", :class => "form-control"
