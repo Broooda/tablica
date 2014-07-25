@@ -21,9 +21,8 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
-
 	def index
-		@users = User.all
+		@users = User.order('surname')
 	end
 
 	def accept
@@ -33,9 +32,9 @@ class UsersController < ApplicationController
 		redirect_to users_url
 	end
   
-  	def show
-    	@user=User.find(params[:id])
-  	end
+	def show
+  	@user=User.find(params[:id])
+	end
 
   def make_admin
     @user = User.find(params[:id])

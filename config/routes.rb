@@ -7,7 +7,9 @@ Rails.application.routes.draw do
 
   get 'week/time' => 'week#showtime'
   get 'week/time/:year/:week' => 'week#showtime', as: "week_time_date"
+  get 'week/time/:fulldate' => 'week#showtime', as: "week_time_fulldate"
   get 'week/people' => 'week#showpeople'
+  get 'week/people/:fulldate' => 'week#showpeople', as: "week_people_fulldate"
   get 'week/people/:year/:week' => 'week#showpeople', as: "week_people_date"
 
   get 'users/accept/:id' => 'users#accept', as: "user_accept"

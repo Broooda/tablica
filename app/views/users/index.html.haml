@@ -1,49 +1,31 @@
-%h1 Users List:
+%h1 Users list
 
 %table.table
   %tr
-    %td
-      Name:
-    %td
-      Show:
-    %td
-    %td
-      Join Date:
-    %td
-      Edit:
-    %td
-    %td
-      Delete:
+    %th Name
+    %th.text-center Join date
+    -if current_user.admin
+      %th.text-center Accept
+      %th.text-center Edit
+      %th.text-center Give admin rights
+      %th.text-center Delete
     
 
   -@users.each do |user|
     %tr
-      %td      
-        =user.name
-        =user.surname
+      %td=link_to user.full_name(!current_user.admin), user_path(user.id)
+      %td.text-center=user.created_at.strftime("%Y.%m.%d")
+      -if current_user.admin
+        %td.text-center
+          -if user.accepted == false and current_user.admin == true
+            = link_to raw('<span class="glyphicon glyphicon-ok"></span> ')+"accept", user_accept_url(user.id), :class=>"btn btn-default btn-xs"
+        %td.text-center
+          -if current_user.admin == true or user.id == current_user.id
+            =link_to raw('<span class="glyphicon glyphicon-pencil"></span> ')+"edit", edit_user_path(user.id), :class=>"btn btn-default btn-xs"
 
-      %td
-        =link_to "Show", user_path(user.id)
-
-      %td
-        -if user.accepted == false and current_user.admin == true
-          = link_to "Accept User", user_accept_url(user.id)
-        -elsif user.accepted == true and current_user.admin == true  
-          user accepted.
-        -else
-
-      %td
-        =user.created_at.strftime("%Y:%m:%d")
-
-      %td
-        -if current_user.admin == true or user.id == current_user.id
-          =link_to "Edit User", edit_user_path(user.id)
-
-      %td
-        -if current_user.admin == true and user.admin == false
-          =link_to "Make Admin", make_admin_path(user.id)
-        -else
-
-      %td
-        -if current_user.admin == true or user.id == current_user.id
-          =link_to "Delete", user_path(user.id), method: :delete
+        %td.text-center
+          -if current_user.admin == true and user.admin == false
+            =link_to raw('<span class="glyphicon glyphicon-user"></span> ')+"give rights", make_admin_path(user.id), :class=>"btn btn-default btn-xs", data: { confirm: "Are you sure you want to give admin rights to "+user.full_name+" ?" }
+        %td.text-center
+          -if current_user.admin == true or user.id == current_user.id
+            =link_to raw('<span class="glyphicon glyphicon-remove"></span> ')+"delete", user_path(user.id), method: :delete, :class=>"btn btn-default btn-xs", data: { confirm: "Are you sure you want to delete "+user.full_name+" ?" }
