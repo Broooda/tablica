@@ -4,8 +4,10 @@ RSpec.describe UsersController, type: :controller do
 
 
   before(:each) do
-    @user=User.create(name: "Jan", surname: "Kowalski", email: "test@mail.pl", password: "razdwatrzycztery")
-    #sign_in @user
+
+    @user=User.create(name: "Jan", surname: "Kowalski", email: "test@mail.pl", password: "razdwatrzycztery", accepted: true)
+    sign_in @user
+
    end
 
 
@@ -13,10 +15,9 @@ RSpec.describe UsersController, type: :controller do
 
    describe "GET #index" do
       it 'responds successfully with an HTTP 200 status code' do
-       # puts current_user
         get :index
-       #expect(response).to be_success
-       # expect(response).to have_http_status(200)
+        expect(response).to be_success
+        expect(response).to have_http_status(200)
       end
 
 
