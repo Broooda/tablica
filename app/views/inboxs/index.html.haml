@@ -1,40 +1,42 @@
 / KOmentar@dr = default work time request
 - days = ['monday', 'tuesday','wednesday','thursday','friday']
 
-%b Holidays requests:
-%br
--@holiday.each do |holiday|
-  -if holiday.status=="pending"
-    %b
-      =holiday.user.name
-      =holiday.user.surname
-    From
-    =holiday.startdate
-    To
-    =holiday.enddate
-    %br
-    Description
-    =holiday.description
-    %br
+%h1 Holidays requests:
+-if @holiday.size>0
+  -@holiday.each do |holiday|
+    -if holiday.status=="pending"
+      %b
+        =holiday.user.name
+        =holiday.user.surname
+      %p
+        From
+        =holiday.startdate
+        To
+        =holiday.enddate
+      %p
+        Description
+        =holiday.description
 
-    =form_tag holiday_reject_url(holiday.id), method: :get do 
-      =label_tag "Description if rejected"
-      =text_area_tag "description"
-      =link_to "Accept", holiday_accept_url(holiday.id)
-      =submit_tag "Reject"
-      %br
+      =form_tag holiday_reject_url(holiday.id), method: :get do 
+        =label_tag "Description if rejected"
+        =text_area_tag "description"
+        =link_to "Accept", holiday_accept_url(holiday.id)
+        =submit_tag "Reject"
+-else
+  %h3 work, work, work. No holidays requests!
+
 
 
 
 %hr
-%b Default work time requests:
-%br 
+%h1 Default work time requests:
 -@dr.each do |request|
   -day_counter = 0
   -actuall_week = request.user.default_work_time.week
   -if request.status=="pending"
-    =request.user.name
-    =request.user.surname
+    %b
+      =request.user.name
+      =request.user.surname
     wants to change:
     %br
     -request.week.each do |day|
@@ -49,7 +51,7 @@
         =day[1]
         %br
       -day_counter+=1
-    =request.description
+    %p=request.description
     %br
     =form_tag default_work_time_reject_url(request.id), method: :get do 
       =label_tag "Description if rejected"
