@@ -5,10 +5,24 @@ class ApplicationController < ActionController::Base
 
   before_action :unaccepted_user
   before_action :authenticate_user!, except: [:go_to_login]
+  before_action :get_inbox_msgs
   
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
+
+  def get_inbox_msgs
+    if current_user.admin
+      @inbox_msgs = Holiday.where("status='pending'").size
+      @inbox_msgs += DefaultWorkTimeRequest.where("status='pending'").size
+
+      if @inbox_msgs > 0
+        @inbox_msgs = ' <span class="badge pulse">'+@inbox_msgs.to_s+'</span>'
+      else
+        @inbox_msgs = ' <span class="badge">0</span>';
+      end
+    end
+  end
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) << :name
