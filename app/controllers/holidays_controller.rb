@@ -1,4 +1,5 @@
 class HolidaysController < ApplicationController
+before_action :make_sure_its_mine, only: [:destroy, :edit]
 
 	def index
 		@holiday= Holiday.all
@@ -65,5 +66,13 @@ class HolidaysController < ApplicationController
 		def holiday_params
 		params.require(:holiday).permit(:startdate, :enddate, :description, :status, :user_id) 
 	end
+
+  def make_sure_its_mine
+      @user = Holiday.find(params[:id]).user
+      unless current_user.id == @user.id or current_user.admin == true
+        redirect_to user_path, alert: "Its not your's!"
+      end
+      true
+    end
 
 end
