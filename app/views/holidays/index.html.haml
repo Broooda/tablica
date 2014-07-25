@@ -16,8 +16,10 @@
         %td
           -if holiday.status=="pending"
             =link_to 'Edit', edit_holiday_path(holiday)
-            =link_to 'Destroy', holiday_path(holiday), method: :delete, data: { confirm: 'Are you sure?' }
+            =link_to 'Destroy', holiday_path(holiday), method: :delete, data: { confirm: 'Are you sure?'}
+          -if holiday.status=="rejected"
+            %td=holiday.reason
 -else
-  %h3 no holiday requests, people just want to work as always
+  %h3 no holiday requests, you just want to work as always
 
-= link_to 'New holiday request', new_holiday_path, :class=>"btn btn-default"
+=link_to 'New holiday request', new_holiday_path, :class=>"btn btn-default"
