@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20140725083425) do
+=======
+ActiveRecord::Schema.define(version: 20140725082049) do
+>>>>>>> b7d8f65278c266e6882a53aa090915f0defb2cac
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,7 +49,7 @@ ActiveRecord::Schema.define(version: 20140725083425) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.integer  "over_hours"
+    t.integer  "over_hours", default: 0
   end
 
   create_table "users", force: true do |t|
@@ -65,6 +69,7 @@ ActiveRecord::Schema.define(version: 20140725083425) do
     t.string   "surname"
     t.boolean  "admin",                  default: false
     t.boolean  "accepted",               default: false
+    t.string   "tags",                   default: ""
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

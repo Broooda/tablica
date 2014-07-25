@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :make_sure_its_mine, only: [:destroy, :edit]
 
 
   def edit
@@ -21,9 +22,8 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
-
 	def index
-		@users = User.all
+		@users = User.order('surname')
 	end
 
 	def accept
@@ -34,9 +34,9 @@ class UsersController < ApplicationController
 		redirect_to users_url
 	end
   
-  	def show
-    	@user=User.find(params[:id])
-  	end
+	def show
+  	@user=User.find(params[:id])
+	end
 
   def make_admin
     @user = User.find(params[:id])
@@ -48,6 +48,14 @@ class UsersController < ApplicationController
   private
     def user_params
       params.require(:user).permit(:name, :surname, :email, :password, :password_confirmation)
+    end
+
+    def make_sure_its_mine
+      @user = User.find(params[:id])
+      unless current_user.id == @user.id or current_user.admin == true
+        redirect_to user_path, alert: "You can't edit that."
+      end
+      true
     end
 
 end
