@@ -56,4 +56,6 @@ Your default work hours
     %br
     %br
     =link_to "Delete", default_work_times_request_path(d_request.id), method: :delete
+  -if d_request.reason
+    =d_request.reason
 

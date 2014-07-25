@@ -9,7 +9,7 @@ class DefaultWorkTimesController < ApplicationController
     #If user has DefaultWorkTimeRequest object
     if User.find(params['user_id']).default_work_time_request
       #If this object's status is 'pending'
-      if User.find(params['user_id']).default_work_time_request.status="pending"
+      if User.find(params['user_id']).default_work_time_request.status=="pending"
         #Error, redirect 
         redirect_to default_work_time_path(User.find(params['user_id']).default_work_time.id), notice: "Request already exists"
       else
@@ -29,7 +29,7 @@ class DefaultWorkTimesController < ApplicationController
     @request.save
     @request.user.default_work_time.save
     
-    redirect_to default_work_time_path(@current_user.default_work_time.id)
+    redirect_to inboxs_path
   end
 
   def reject
@@ -37,7 +37,7 @@ class DefaultWorkTimesController < ApplicationController
     #DefaultWorkTimeRequest.find(params[:id]).destroy
     @request.status = "rejected"
     @request.save
-    redirect_to default_work_time_path(@current_user.default_work_time.id)
+    redirect_to inboxs_path
   end
 
 
