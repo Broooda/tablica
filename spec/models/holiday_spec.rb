@@ -18,4 +18,3 @@ RSpec.describe Holiday, :type => :model do
 
 end
 
-
