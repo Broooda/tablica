@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def get_inbox_msgs
-    if current_user.admin
+    if current_user and current_user.admin
       @inbox_msgs = Holiday.where("status='pending'").size
       @inbox_msgs += DefaultWorkTimeRequest.where("status='pending'").size
 

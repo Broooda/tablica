@@ -22,8 +22,8 @@
 
     .hours-plan {
       position: absolute;
-      left: 0px;
-      top: 0px;
+      left: 50%;
+      top: 50%;
 
       width: 0px;
       height: 0px;
@@ -40,6 +40,32 @@
 
   .today {
     background: #ddb2a9;
+  }
+
+
+  .table-configurator > div {
+    display: inline-block;
+  }
+
+  .table-configurator > #people-picker {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    vertical-align: middle;
+    margin-left: 20px;
+  }
+
+  .table-configurator > #people-picker > span {
+    cursor: pointer;
+  }
+
+  .all-tags {
+    display: none;
+
+    span {
+      line-height: 2;
+      cursor: pointer;  
+    }
   }
 
   .hour {
@@ -183,4 +209,3 @@
   transform:rotate(0deg);
   -webkit-transform:rotate(0deg);
 }
-

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :make_sure_its_mine, only: [:destroy, :edit]
+  before_action :mine_or_admin, except: [:index, :show ]
 
 
   def edit
@@ -53,11 +53,12 @@ class UsersController < ApplicationController
   end
 
   private
+
     def user_params
-      params.require(:user).permit(:name, :surname, :email, :password, :password_confirmation)
+      params.require(:user).permit(:name, :surname, :email, :password, :password_confirmation, :tags)
     end
 
-    def make_sure_its_mine
+    def mine_or_admin
       @user = User.find(params[:id])
       unless current_user.id == @user.id or current_user.admin == true
         redirect_to user_path, alert: "You can't edit that."
