@@ -12,7 +12,7 @@ before_action :make_sure_its_mine, only: [:destroy, :show]
       #If this object's status is 'pending'
       if User.find(params['user_id']).default_work_time_request.status=="pending"
         #Error, redirect 
-        redirect_to default_work_time_path(User.find(params['user_id']).default_work_time.id), notice: "Request already exists"
+        redirect_to default_work_time_path(User.find(params['user_id']).default_work_time.id), alert: "Request already exists"
       else
         create_new_request
       end
@@ -52,16 +52,19 @@ before_action :make_sure_its_mine, only: [:destroy, :show]
 
   private
   def create_new_request
-      #Create object with params
-        new_default=DefaultWorkTimeRequest.new(week: [[params['monday_start'],params['monday_end']],[params['tuesday_start'], params['tuesday_end']],[params['wednesday_start'], params['wednesday_end']],[params['thursday_start'],params['thursday_end']],[params['friday_start'],params['friday_end']]],description: params['description'], user_id: params['user_id'], status: 'pending')
-        #If valid save object and redirect
-        if new_default.valid?
-          new_default.save
-          redirect_to default_work_time_path(User.find(params['user_id']).default_work_time.id), notice: "Request added"
-        #If not valid redirect with notice
-        else
-          redirect_to default_work_time_path(User.find(params['user_id']).default_work_time.id), alert: new_default.errors.full_messages.first
-        end
+    #usun aktualne requesty uzytkownika
+    DefaultWorkTimeRequest.where('user_id = :user_id', {user_id: current_user.id}).destroy_all
+
+    #Create object with params
+    new_default=DefaultWorkTimeRequest.new(week: [[params['monday_start'],params['monday_end']],[params['tuesday_start'], params['tuesday_end']],[params['wednesday_start'], params['wednesday_end']],[params['thursday_start'],params['thursday_end']],[params['friday_start'],params['friday_end']]],description: params['description'], user_id: params['user_id'], status: 'pending')
+    #If valid save object and redirect
+    if new_default.valid?
+      new_default.save
+      redirect_to default_work_time_path(User.find(params['user_id']).default_work_time.id), notice: "Request added"
+    #If not valid redirect with notice
+    else
+      redirect_to default_work_time_path(User.find(params['user_id']).default_work_time.id), alert: new_default.errors.full_messages.first
+    end
   end
 
   def make_sure_its_mine

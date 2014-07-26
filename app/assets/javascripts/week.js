@@ -59,8 +59,10 @@ function setUpHoursPlans(tags) {
     end = new Date($(this).attr('end'));
     user = $(this).attr('user');
 
-    if(people.indexOf(user)<colors.length)
-      {$(this).css('background-color',colors[people.indexOf(user)]);}
+    if(tags==' ') { //only when everybody onboard
+      if(people.indexOf(user)<colors.length)
+        {$(this).css('background-color',colors[people.indexOf(user)]);}
+    }
 
     width = 200/people.length;
     //if(width>30) {width=30;}
