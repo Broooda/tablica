@@ -1,5 +1,6 @@
 class HoursPlansController < ApplicationController
   
+  before_action :is_mine
   layout false
 
   def edit
@@ -20,6 +21,14 @@ class HoursPlansController < ApplicationController
       redirect_to week_time_url, notice: "Error while saving"
     end
 
+  end
+
+  private
+  def is_mine
+    @hours_plan = HoursPlan.find(params[:id])
+    unless @hours_plan.user == current_user
+       redirect_to week_time_url, notice: "Nope, it's not yours"
+    end
   end
 
   
