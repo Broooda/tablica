@@ -24,8 +24,7 @@ class DefaultWorkTime < ActiveRecord::Base
     #force_update (bool) - jesli sa jakiej godziny juz w tych dniach i force_update==true to napisze je 
 
     #poniedzialek 0:00 (posluzy jako punkt odniesienia)
-    monday_midnight_in_current_week = DateTime.commercial(DateTime.now.year, DateTime.now.cweek,1)
-
+    monday_midnight_in_current_week = DateTime.commercial(DateTime.now.year, DateTime.now.cweek,1,0,0,0,'+2')
     #iteruj po wszystkich DefaultWorkTime
     default_work_times = DefaultWorkTime.all
     default_work_times.each do |default_work_time|
