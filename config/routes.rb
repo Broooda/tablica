@@ -31,7 +31,8 @@ Rails.application.routes.draw do
 
   post 'update_work_time' => 'default_work_times#update_work_time', as: :update_work_time
 
-  
+  get 'ajax/hours_plans/edit/:id' => 'hours_plans#edit', as: "edit_hours_plans_ajax"
+  post 'hours_plans/update/:id' => 'hours_plans#update', as: "update_hours_plans"
 
 
   

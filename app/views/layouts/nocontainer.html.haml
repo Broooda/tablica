@@ -19,4 +19,9 @@
         .col-xs-3.text-center.weekpicker.rotate-r3
           week #{(@week+7).cweek}, #{(@week+7).year}
     = yield
+    #modal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1"}
+      .modal-dialog
+        .modal-content
+          .modal-body
+            error, please try again...
     = render "shared/footer"
