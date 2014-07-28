@@ -25,6 +25,8 @@ function moveNowLine() {
 }
 
 function setUpHoursPlans(tags) {
+  console.log(tags);
+
   colors=[
    'hsl(30,75%,50%)',
    'hsl(50,75%,50%)',
@@ -96,7 +98,7 @@ $(function(){
 
     });
 
-  $('#people-picker > span').popover({html: true, content: '<input id="people-picker-input" placeholder="name, surname or tags">'}).on('shown.bs.popover', function () {
+  $('#people-picker > span.by-tags').popover({html: true, content: '<input id="people-picker-input" placeholder="name, surname or tags">'}).on('shown.bs.popover', function () {
     $('.popover-content').append($('.all-tags').clone());
 
     $('.popover-content .all-tags').slideDown();
@@ -119,6 +121,17 @@ $(function(){
     });
   });
 
+  $('#people-picker > span.only-me').click(function(){
+    tags=$(this).attr('me');
+
+    if(view=="time")
+      { setUpHoursPlans(tags); }
+    else if(view=="people") {
+      $('.hour').stop(true).slideUp();
+      $('.hour[tags*="'+tags+'"]').stop(true).slideDown();
+    }
+  });
+
 
   startHour = startHour || false;
   endHour = endHour || false;
@@ -130,6 +143,13 @@ $(function(){
 
     moveNowLine();
     setInterval(function(){moveNowLine();}, 1000);
+
+    $('.hours-plan.hours_plan_owner').click(function(){
+      $.ajax('/ajax/hours_plans/edit/'+$(this).attr('hours_plan_id')).done(function(data){
+        $('.modal-body').html(data);
+      });
+      $('#modal').modal();
+    });
 
     $('.hours-plan').hover(function(){
       $('.tooltip-inner').css('background-color', $(this).css('background-color'));

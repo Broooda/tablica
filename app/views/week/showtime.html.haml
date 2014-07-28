@@ -20,7 +20,8 @@
               %br
               =link_to "by people", week_people_date_url(@year,@week_num)
             %div#people-picker
-              %span.glyphicon.glyphicon-search
+              %span.glyphicon.glyphicon-search.by-tags
+              %span.glyphicon.glyphicon-user.only-me(me="#{current_user.full_name}")
               .all-tags
                 -User.get_all_tags.each do |tag|
                   %span.label.label-default=tag
@@ -31,7 +32,9 @@
 
       -@hours_plans.each do |hours_plan| #wyswietlanie kiedy typek jest w pracy
         -if hours_plan.start_date.strftime('%u').to_i==day_num
-          .hours-plan(start="#{hours_plan.start_date.strftime('%D %R')}" end="#{hours_plan.end_date.strftime('%D %R')}" user="#{hours_plan.user.full_name}" title="#{hours_plan.user.full_name}" tags="#{hours_plan.user.get_tags}")
+          .hours-plan{:class => ('hours_plan_owner' if hours_plan.user_id==current_user.id)}(hours_plan_id="#{hours_plan.id}" start="#{hours_plan.start_date.strftime('%D %R')}" end="#{hours_plan.end_date.strftime('%D %R')}" user="#{hours_plan.user.full_name}" title="#{hours_plan.user.full_name}" tags="#{hours_plan.user.get_tags}")
+            -if hours_plan.user_id==current_user.id
+              %span.glyphicon.glyphicon-user
 
       -while now_hour <= @end_hour #wolne komorki lub godziny
         -if day_num==0
