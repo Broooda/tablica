@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   post 'hours_plans/update/:id' => 'hours_plans#update', as: "update_hours_plans"
 
 
-  
+  resources :hours_plans
 
 
   # The priority is based upon order of creation: first created -> highest priority.

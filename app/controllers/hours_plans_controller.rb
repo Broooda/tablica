@@ -3,6 +3,10 @@ class HoursPlansController < ApplicationController
   before_action :is_mine
   layout false
 
+  def index
+    @hours_plans = HoursPlan.all
+  end
+
   def edit
     @hours_plan = HoursPlan.find(params[:id])
   end
@@ -21,6 +25,18 @@ class HoursPlansController < ApplicationController
       redirect_to week_time_url, notice: "Error while saving"
     end
 
+  end
+
+  def earliest_hoursplan
+
+    now=Time.now
+    @hoursplans = HoursPlan.order(:startdate) #wspolne terminy pracy wybranego usera i zaalogowanego uzytkownika
+    @earliest_hour = HoursPlan.order(:startdate).first #najblizszy termin, gdy user bedzie w pracy
+    if @hoursplans == now || @hoursplans>now
+      @commonhours = HoursPlan.order(:startdate) 
+    #else
+      #puts "Nie znaleziono najblizszego wspolnego terminu pracy"
+    end
   end
 
   private
