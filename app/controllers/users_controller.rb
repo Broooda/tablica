@@ -36,6 +36,12 @@ class UsersController < ApplicationController
   
 	def show
   	@user=User.find(params[:id])
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+      render :pdf => "generated.pdf"
+    end
 	end
 
   def make_admin
@@ -65,4 +71,5 @@ class UsersController < ApplicationController
       end
       true
     end
+end
 end
