@@ -7,13 +7,13 @@ set :environment, "development"
 
 #set :output, "cron_log.log"
 
-#every 1.minute do
-#  runner "DefaultWorkTime.generate_hours_plans"
-#end
-
-every :saturday, :at => '3am' do
-  runner "DefaultWorkTime.generate_hours_plans"
+every 1.minute do
+ runner "DefaultWorkTime.generate_few_weeks"
 end
+
+# every :saturday, :at => '3am' do
+#   runner "DefaultWorkTime.generate_hours_plans"
+# end
 
 # Example:
 #

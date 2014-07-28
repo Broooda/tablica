@@ -26,7 +26,10 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
+   
+    @user.default_work_time.destroy_all
+    @user.hours_plan.destroy_all
+     @user.destroy
     redirect_to users_url
   end
 
@@ -50,6 +53,18 @@ class UsersController < ApplicationController
 		@user.save
     DefaultWorkTime.create(week: [['9:00','16:00'],['9:00','16:00'],['9:00','16:00'],['9:00','16:00'],['9:00','16:00']], user_id: @user.id)
 		
+    if HoursPlan.all.size > 0
+    last=HoursPlan.order( 'start_date ASC' )
+    last=last.last
+    current_week=Time.now.to_date.cweek
+    last_week=last.start_date.to_date.cweek
+    difference=last_week-current_week
+    else
+    difference=6
+    (0..difference).each do |counter|
+      DefaultWorkTime.generate_hours_plans(counter, @user.id)    
+    end
+  end
     redirect_to users_url
 	end
   

@@ -22,7 +22,13 @@ before_action :make_sure_its_mine, only: [:destroy, :edit]
     @holiday = Holiday.find(params[:id])
     @holiday.status = "accepted"
     @holiday.save
-   
+
+    first_week=@holiday.startdate.to_date.cweek-Time.now.to_date.cweek
+    second_week=@holiday.enddate.to_date.cweek-Time.now.to_date.cweek
+
+    (first_week..second_week).each do |counter|
+      DefaultWorkTime.generate_hours_plans(counter)
+   end
     redirect_to inboxs_path, notice: "Holiday accepted"
   end
 
