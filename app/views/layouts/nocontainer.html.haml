@@ -8,7 +8,7 @@
           -if params[:fulldate] 
             -inputdate = params[:fulldate]
           -else
-            -inputdate = Date.commercial(@year, @week_num, 1,0,0,0,'+2').strftime('%Y-%m-%d')
+            -inputdate = Date.commercial(@year, @week_num, 1).strftime('%Y-%m-%d')
           %input(value="#{inputdate}" act="#{action_name}")
       %a.bl(href="#{url_for :controller => 'week', :action => action_name, :year => (@week-7).year, :week => (@week-7).cweek}")
         .col-xs-3.col-xs-offset-1.text-center.weekpicker.rotate-l3
