@@ -60,7 +60,12 @@ class UsersController < ApplicationController
 
   def earliest_hoursplan
     now=Time.now
-    @user = User.find(params[:id])
+    @hoursplan = HoursPlan.find(params[:id])
+    if hoursplan==now || hoursplan>now
+      @commonhours=HoursPlan.order(:startdate)
+    else
+      puts "Nie znaleziono najblizszego wspolnego terminu pracy"
+    end
   end
 
   private
