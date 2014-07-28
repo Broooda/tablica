@@ -1,0 +1,18 @@
+%h2
+  Edit your work hours at
+  =@hours_plan.start_date.strftime("%Y-%-m-%-d")  
+
+=form_tag('/hours_plans/update/'+@hours_plan.id.to_s) do
+  %div.form-group
+    =label_tag :start_hour, "start hour"
+    =time_field_tag :start_hour,  @hours_plan.start_date.strftime("%H:%M"), class: "form-control"
+  %div.form-group
+    =label_tag :end_hour, "end hour"
+    =time_field_tag :end_hour,  @hours_plan.end_date.strftime("%H:%M"), class: "form-control"
+  %div.form-group
+    =label_tag :over_hours, "over hours"
+    =number_field_tag :over_hours, @hours_plan.over_hours, class: "form-control", min: 0, max: 24
+  %div.form-group
+    =submit_tag "save changes", class: "form-control"
+
+  

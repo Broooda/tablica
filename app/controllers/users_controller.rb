@@ -24,6 +24,16 @@ class UsersController < ApplicationController
 
 	def index
 		@users = User.order('surname')
+
+    WickedPdf.config = {
+      :exe_path => '/usr/local/bin/wkhtmltopdf'
+    }
+
+      respond_to do |format|
+        format.html
+        format.pdf do render :pdf => "generated.pdf", :layout => 'pdfgen.html.erb'
+        end
+      end
 	end
 
 	def accept
@@ -36,7 +46,13 @@ class UsersController < ApplicationController
   
 	def show
   	@user=User.find(params[:id])
-	end
+
+    respond_to do |format|
+      format.html
+      format.pdf do render :pdf => "generated.pdf", :layout => 'pdfgen'
+      end
+    end
+  end
 
   def make_admin
     @user = User.find(params[:id])
@@ -67,3 +83,4 @@ class UsersController < ApplicationController
     end
 
 end
+
