@@ -18,7 +18,7 @@ class DefaultWorkTime < ActiveRecord::Base
 
   belongs_to :user
 
-  def self.generate_hours_plans(week=1, force_update=false)
+  def self.generate_hours_plans(week=1, force_update=true)
     #funkcja generuje hours_plans
     #week (int) oznacza dla którego tygodnia ma wygenerować ( 0=dla aktualnego tygodnia, 1=dla następnego, -1=dla poprzedniego itd)
     #force_update (bool) - jesli sa jakiej godziny juz w tych dniach i force_update==true to napisze je 
@@ -45,7 +45,11 @@ class DefaultWorkTime < ActiveRecord::Base
 
         #jesli sa jakies ogdziny i force_update to usun je
         if hours_in_that_day.size>0 and force_update            
-          hours_in_that_day.destroy_all
+          hours_in_that_day.each do |hours|
+            if hours.start_date.to_date >= DateTime.now.to_date
+            hours.destroy
+          end
+          end
         end
 
         #jesli nie ma godzin lub force_update to dodaj nowe godziny
@@ -53,7 +57,8 @@ class DefaultWorkTime < ActiveRecord::Base
           _start= monday_midnight_in_current_week + week.week + day_num.day + start_hour[0].to_i.hour + start_hour[1].to_i.minute
           _end= monday_midnight_in_current_week + week.week + day_num.day + end_hour[0].to_i.hour + end_hour[1].to_i.minute
           _id= default_work_time.user_id
-
+          #jesli nie jest w przeszlosci to apdejt
+       unless _start.to_date < DateTime.now.to_date
         #Sprawdzenie urlopow
           if Holiday.where('user_id = ? and startdate < ? and enddate > ? and status= ?',
               user_id = _id,
@@ -99,6 +104,7 @@ class DefaultWorkTime < ActiveRecord::Base
         end
       day_num += 1;
       end
+    end
     end
   end
 end

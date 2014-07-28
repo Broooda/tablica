@@ -3,6 +3,14 @@ class UsersController < ApplicationController
   before_action :mine_or_admin, except: [:index, :show ]
 
 
+  # def download 
+  #   html = render_to_string(:action => :show, :layout => "pdf_layout.html") 
+  #   pdf = WickedPdf.new.pdf_from_string(html) 
+  #   send_data(pdf, 
+  #     :filename    => "my_pdf_name.pdf", 
+  #     :disposition => 'attachment') 
+  # end
+
   def edit
     @user=User.find(params[:id])
   end
@@ -24,6 +32,16 @@ class UsersController < ApplicationController
 
 	def index
 		@users = User.order('surname')
+
+    WickedPdf.config = {
+      :exe_path => '/usr/local/bin/wkhtmltopdf'
+    }
+
+      respond_to do |format|
+        format.html
+        format.pdf do render :pdf => "generated.pdf", :layout => 'pdfgen.html.erb'
+        end
+      end
 	end
 
 	def accept
@@ -31,7 +49,8 @@ class UsersController < ApplicationController
 		@user.accepted = true
 		@user.save
     DefaultWorkTime.create(week: [['9:00','16:00'],['9:00','16:00'],['9:00','16:00'],['9:00','16:00'],['9:00','16:00']], user_id: @user.id)
-		redirect_to users_url
+		
+    redirect_to users_url
 	end
   
 	def show
@@ -39,10 +58,10 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.pdf do
-      render :pdf => "generated.pdf"
+      format.pdf do render :pdf => "generated.pdf", :layout => 'pdfgen'
+      end
     end
-	end
+  end
 
   def make_admin
     @user = User.find(params[:id])
@@ -85,4 +104,4 @@ class UsersController < ApplicationController
     end
 
 end
-end
+

@@ -35,8 +35,11 @@ Rails.application.routes.draw do
   post 'hours_plans/update/:id' => 'hours_plans#update', as: "update_hours_plans"
 
 
+
   resources :hours_plans
 
+
+  get 'layouts/pdfgen' =>'users#index', as: "generate_pdf"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

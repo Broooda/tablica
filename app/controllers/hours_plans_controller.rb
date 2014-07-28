@@ -14,8 +14,8 @@ class HoursPlansController < ApplicationController
   def update
     @hours_plan = HoursPlan.find(params[:id])
 
-    @hours_plan.start_date = @hours_plan.start_date.strftime("%Y-%-m-%-d ") + params[:start_hour]
-    @hours_plan.end_date = @hours_plan.end_date.strftime("%Y-%-m-%-d ") + params[:end_hour]
+    #@hours_plan.start_date = @hours_plan.start_date.strftime("%Y-%-m-%-d ") + params[:start_hour]
+    #@hours_plan.end_date = @hours_plan.end_date.strftime("%Y-%-m-%-d ") + params[:end_hour]
 
     @hours_plan.over_hours = params[:over_hours]
 
@@ -30,9 +30,9 @@ class HoursPlansController < ApplicationController
   def earliest_hoursplan
 
     now=Time.now
-    @hoursplans = HoursPlan.order(:startdate) #wspolne terminy pracy wybranego usera i zaalogowanego uzytkownika
+    @hours_plans = HoursPlan.order(:startdate) #wspolne terminy pracy wybranego usera i zaalogowanego uzytkownika
     @earliest_hour = HoursPlan.order(:startdate).first #najblizszy termin, gdy user bedzie w pracy
-    if @hoursplans == now || @hoursplans>now
+    if @hours_plans == now || @hours_plans>now
       @commonhours = HoursPlan.order(:startdate) 
     #else
       #puts "Nie znaleziono najblizszego wspolnego terminu pracy"
