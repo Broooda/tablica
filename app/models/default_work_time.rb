@@ -44,17 +44,58 @@ class DefaultWorkTime < ActiveRecord::Base
           )
 
         #jesli sa jakies ogdziny i force_update to usun je
-        if hours_in_that_day.size>0 and force_update
+        if hours_in_that_day.size>0 and force_update            
           hours_in_that_day.destroy_all
         end
 
         #jesli nie ma godzin lub force_update to dodaj nowe godziny
         if hours_in_that_day.size==0 or force_update
-          HoursPlan.create(
-            start_date: monday_midnight_in_current_week + week.week + day_num.day + start_hour[0].to_i.hour + start_hour[1].to_i.minute,
-            end_date: monday_midnight_in_current_week + week.week + day_num.day + end_hour[0].to_i.hour + end_hour[1].to_i.minute,
-            user_id: default_work_time.user_id
-            )
+          _start= monday_midnight_in_current_week + week.week + day_num.day + start_hour[0].to_i.hour + start_hour[1].to_i.minute
+          _end= monday_midnight_in_current_week + week.week + day_num.day + end_hour[0].to_i.hour + end_hour[1].to_i.minute
+          _id= default_work_time.user_id
+
+        #Sprawdzenie urlopow
+          if Holiday.where('user_id = ? and startdate < ? and enddate > ? and status= ?',
+              user_id = _id,
+              _start,
+              _end,
+              'accepted'
+            ).size > 0
+          elsif (holiday=Holiday.where('user_id = :id and :start <= startdate and :end_h >= startdate and 
+          :start <= enddate and :end_h >= enddate and status= :status',
+          {
+            id: _id,
+            start: _start,
+            end_h: _end,
+            status: 'accepted'
+
+          }
+            )).size > 0
+            HoursPlan.create(start_date: _start,end_date: holiday[0].startdate, user_id: _id)
+            HoursPlan.create(start_date: holiday[0].enddate,end_date: _end, user_id: _id)       
+          elsif (holiday=Holiday.where('user_id = :id and :start <= startdate and :end_h >= startdate and status= :status',
+          {
+            id: _id,
+            start: _start,
+            end_h: _end,
+            status: 'accepted'
+          }
+          )).size > 0
+            _end=holiday[0].startdate
+             HoursPlan.create(start_date: _start,end_date: _end, user_id: _id)
+          elsif (holiday=Holiday.where('user_id = :id and :start <= enddate and :end_h >= enddate and status= :status',
+          {
+            id: _id,
+            start: _start,
+            end_h: _end,
+            status: 'accepted'
+           }
+            )).size > 0
+            _start=holiday[0].enddate
+            HoursPlan.create(start_date: _start,end_date: _end, user_id: _id)
+         else
+            HoursPlan.create(start_date: _start,end_date: _end, user_id: _id)
+         end
         end
       day_num += 1;
       end
