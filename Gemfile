@@ -8,6 +8,7 @@ gem 'rails', '4.1.4'
 gem 'pg'
 gem 'haml'
 gem 'devise'
+gem 'wicked_pdf'
 group :development, :test do
 gem 'rspec-rails', '~> 3.0.0'
 end
