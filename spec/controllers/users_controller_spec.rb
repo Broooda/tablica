@@ -21,15 +21,33 @@ RSpec.describe UsersController, type: :controller do
       end
 
 
-      # it 'renders the index template' do
-      #   get :index
-      #   expect(response).to render_template("index")
-      # end
+      it 'renders the index template' do
+        get :index
+        expect(response).to render_template("index")
+      end
 
-      # it 'loads all users into @users' do
-      #   user1, user2 = User.create(name: "Anna", surname: "Owczarek"), User.create(name: "Robert", surname: "Kowalski")
-      #   get :index
-      #   expect(assigns(:users)).to match_array([user1, user2])
-      # end
+      it 'loads all users into @users' do
+        user1, user2 = User.create(name: "Anna", surname: "Owczarek"), User.create(name: "Robert", surname: "Kowalski")
+        get :index
+        expect(assigns(:users)).to match_array([user1, user2])
+      end
    end
+
+   # describe "PUT #update" do
+      
+   #  end
+
+
+   #  describe "DELETE #destroy" do
+
+   #  end
+
+
+   #  describe "GET #edit" do
+
+   #  end
+
+   #  describe "GET #show" do
+
+   #  end
 end
