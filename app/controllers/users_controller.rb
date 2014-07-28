@@ -65,18 +65,4 @@ class UsersController < ApplicationController
       end
       true
     end
-
-    describe "PUT #update" do
-      
-    end
-
-
-    describe "DELETE #destroy" do
-
-    end
-
-
-    describe "GET #" do
-
-    end
 end
