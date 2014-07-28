@@ -3,6 +3,14 @@ class UsersController < ApplicationController
   before_action :mine_or_admin, except: [:index, :show ]
 
 
+  # def download 
+  #   html = render_to_string(:action => :show, :layout => "pdf_layout.html") 
+  #   pdf = WickedPdf.new.pdf_from_string(html) 
+  #   send_data(pdf, 
+  #     :filename    => "my_pdf_name.pdf", 
+  #     :disposition => 'attachment') 
+  # end
+
   def edit
     @user=User.find(params[:id])
   end
