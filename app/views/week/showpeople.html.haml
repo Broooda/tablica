@@ -1,28 +1,37 @@
 - days = [nil,'monday', 'tuesday','wednesday','thursday','friday']
 
+-# przekazanie zmiennych do JS
+:javascript
+  var view="people";
+
 -#generowanie tabeli
 .row.timetable
-  #nowline
-    #nowlinetext.text-center
   -(0..5).each do |day_num|
     -comercial_date = Date.commercial(@year, @week_num, day_num) unless day_num==0
     .col-xs-2.day{:class => ("today" if comercial_date==Date.today)}
       .weekday
         -if day_num==0
-          =link_to "by time", week_time_date_url(@year,@week_num)
-          %br
-          by people
+          .table-configurator
+            %div
+              =link_to "by time", week_time_date_url(@year,@week_num)
+              %br
+              by people
+            %div#people-picker
+              %span.glyphicon.glyphicon-search
+              .all-tags
+                -User.get_all_tags.each do |tag|
+                  %span.label.label-default=tag
         -else
           .dayname=raw(days[day_num])
           .daydate=comercial_date
       -now_hour = @start_hour
       -@users.each do |user|
         -if day_num==0
-          .hour.text-center
+          .hour.text-center(tags="#{user.get_tags}")
             %span.man
               =link_to user.full_name(true), user_path(user.id)
         -else
-          .hour.text-center
+          .hour.text-center(tags="#{user.get_tags}")
             -user_hours_plans = @hours_plans.where('user_id = :user_id', { user_id: user.id})
             -user_hours_plans.each do |user_hours_plan|
               -if user_hours_plan.start_date.strftime('%u').to_i==day_num
