@@ -44,7 +44,7 @@ class DefaultWorkTime < ActiveRecord::Base
           )
 
         #jesli sa jakies ogdziny i force_update to usun je
-        if hours_in_that_day.size>0 and force_update
+        if hours_in_that_day.size>0 and force_update            
           hours_in_that_day.destroy_all
         end
 
@@ -54,15 +54,13 @@ class DefaultWorkTime < ActiveRecord::Base
           _end= monday_midnight_in_current_week + week.week + day_num.day + end_hour[0].to_i.hour + end_hour[1].to_i.minute
           _id= default_work_time.user_id
 
-
+        #Sprawdzenie urlopow
           if Holiday.where('user_id = ? and startdate < ? and enddate > ? and status= ?',
               user_id = _id,
               _start,
               _end,
               'accepted'
             ).size > 0
-            puts "------------------------"
-            puts "PIERWSZY WARUNEK"
           elsif (holiday=Holiday.where('user_id = :id and :start <= startdate and :end_h >= startdate and 
           :start <= enddate and :end_h >= enddate and status= :status',
           {
@@ -73,8 +71,6 @@ class DefaultWorkTime < ActiveRecord::Base
 
           }
             )).size > 0
-            puts "------------------------"
-            puts "DRUGI WARUNEK"
             HoursPlan.create(start_date: _start,end_date: holiday[0].startdate, user_id: _id)
             HoursPlan.create(start_date: holiday[0].enddate,end_date: _end, user_id: _id)       
           elsif (holiday=Holiday.where('user_id = :id and :start <= startdate and :end_h >= startdate and status= :status',
@@ -85,8 +81,6 @@ class DefaultWorkTime < ActiveRecord::Base
             status: 'accepted'
           }
           )).size > 0
-            puts "------------------------"
-            puts "TRZECI WARUNEK"
             _end=holiday[0].startdate
              HoursPlan.create(start_date: _start,end_date: _end, user_id: _id)
           elsif (holiday=Holiday.where('user_id = :id and :start <= enddate and :end_h >= enddate and status= :status',
@@ -97,8 +91,6 @@ class DefaultWorkTime < ActiveRecord::Base
             status: 'accepted'
            }
             )).size > 0
-            puts "------------------------"
-            puts "CZWARTY WARUNEK"
             _start=holiday[0].enddate
             HoursPlan.create(start_date: _start,end_date: _end, user_id: _id)
          else
