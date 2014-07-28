@@ -2,60 +2,64 @@
 - days = ['monday', 'tuesday','wednesday','thursday','friday']
 
 %h1 Holidays requests:
--if @holiday.size>0
+-if @holiday.size == 0
+  %h3 work, work, work. No holidays requests!
+-else
   -@holiday.each do |holiday|
-    -if holiday.status=="pending"
+    .inbox-block
       %b
         =holiday.user.name
         =holiday.user.surname
-      %p
-        From
-        =holiday.startdate
-        To
-        =holiday.enddate
-      %p
-        Description
-        =holiday.description
+      wants holidays
+      %br/  
+      from
+      %b=holiday.startdate.strftime('%Y-%-m-%-d %k:%M')
+      to
+      %b=holiday.enddate.strftime('%Y-%-m-%-d %k:%M')
+      %br/
+      %p=holiday.description
 
       =form_tag holiday_reject_url(holiday.id), method: :get do 
-        =label_tag "Description if rejected"
-        =text_area_tag "description"
-        =link_to "Accept", holiday_accept_url(holiday.id)
-        =submit_tag "Reject"
--else
-  %h3 work, work, work. No holidays requests!
+        .vermid
+          =text_area_tag "description", nil, rows: 1, cols: 30, :placeholder => "Description if rejected", :class => "form-control"
+        .vermid
+          .btn-group
+            =link_to "Accept", holiday_accept_url(holiday.id), :class => "btn btn-success"
+            =submit_tag "Reject", :class => "btn btn-danger", data: { confirm: "This this person will sad because of your decision. Are you sure you want to reject?"}
+
 
 
 
 
 %hr
 %h1 Default work time requests:
--@dr.each do |request|
-  -day_counter = 0
-  -actuall_week = request.user.default_work_time.week
-  -if request.status=="pending"
-    %b
-      =request.user.name
-      =request.user.surname
-    wants to change:
-    %br
-    -request.week.each do |day|
-      -unless day[0] == actuall_week[day_counter][0] and day[1] == actuall_week[day_counter][1]
-        %b
-          =days[day_counter]
-        from
-        =actuall_week[day_counter][0]
-        =actuall_week[day_counter][1]
-        to
-        =day[0]
-        =day[1]
-        %br
-      -day_counter+=1
-    %p=request.description
-    %br
-    =form_tag default_work_time_reject_url(request.id), method: :get do 
-      =label_tag "Description if rejected"
-      =text_area_tag "description"
-      =link_to "Accept", default_work_time_accept_url(request.id)
-      =submit_tag "Reject"
+-if @dr.size == 0
+  %h3 no default work time requests
+-else
+  -@dr.each do |request|
+    -actuall_week = request.user.default_work_time.week
+    .inbox-block
+      %b
+        =request.user.name
+        =request.user.surname
+      wants to change:
       %br
+      -day_counter = 0
+      -request.week.each do |day|
+        -unless day[0] == actuall_week[day_counter][0] and day[1] == actuall_week[day_counter][1]
+          %b
+            =days[day_counter]
+          from
+          %b=actuall_week[day_counter][0]+"-"+actuall_week[day_counter][1]
+          to
+          %b=day[0]+"-"+day[1]
+          %br
+        -day_counter+=1
+      %p=request.description
+      =form_tag default_work_time_reject_url(request.id), method: :get do 
+        .vermid
+          =text_area_tag "description", nil, rows: 1, cols: 30, :placeholder => "Description if rejected", :class => "form-control"
+        .vermid
+          .btn-group
+            =link_to "Accept", default_work_time_accept_url(request.id), :class => "btn btn-success"
+            =submit_tag "Reject", :class => "btn btn-danger", data: { confirm: "This this person will sad because of your decision. Are you sure you want to reject?"}

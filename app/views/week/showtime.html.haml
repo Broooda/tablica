@@ -4,7 +4,7 @@
 :javascript
   var startHour=#{@start_hour};
   var endHour=#{@end_hour};
-
+  var view="time";
 -#generowanie tabeli
 .row.timetable
   #nowline
@@ -13,10 +13,17 @@
     -comercial_date = Date.commercial(@year, @week_num, day_num) unless day_num==0
     .col-xs-2.day{:class => ("today" if comercial_date==Date.today)}
       .weekday
-        -if day_num==0 
-          by time
-          %br
-          =link_to "by people", week_people_date_url(@year,@week_num)
+        -if day_num==0
+          .table-configurator
+            %div
+              by time
+              %br
+              =link_to "by people", week_people_date_url(@year,@week_num)
+            %div#people-picker
+              %span.glyphicon.glyphicon-search
+              .all-tags
+                -User.get_all_tags.each do |tag|
+                  %span.label.label-default=tag
         -else
           .dayname=raw(days[day_num])
           .daydate=comercial_date
@@ -24,7 +31,7 @@
 
       -@hours_plans.each do |hours_plan| #wyswietlanie kiedy typek jest w pracy
         -if hours_plan.start_date.strftime('%u').to_i==day_num
-          .hours-plan(start="#{hours_plan.start_date.strftime('%D %R')}" end="#{hours_plan.end_date.strftime('%D %R')}" user="#{hours_plan.user.name+" "+hours_plan.user.surname}" title="#{hours_plan.user.name+" "+hours_plan.user.surname}")
+          .hours-plan(start="#{hours_plan.start_date.strftime('%D %R')}" end="#{hours_plan.end_date.strftime('%D %R')}" user="#{hours_plan.user.full_name}" title="#{hours_plan.user.full_name}" tags="#{hours_plan.user.get_tags}")
 
       -while now_hour <= @end_hour #wolne komorki lub godziny
         -if day_num==0

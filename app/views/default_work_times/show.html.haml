@@ -26,8 +26,9 @@
       -day_counter+=1   
   .form-group
     =label_tag "description:"
-    =text_area_tag "description", "Description", size: '19', :class => "form-control"
-    =hidden_field_tag "user_id", @d.user_id,:class => "form-control"
+    =text_area_tag "description", nil, size: '19', :class => "form-control", :placeholder => "description"
+  .form-group
+    =hidden_field_tag "user_id", @d.user_id
     =submit_tag "Send Request", :class => "form-control"
 
 
@@ -43,17 +44,13 @@
         %b
           =days[day_count]
         %br
-        Start: 
-        =w[0]
-        %br
-        End: 
-        =w[1]
+        %b=w[0]+' - '+w[1]
         -day_count+=1
 
   %h4
     Status:
     =d_request.status
-  %p=link_to "Delete", default_work_times_request_path(d_request.id), method: :delete
+  %p=link_to "Delete", default_work_times_request_path(d_request.id), method: :delete, :class => 'btn btn-danger'
   -if d_request.reason
     =d_request.reason
 

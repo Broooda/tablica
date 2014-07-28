@@ -6,7 +6,7 @@
     %ul
       -if user_signed_in?
         -if current_user.admin
-          %li=link_to (raw('<span class="glyphicon glyphicon-envelope"></span>')), inboxs_path
+          %li=link_to (raw('<span class="glyphicon glyphicon-envelope"></span>'+@inbox_msgs)), inboxs_path
         %li=link_to raw('logged as <b>'+current_user.name+' '+current_user.surname+'</b>'), user_url(current_user.id) #link do profilu użytkownika
         %li=link_to "sign out", destroy_user_session_url, :method => :delete
       -else

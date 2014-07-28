@@ -11,7 +11,7 @@ gem 'devise'
 group :development, :test do
 gem 'rspec-rails', '~> 3.0.0'
 end
-
+gem "validates_date_time"
 gem 'rails_12factor', group: :production
 
 # Use SCSS for stylesheets
@@ -34,6 +34,10 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
+
+# gem dla uruchamiania skryptów w określonych momentach czasowych (cron jobs)
+# https://github.com/javan/whenever
+gem 'whenever', :require => false
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
