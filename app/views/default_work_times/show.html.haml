@@ -4,57 +4,52 @@
 %h1 Your default work hours
 
 
--day_counter = 0
-.col-xs-6.day
-  -@d.week.each do |w|
-    %b
-      =days[day_counter]
-    Start: 
-    =w[0]
-    %br
-    End: 
-    =w[1]
-    %hr
-    -day_counter+=1
+=form_tag update_work_time_path do
+  %table.table
+    -day_counter = 0
+    -@d.week.each do |w|
+      %tr
+        %td
+          %b
+            =days[day_counter]
+          %br/
+          from
+          %b=w[0]
+          to 
+          %b=w[1]
+        %td
+          =label_tag "from"
+          =text_field_tag days[day_counter]+start_end[0], @d.week[day_counter][0], size: '4'
+          =label_tag "to"
+          =text_field_tag days[day_counter]+start_end[1],  @d.week[day_counter][1], size: '4'
 
-.col-xs-6.day
-  =form_tag update_work_time_path do
-    -(0..4).each do |num| 
-      =label_tag "Start"
-      =text_field_tag days[num]+start_end[0], @d.week[num][0], size: '4'
-      =label_tag "End"
-      =text_field_tag days[num]+start_end[1],  @d.week[num][1], size: '4'
-      %hr
-    =text_area_tag "description", "Description", size: '19'
-    =hidden_field_tag "user_id", @d.user_id
-    =submit_tag "Send Request"
-
+      -day_counter+=1   
+  .form-group
+    =label_tag "description:"
+    =text_area_tag "description", nil, size: '19', :class => "form-control", :placeholder => "description"
+  .form-group
+    =submit_tag "Send Request", :class => "form-control"
 
 
 -if User.find(@d.user_id).default_work_time_request
   -day_count=0
   -d_request=User.find(@d.user_id).default_work_time_request
-  %b Your current request:
-  %br
-  =d_request.description
-  %br
-  -d_request.week.each do |w|
-    .col-xs-2.day
-      %b
-        =days[day_count]
-      %br
-      Start: 
-      =w[0]
-      %br
-      End: 
-      =w[1]
-      -day_count+=1
-  .col-xs-2.day
-    %b Status:
+  %h3 Your current request:
+  %p=d_request.description
+  %table.table
+    %tr
+    -d_request.week.each do |w|
+      %td
+        %b
+          =days[day_count]
+        %br
+        %b=w[0]+' - '+w[1]
+        -day_count+=1
+
+  %h4
+    Status:
     =d_request.status
-    %br
-    %br
-    =link_to "Delete", default_work_times_request_path(d_request.id), method: :delete
+  %p=link_to "Delete", default_work_times_request_path(d_request.id), method: :delete, :class => 'btn btn-danger'
   -if d_request.reason
     =d_request.reason
 

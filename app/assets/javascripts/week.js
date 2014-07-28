@@ -1,3 +1,10 @@
+/* 
+do osoby, która będzie chciała ogarnąć ten kod:
+
+  przepraszam :(
+
+*/
+
 headerOffset = 70;
 pxPerHour = 50;
 
@@ -17,8 +24,8 @@ function moveNowLine() {
   
 }
 
-function setUpHoursPlans() {
-  $('.hours-plan').tooltip();
+function setUpHoursPlans(tags) {
+  console.log(tags);
 
   colors=[
    'hsl(30,75%,50%)',
@@ -37,7 +44,7 @@ function setUpHoursPlans() {
   'hsl(290,75%,50%)']
   people=[];
 
-  $('.hours-plan').each(function() {
+  $('.hours-plan[tags*="'+tags+'"]').each(function() {
     start = new Date($(this).attr('start')); // pobierz dane
     end = new Date($(this).attr('end'));
     user = $(this).attr('user');
@@ -47,24 +54,30 @@ function setUpHoursPlans() {
     }
   });
 
-  $('.hours-plan').each(function() {
+  $('.hours-plan').stop(true).animate({width: 0, height:0});
+
+  $('.hours-plan[tags*="'+tags+'"]').each(function() {
     start = new Date($(this).attr('start')); // pobierz dane
     end = new Date($(this).attr('end'));
     user = $(this).attr('user');
 
-    if(people.indexOf(user)<colors.length)
-      {$(this).css('background-color',colors[people.indexOf(user)]);}
+    if(tags==' ') { //only when everybody onboard
+      if(people.indexOf(user)<colors.length)
+        {$(this).css('background-color',colors[people.indexOf(user)]);}
+    }
 
     width = 200/people.length;
-    if(width>30) 
-      {width=30;}
+    //if(width>30) {width=30;}
 
-    $(this).css('left', 5+(width*people.indexOf(user)));
-    $(this).css('width', width-2);
-    $(this).css('top', (start.getHours()+start.getMinutes()/60-startHour)*pxPerHour+headerOffset);
+    //$(this).css('left', 5+(width*people.indexOf(user)));
+    //$(this).css('width', width-2);
+    //$(this).css('top', (start.getHours()+start.getMinutes()/60-startHour)*pxPerHour+headerOffset);
     //$(this).css('height', (end.getHours()+end.getMinutes()/60-start.getHours()-start.getMinutes()/60)*pxPerHour);
 
-    $(this).animate({
+    $(this).stop(true).animate({
+      left: 5+(width*people.indexOf(user)),
+      width: width-2,
+      top: (start.getHours()+start.getMinutes()/60-startHour)*pxPerHour+headerOffset,
       height: (end.getHours()+end.getMinutes()/60-start.getHours()-start.getMinutes()/60)*pxPerHour
     }, 1000);
   });
@@ -85,23 +98,67 @@ $(function(){
 
     });
 
+  $('#people-picker > span.by-tags').popover({html: true, content: '<input id="people-picker-input" placeholder="name, surname or tags">'}).on('shown.bs.popover', function () {
+    $('.popover-content').append($('.all-tags').clone());
+
+    $('.popover-content .all-tags').slideDown();
+
+    $('.popover-content .all-tags span').click(function(){
+      $('#people-picker-input').val($(this).text()).keyup();
+    });
+
+    $('#people-picker-input').keyup(function(){
+      tags = $(this).val();
+      tags = tags || " ";
+
+      if(view=="time")
+        { setUpHoursPlans(tags); }
+      else if(view=="people") {
+
+        $('.hour').stop(true).slideUp();
+        $('.hour[tags*="'+tags+'"]').stop(true).slideDown();
+      }
+    });
+  });
+
+  $('#people-picker > span.only-me').click(function(){
+    tags=$(this).attr('me');
+
+    if(view=="time")
+      { setUpHoursPlans(tags); }
+    else if(view=="people") {
+      $('.hour').stop(true).slideUp();
+      $('.hour[tags*="'+tags+'"]').stop(true).slideDown();
+    }
+  });
+
+
   startHour = startHour || false;
   endHour = endHour || false;
 
   if(startHour && endHour) {
-    setUpHoursPlans();  
+    setUpHoursPlans(' ');  
+
+    $('.hours-plan').tooltip();
 
     moveNowLine();
     setInterval(function(){moveNowLine();}, 1000);
+
+    $('.hours-plan.hours_plan_owner').click(function(){
+      $.ajax('/ajax/hours_plans/edit/'+$(this).attr('hours_plan_id')).done(function(data){
+        $('.modal-body').html(data);
+      });
+      $('#modal').modal();
+    });
 
     $('.hours-plan').hover(function(){
       $('.tooltip-inner').css('background-color', $(this).css('background-color'));
       $('.tooltip-arrow').css('border-top-color', $(this).css('background-color'));
 
-      $('.hours-plan').not('[user="'+$(this).attr('user')+'"]').stop(true).fadeTo(500,0.4);
-      $('.hours-plan[user="'+$(this).attr('user')+'"]').stop(true).fadeTo(500,1);
+      $('.hours-plan').not('[user="'+$(this).attr('user')+'"]').stop(true,true).fadeTo(500,0.4);
+      $('.hours-plan[user="'+$(this).attr('user')+'"]').stop(true,true).fadeTo(500,1);
     }, function() {
-      $('.hours-plan').stop(true).fadeTo(500,0.8);
+      $('.hours-plan').stop(true,true).fadeTo(500,0.8);
     });
   }
 });

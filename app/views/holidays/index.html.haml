@@ -1,0 +1,36 @@
+%h1 Yours holiday requests
+-if @holiday.size>0
+  %table.table
+    %tr
+      %td When
+
+      %td Description
+      %td Status
+      %td
+    -@holiday.each do |holiday|
+      %tr
+        %td
+          from
+          %b= holiday.startdate.strftime('%Y-%-m-%-d %k:%M')
+          %br/
+          to
+          %b= holiday.enddate.strftime('%Y-%-m-%-d %k:%M')
+        %td= holiday.description
+        %td
+          -if holiday.status=='rejected'
+            .label.label-danger= holiday.status
+          -elsif holiday.status=='accepted'
+            .label.label-success= holiday.status
+          -elsif holiday.status=='pending'
+            .label.label-warning= holiday.status
+        %td
+          -if holiday.status=="pending"
+            .btn-group
+              =link_to 'Edit', edit_holiday_path(holiday), :class=>"btn btn-default"
+              =link_to 'Destroy', holiday_path(holiday), method: :delete, data: { confirm: 'Are you sure?'}, :class=>"btn btn-danger"
+          -elsif holiday.status=="rejected"
+            %td=holiday.reason
+-else
+  %h3 no holiday requests, you just want to work as always
+
+=link_to 'New holiday request', new_holiday_path, :class=>"btn btn-default"

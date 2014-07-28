@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :make_sure_its_mine, only: [:destroy, :edit]
+  before_action :mine_or_admin, except: [:index, :show ]
 
 
   def edit
@@ -36,6 +36,12 @@ class UsersController < ApplicationController
   
 	def show
   	@user=User.find(params[:id])
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+      render :pdf => "generated.pdf"
+    end
 	end
 
   def make_admin
@@ -45,12 +51,20 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
+  def unmake_admin
+    @user = User.find(params[:id])
+    @user.admin = false
+    @user.save
+    redirect_to users_url
+  end
+
   private
+
     def user_params
-      params.require(:user).permit(:name, :surname, :email, :password, :password_confirmation)
+      params.require(:user).permit(:name, :surname, :email, :password, :password_confirmation, :tags)
     end
 
-    def make_sure_its_mine
+    def mine_or_admin
       @user = User.find(params[:id])
       unless current_user.id == @user.id or current_user.admin == true
         redirect_to user_path, alert: "You can't edit that."
@@ -58,4 +72,5 @@ class UsersController < ApplicationController
       true
     end
 
+end
 end

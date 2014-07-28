@@ -15,9 +15,25 @@ class User < ActiveRecord::Base
 
   def full_name(badge=false)
     ret = "".html_safe
-    ret << self.name+" "+self.surname
+    ret << name+" "+surname
     ret << ' <span class="label label-danger">admin</span>'.html_safe if badge and self.admin
     ret
+  end
+
+  def get_tags
+    full_name + " " + tags
+  end
+
+  def tags_array
+    tags.split(" ")
+  end
+
+  def self.get_all_tags
+    tags=[]
+    User.all.each do |user|
+      tags = tags | user.tags_array
+    end
+    tags
   end
 
 end

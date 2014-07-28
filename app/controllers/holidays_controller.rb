@@ -1,7 +1,8 @@
 class HolidaysController < ApplicationController
+before_action :make_sure_its_mine, only: [:destroy, :edit]
 
 	def index
-		@holiday= Holiday.all
+	@holiday= Holiday.where('user_id=:user_id',{user_id: current_user.id})
 	end
 	
 	def show
@@ -22,15 +23,16 @@ class HolidaysController < ApplicationController
     @holiday.status = "accepted"
     @holiday.save
    
-    redirect_to inboxs_path
+    redirect_to inboxs_path, notice: "Holiday accepted"
   end
 
   def reject
     @holiday = Holiday.find(params[:id])
     @holiday.status = "rejected"
+    @holiday.reason = params['description']
     @holiday.save
    
-    redirect_to inboxs_path
+    redirect_to inboxs_path, notice: "Holiday rejected"
   end
 
 	def new
@@ -39,6 +41,8 @@ class HolidaysController < ApplicationController
 
 	def create
 		@holiday=Holiday.new(holiday_params)
+    @holiday.status="pending"
+    @holiday.user_id=current_user.id
 	if @holiday.save
 			redirect_to holidays_path notice: "Created Holiday"
 		else
@@ -62,7 +66,15 @@ class HolidaysController < ApplicationController
 
 	private
 		def holiday_params
-		params.require(:holiday).permit(:startdate, :enddate, :description, :status, :user_id) 
+		params.require(:holiday).permit(:startdate, :enddate, :description) 
 	end
+
+  def make_sure_its_mine
+      @user = Holiday.find(params[:id]).user
+      unless current_user.id == @user.id or current_user.admin == true
+        redirect_to user_path, alert: "It's not yours!"
+      end
+      true
+    end
 
 end
