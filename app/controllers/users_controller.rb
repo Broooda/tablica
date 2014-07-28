@@ -31,7 +31,8 @@ class UsersController < ApplicationController
 		@user.accepted = true
 		@user.save
     DefaultWorkTime.create(week: [['9:00','16:00'],['9:00','16:00'],['9:00','16:00'],['9:00','16:00'],['9:00','16:00']], user_id: @user.id)
-		redirect_to users_url
+		
+    redirect_to users_url
 	end
   
 	def show
