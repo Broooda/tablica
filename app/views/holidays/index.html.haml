@@ -1,0 +1,25 @@
+%h1 List of holiday requests
+-if @holiday.size>0
+  %table.table
+    %tr
+      %th Start Date
+      %th End Date
+      %th Description
+      %th Status
+      %th
+    -@holiday.each do |holiday|
+      %tr
+        %td= holiday.startdate
+        %td= holiday.enddate
+        %td= holiday.description
+        %td= holiday.status
+        %td
+          -if holiday.status=="pending"
+            =link_to 'Edit', edit_holiday_path(holiday)
+            =link_to 'Destroy', holiday_path(holiday), method: :delete, data: { confirm: 'Are you sure?'}
+          -if holiday.status=="rejected"
+            %td=holiday.reason
+-else
+  %h3 no holiday requests, you just want to work as always
+
+=link_to 'New holiday request', new_holiday_path, :class=>"btn btn-default"

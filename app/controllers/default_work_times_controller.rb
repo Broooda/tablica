@@ -1,5 +1,5 @@
 class DefaultWorkTimesController < ApplicationController
-
+before_action :make_sure_its_mine, only: [:destroy, :show]
   def show 
     @d=DefaultWorkTime.find(params[:id])
     @dr=DefaultWorkTimeRequest.all
@@ -29,15 +29,16 @@ class DefaultWorkTimesController < ApplicationController
     @request.save
     @request.user.default_work_time.save
     
-    redirect_to inboxs_path
+    redirect_to inboxs_path, notice: "Default hours accepted"
   end
 
   def reject
     @request = DefaultWorkTimeRequest.find(params[:id])
     #DefaultWorkTimeRequest.find(params[:id]).destroy
     @request.status = "rejected"
+    @request.reason = params['description']
     @request.save
-    redirect_to inboxs_path
+    redirect_to inboxs_path, notice: "Default hours rejected"
   end
 
 
@@ -54,6 +55,14 @@ class DefaultWorkTimesController < ApplicationController
           redirect_to default_work_time_path(User.find(params['user_id']).default_work_time.id), alert: new_default.errors.full_messages.first
         end
   end
+
+  def make_sure_its_mine
+      @user = DefaultWorkTime.find(params[:id]).user
+      unless current_user.id == @user.id or current_user.admin == true
+        redirect_to user_path, alert: "You can't edit that."
+      end
+      true
+    end
 
 end
 
