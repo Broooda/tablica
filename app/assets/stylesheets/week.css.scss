@@ -28,6 +28,8 @@
       width: 0px;
       height: 0px;
 
+      text-align: center;
+
       background: #F00;
       z-index: 4;
       opacity: 0.8;
@@ -35,6 +37,15 @@
       -webkit-border-radius: 5px;
       -moz-border-radius: 5px;
       border-radius: 5px;
+
+      span {
+        margin-top: 15px;
+        color: #eee;
+      }
+    }
+
+    .hours_plan_owner {
+      cursor: pointer;
     }
   }
 

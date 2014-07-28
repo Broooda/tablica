@@ -14,7 +14,7 @@
         %li=link_to "sign up", new_user_registration_url
     -if current_user
       %ul
-        %li=link_to "My week plan", week_time_url
+        %li=link_to "Week plan", week_time_url
         %li=link_to "Holidays", holidays_path
         %li=link_to "Raports", root_url
         -if current_user.default_work_time

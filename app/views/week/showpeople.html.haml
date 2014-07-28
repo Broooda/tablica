@@ -17,7 +17,8 @@
               %br
               by people
             %div#people-picker
-              %span.glyphicon.glyphicon-search
+              %span.glyphicon.glyphicon-search.by-tags
+              %span.glyphicon.glyphicon-user.only-me(me="#{current_user.full_name}")
               .all-tags
                 -User.get_all_tags.each do |tag|
                   %span.label.label-default=tag
