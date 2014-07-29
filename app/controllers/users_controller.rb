@@ -36,13 +36,9 @@ class UsersController < ApplicationController
 	def index
 		@users = User.order('surname')
 
-    WickedPdf.config = {
-      :exe_path => '/usr/local/bin/wkhtmltopdf'
-    }
-
       respond_to do |format|
         format.html
-        format.pdf do render :pdf => "generated.pdf", :layout => 'pdfgen.html.erb'
+        format.pdf do render :pdf => "generated.pdf", :layout => 'pdfgen'
         end
       end
 	end
