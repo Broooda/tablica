@@ -116,7 +116,7 @@ class UsersController < ApplicationController
       true
     end
 
-  end
+ 
 
 end
 
