@@ -30,8 +30,23 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		@user.accepted = true
 		@user.save
-    DefaultWorkTime.create(week: [['9:00','16:00'],['9:00','16:00'],['9:00','16:00'],['9:00','16:00'],['9:00','16:00']], user_id: @user.id)
-		redirect_to users_url
+
+    DefaultWorkTime.create(week: [['9:00','17:00'],['9:00','17:00'],['9:00','17:00'],['9:00','17:00'],['9:00','17:00']], user_id: @user.id)
+		
+    if HoursPlan.all.size > 0
+    last=HoursPlan.order( 'start_date ASC' )
+    last=last.last
+    current_week=Time.now.to_date.cweek
+    last_week=last.start_date.to_date.cweek
+    difference=last_week-current_week
+    else
+    difference=6
+    (0..difference).each do |counter|
+      DefaultWorkTime.generate_hours_plans(counter, @user.id)    
+    end
+  end
+    redirect_to users_url
+
 	end
   
 	def show

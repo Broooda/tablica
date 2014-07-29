@@ -1,5 +1,5 @@
 class HolidaysController < ApplicationController
-before_action :make_sure_its_mine, only: [:destroy, :edit, :create, :update]
+before_action :make_sure_its_mine, only: [:destroy, :edit, :update]
 before_action :make_sure_its_admin, only: [:accept, :reject]
 	def index
 	@holiday= Holiday.where('user_id=:user_id',{user_id: current_user.id})
@@ -24,10 +24,10 @@ before_action :make_sure_its_admin, only: [:accept, :reject]
     @holiday.save
 
     first_week=@holiday.startdate.to_date.cweek-Time.now.to_date.cweek
-    second_week=@holiday.enddate.to_date.cweek-Time.now.to_date.cweek
+    last_week=@holiday.enddate.to_date.cweek-Time.now.to_date.cweek
 
-    (first_week..second_week).each do |counter|
-      DefaultWorkTime.generate_hours_plans(counter)
+    (first_week..last_week).each do |counter|
+      DefaultWorkTime.generate_hours_plans(counter, @holiday.user_id)
    end
     redirect_to inboxs_path, notice: "Holiday accepted"
   end
@@ -46,7 +46,7 @@ before_action :make_sure_its_admin, only: [:accept, :reject]
 	end
 
 	def create
-		@holiday=Holiday.new(holiday_params)
+		@holiday=Holiday.new
     @holiday.status="pending"
     @holiday.user_id=current_user.id
     @holiday.startdate = params[:startdate] +" "+ params[:starttime]
@@ -77,9 +77,7 @@ before_action :make_sure_its_admin, only: [:accept, :reject]
 	end
 
 	private
-		def holiday_params
-		params.require(:holiday).permit(:startdate, :enddate, :description) 
-	end
+
 
   def make_sure_its_mine
       @user = Holiday.find(params[:id]).user

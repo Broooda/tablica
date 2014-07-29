@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get 'week/people/:fulldate' => 'week#showpeople', as: "week_people_fulldate"
   get 'week/people/:year/:week' => 'week#showpeople', as: "week_people_date"
 
-  get 'default_work_times/generate' => 'default_work_times#generate_hours_plans_admin', as: "generate_hours_plans"
+  get 'default_work_times/generate' => 'default_work_times#generate_few_weeks', as: "generate_hours_plans"
   resources :default_work_times, only: [:show]
   get 'default_work_times/accept/:id' => 'default_work_times#accept', as: "default_work_time_accept"
   get 'default_work_times/reject/:id' => 'default_work_times#reject', as: "default_work_time_reject"
