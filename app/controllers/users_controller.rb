@@ -30,6 +30,15 @@ class UsersController < ApplicationController
 
 	def index
 		@users = User.order('surname')
+<<<<<<< HEAD
+
+      respond_to do |format|
+        format.html
+        format.pdf do render :pdf => "generated.pdf", :layout => 'pdfgen.html'
+        end
+      end
+=======
+>>>>>>> 34eb26aa74d6f2a8e7abdab2c7b1ced22a8ccaf9
 	end
 
 	def accept
@@ -85,7 +94,7 @@ class UsersController < ApplicationController
 
   def earliest_hoursplan
     now=DateTime.now
-    @hours_plan = HoursPlan.where('user_id = :user_id and start_date > :now',{user_id: params[:id], now: now}).order(:startdate).first
+    @hours_plan = HoursPlan.where('user_id = :user_id and start_date > :now',{user_id: params[:id], now: now}).order('start_date').first
     #pobrac wszystkie rozpoczecia przeze mnie i usera
     #iterowac po nich i spr w kazdej czy jestesmy oboje w pracy
     #dopoki nie znajde wspolnego
@@ -102,9 +111,13 @@ class UsersController < ApplicationController
     def mine_or_admin
       @user = User.find(params[:id])
       unless current_user.id == @user.id or current_user.admin == true
-        redirect_to user_path, alert: "You can't edit that."
+        redirect_to users_path, alert: "You can't edit that."
       end
       true
     end
-  end
+
+ 
+
+end
+
 
