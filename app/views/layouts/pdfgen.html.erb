@@ -7,11 +7,6 @@
     <%= wicked_pdf_javascript_include_tag "number_pages" %>
   </head>
   <body onload='number_pages'>
-    <div id="h1">
-      <%= wicked_pdf_image_tag 'mysite.jpg' %>
-    </div>
-    <div id="h3">
       <%= yield %>
-    </div>
   </body>
 </html>

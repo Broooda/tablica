@@ -2,7 +2,7 @@ class HolidaysController < ApplicationController
 before_action :make_sure_its_mine, only: [:destroy, :edit, :update]
 before_action :make_sure_its_admin, only: [:accept, :reject]
 	def index
-	@holiday= Holiday.where('user_id=:user_id',{user_id: current_user.id})
+		@holiday= Holiday.where('user_id=:user_id',{user_id: current_user.id})
 	end
 	
 	def show
