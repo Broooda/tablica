@@ -117,9 +117,11 @@ class DefaultWorkTime < ActiveRecord::Base
   end
 
   def self.generate_few_weeks
+   
       (0..10).each do |counter|
       DefaultWorkTime.generate_hours_plans(counter)
-      end
+      
+    end
   end
 end
 

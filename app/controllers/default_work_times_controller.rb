@@ -37,7 +37,7 @@ before_action :make_sure_its_mine, only: [:destroy, :show]
     difference=last_week-current_week
 
     (0..difference).each do |counter|
-      DefaultWorkTime.generate_hours_plans(counter)
+      DefaultWorkTime.generate_hours_plans(counter, @request.user_id)
     
     end
 
@@ -56,6 +56,14 @@ before_action :make_sure_its_mine, only: [:destroy, :show]
   def generate_hours_plans_admin
     if(current_user.admin)
       DefaultWorkTime.generate_hours_plans
+      flash[:notice] = "Hours plans generated"
+    end
+    redirect_to root_path
+  end
+
+  def generate_few_weeks
+  if(current_user.admin)
+      DefaultWorkTime.generate_few_weeks
       flash[:notice] = "Hours plans generated"
     end
     redirect_to root_path

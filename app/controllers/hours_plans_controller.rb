@@ -3,6 +3,14 @@ class HoursPlansController < ApplicationController
   before_action :is_mine
   layout false
 
+  def index
+    @hours_plans = HoursPlan.all
+  end
+
+  def show
+    @hours_plan=HoursPlan.find(params[:id])
+  end
+
   def edit
     @hours_plan = HoursPlan.find(params[:id])
   end
@@ -21,6 +29,16 @@ class HoursPlansController < ApplicationController
       redirect_to week_time_url, notice: "Error while saving"
     end
 
+  end
+
+  def earliest_hoursplan
+    now=DateTime.now
+    @hours_plan = HoursPlan.where('user_id = :user_id and start_date > :now',{user_id: params[:id], now: now}).order(:startdate).first
+    #pobrac wszystkie rozpoczecia przeze mnie i usera
+    #iterowac po nich i spr w kazdej czy jestesmy oboje w pracy
+    #dopoki nie znajde wspolnego
+    #or zamiast and
+    #@commonhours =  = HoursPlan.where('user_id = :user_id and startdate > :now',{user_id: params[:id], now: now}).order(:startdate).first
   end
 
   private
