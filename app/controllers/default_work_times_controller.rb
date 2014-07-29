@@ -29,7 +29,18 @@ before_action :make_sure_its_mine, only: [:destroy, :show]
     @request.user.default_work_time.week=@request.week
     @request.save
     @request.user.default_work_time.save
+
+    last=HoursPlan.order( 'start_date ASC' )
+    last=last.last
+    current_week=Time.now.to_date.cweek
+    last_week=last.start_date.to_date.cweek
+    difference=last_week-current_week
+
+    (0..difference).each do |counter|
+      DefaultWorkTime.generate_hours_plans(counter, @request.user_id)
     
+    end
+
     redirect_to inboxs_path, notice: "Default hours accepted"
   end
 
@@ -45,6 +56,14 @@ before_action :make_sure_its_mine, only: [:destroy, :show]
   def generate_hours_plans_admin
     if(current_user.admin)
       DefaultWorkTime.generate_hours_plans
+      flash[:notice] = "Hours plans generated"
+    end
+    redirect_to root_path
+  end
+
+  def generate_few_weeks
+  if(current_user.admin)
+      DefaultWorkTime.generate_few_weeks
       flash[:notice] = "Hours plans generated"
     end
     redirect_to root_path
