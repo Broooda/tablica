@@ -60,10 +60,10 @@ class UsersController < ApplicationController
     last_week=last.start_date.to_date.cweek
     difference=last_week-current_week
     else
-    difference=6
-    (0..difference).each do |counter|
-      DefaultWorkTime.generate_hours_plans(counter, @user.id)    
+    difference=6     
     end
+     (0..difference).each do |counter|
+      DefaultWorkTime.generate_hours_plans(counter, @user.id) 
   end
     redirect_to users_url
 	end
