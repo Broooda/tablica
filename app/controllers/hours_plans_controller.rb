@@ -29,14 +29,13 @@ class HoursPlansController < ApplicationController
 
   def earliest_hoursplan
 
-    now=Time.now
-    @hours_plans = HoursPlan.order(:startdate) #wspolne terminy pracy wybranego usera i zaalogowanego uzytkownika
-    @earliest_hour = HoursPlan.order(:startdate).first #najblizszy termin, gdy user bedzie w pracy
-    if @hours_plans == now || @hours_plans>now
-      @commonhours = HoursPlan.order(:startdate) 
-    #else
-      #puts "Nie znaleziono najblizszego wspolnego terminu pracy"
-    end
+    now=DateTime.now
+    @hours_plans = HoursPlan.where('user_id = :user_id and startdate > :now',{user_id: params[:id], now: now}).order(:startdate).first
+    #pobrac wszystkie rozpoczecia przeze mnie i usera
+    #iterowac po nich i spr w kazdej czy jestesmy oboje w pracy
+    #dopoki nie znajde wspolnego
+    #or zamiast and
+    #@commonhours =  = HoursPlan.where('user_id = :user_id and startdate > :now',{user_id: params[:id], now: now}).order(:startdate).first
   end
 
   private
