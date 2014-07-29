@@ -38,7 +38,7 @@ class UsersController < ApplicationController
 
       respond_to do |format|
         format.html
-        format.pdf do render :pdf => "generated.pdf", :layout => 'pdfgen'
+        format.pdf do render :pdf => "generated.pdf", :layout => 'pdfgen.html'
         end
       end
 	end
