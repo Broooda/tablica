@@ -30,11 +30,19 @@ class UsersController < ApplicationController
 
 	def index
 		@users = User.order('surname')
+<<<<<<< HEAD
+=======
+
+>>>>>>> 33dbf3511dd3727b498fecf7788ee10b1eb9b2cc
       respond_to do |format|
         format.html
         format.pdf do render :pdf => "generated.pdf", :layout => 'pdfgen.html'
         end
       end
+<<<<<<< HEAD
+=======
+
+>>>>>>> 33dbf3511dd3727b498fecf7788ee10b1eb9b2cc
 	end
 
 	def accept
