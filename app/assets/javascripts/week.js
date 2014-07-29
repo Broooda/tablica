@@ -51,7 +51,7 @@ function setUpHoursPlans(tags) {
 
     if(people.indexOf(user)==-1) { //jeśli nie wstawialiśmy jeszcze użytkownika to dodaj go do array
       people.push(user);
-    }rde
+    }
   });
 
   $('.hours-plan').stop(true).animate({width: 0, height:0});
@@ -153,7 +153,7 @@ $(function(){
 
     $('.hours-plan').hover(function(){
       $('.tooltip-inner').css('background-color', $(this).css('background-color'));
-      $('.tooltip-arrow').css('border-top-color', 'none');
+      $('.tooltip-arrow').css('display', 'none');
 
       $('.hours-plan').not('[user="'+$(this).attr('user')+'"]').stop(true,true).fadeTo(500,0.4);
       $('.hours-plan[user="'+$(this).attr('user')+'"]').stop(true,true).fadeTo(500,1);
