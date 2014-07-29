@@ -11,7 +11,13 @@
 %p
   The user will be at work:
   -if @hours_plan
-    =@hours_plan.start_date
+    =@hours_plan.start_date.strftime('%Y-%-m-%-d %k:%M')
+-if @first_common_hour=='nope'
+  %p You have no common hours with this user
+-else
+  %p
+    Your firstn common hour with this user is
+    =@first_common_hour.strftime('%Y-%-m-%-d %k:%M')
 
 -if current_user.admin or @user.id==current_user.id
   %p= link_to "Edit profile", edit_user_path(@user.id), :class=>"btn btn-default"
