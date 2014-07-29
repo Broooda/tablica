@@ -11,7 +11,7 @@ class WeekController < ApplicationController
   end
 
   def showpeople
-    @users = User.all
+    @users = User.where('accepted = true')
   end
 
   def gethoursplan

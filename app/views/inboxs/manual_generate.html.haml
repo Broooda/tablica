@@ -1,0 +1,9 @@
+%h1 Manual generating working hours
+
+
+=form_tag manual_generate_post_path do
+  %div.form-group
+    = label_tag "Till which week", nil,  :style => "width: 100%;"
+    = text_field_tag "week", nil, class: "form-control date-picker fifty-fifty"
+    .form-group
+    =submit_tag "Send Request", :class => "form-control"
