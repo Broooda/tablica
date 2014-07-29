@@ -85,7 +85,7 @@ class UsersController < ApplicationController
 
   def earliest_hoursplan
     now=DateTime.now
-    @hours_plan = HoursPlan.where('user_id = :user_id and start_date > :now',{user_id: params[:id], now: now}).order(:startdate).first
+    @hours_plan = HoursPlan.where('user_id = :user_id and start_date > :now',{user_id: params[:id], now: now}).order('start_date').first
     #pobrac wszystkie rozpoczecia przeze mnie i usera
     #iterowac po nich i spr w kazdej czy jestesmy oboje w pracy
     #dopoki nie znajde wspolnego
