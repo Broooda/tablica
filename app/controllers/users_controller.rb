@@ -18,7 +18,13 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
+
+   
+    @user.default_work_time.destroy
+    @user.hours_plan.destroy_all
+    @user.holiday.destroy_all
+     @user.destroy
+
     redirect_to users_url
   end
 
@@ -34,28 +40,32 @@ class UsersController < ApplicationController
     DefaultWorkTime.create(week: [['9:00','17:00'],['9:00','17:00'],['9:00','17:00'],['9:00','17:00'],['9:00','17:00']], user_id: @user.id)
 		
     if HoursPlan.all.size > 0
-    last=HoursPlan.order( 'start_date ASC' )
-    last=last.last
-    current_week=Time.now.to_date.cweek
-    last_week=last.start_date.to_date.cweek
-    difference=last_week-current_week
+      last=HoursPlan.order( 'start_date ASC' )
+      last=last.last
+      current_week=Time.now.to_date.cweek
+      last_week=last.start_date.to_date.cweek
+      difference=last_week-current_week
     else
-    difference=6
-    (0..difference).each do |counter|
-      DefaultWorkTime.generate_hours_plans(counter, @user.id)    
+      difference=6     
     end
-  end
-    redirect_to users_url
 
+     (0..difference).each do |counter|
+      DefaultWorkTime.generate_hours_plans(counter, @user.id) 
+  end
+
+    redirect_to users_url
 	end
   
 	def show
   	@user=User.find(params[:id])
 
+    earliest_hoursplan
+
     respond_to do |format|
       format.html
       format.pdf do
-      render :pdf => "generated.pdf"
+        render :pdf => "generated.pdf"
+      end
     end
 	end
 
@@ -73,7 +83,15 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
-  
+  def earliest_hoursplan
+    now=DateTime.now
+    @hours_plan = HoursPlan.where('user_id = :user_id and start_date > :now',{user_id: params[:id], now: now}).order(:startdate).first
+    #pobrac wszystkie rozpoczecia przeze mnie i usera
+    #iterowac po nich i spr w kazdej czy jestesmy oboje w pracy
+    #dopoki nie znajde wspolnego
+    #or zamiast and
+    #@commonhours =  = HoursPlan.where('user_id = :user_id and startdate > :now',{user_id: params[:id], now: now}).order(:startdate).first
+  end
 
   private
 
@@ -88,6 +106,5 @@ class UsersController < ApplicationController
       end
       true
     end
+  end
 
-end
-end
