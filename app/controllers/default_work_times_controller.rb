@@ -61,6 +61,14 @@ before_action :make_sure_its_mine, only: [:destroy, :show]
     redirect_to root_path
   end
 
+  def generate_few_weeks
+  if(current_user.admin)
+      DefaultWorkTime.generate_few_weeks
+      flash[:notice] = "Hours plans generated"
+    end
+    redirect_to root_path
+  end
+
   private
   def create_new_request
     #usun aktualne requesty uzytkownika
