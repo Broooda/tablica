@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get 'week/people/:fulldate' => 'week#showpeople', as: "week_people_fulldate"
   get 'week/people/:year/:week' => 'week#showpeople', as: "week_people_date"
 
-  get 'default_work_times/generate' => 'default_work_times#generate_hours_plans_admin', as: "generate_hours_plans"
+  get 'default_work_times/generate' => 'default_work_times#generate_few_weeks', as: "generate_hours_plans"
   resources :default_work_times, only: [:show]
   get 'default_work_times/accept/:id' => 'default_work_times#accept', as: "default_work_time_accept"
   get 'default_work_times/reject/:id' => 'default_work_times#reject', as: "default_work_time_reject"
@@ -33,10 +33,9 @@ Rails.application.routes.draw do
 
   get 'ajax/hours_plans/edit/:id' => 'hours_plans#edit', as: "edit_hours_plans_ajax"
   post 'hours_plans/update/:id' => 'hours_plans#update', as: "update_hours_plans"
-
-
   
 
+  get 'layouts/pdfgen' =>'users#index', as: "generate_pdf"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

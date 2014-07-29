@@ -6,7 +6,7 @@ $(function() {
     $('#footer .authors').slideDown();
   });
 
-  $('.date-picker').datepicker({format: 'yyyy-mm-dd'});
+  $('.date-picker').datepicker({format: 'yyyy-mm-dd', weekStart: 1});
 
   $('.inbox-block textarea').focus(function(){
    $(this).animate({height: 90, width: 420});

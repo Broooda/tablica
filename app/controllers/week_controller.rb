@@ -15,8 +15,8 @@ class WeekController < ApplicationController
   end
 
   def gethoursplan
-    get_from = DateTime.commercial(@year, @week_num, 1) #od poniedzialek 0:00
-    get_to = DateTime.commercial(@year, @week_num, 6) #do sobota 0:00
+    get_from = DateTime.commercial(@year, @week_num, 1,0,0,0,'+2') #od poniedzialek 0:00
+    get_to = DateTime.commercial(@year, @week_num, 6,0,0,0,'+2') #do sobota 0:00
 
     @hours_plans = HoursPlan.where('start_date > :from and start_date < :to', { from: get_from, to: get_to})
 
@@ -37,7 +37,7 @@ class WeekController < ApplicationController
     else 
       #sprawdz czy mozna wygenerowac date, jesli tak to wpisz ja
       begin
-        @week = DateTime.commercial(params[:year].to_i,params[:week].to_i,1)
+        @week = DateTime.commercial(params[:year].to_i,params[:week].to_i,1,0,0,0,'+2')
         @year = params[:year].to_i
         @week_num = params[:week].to_i
       rescue
