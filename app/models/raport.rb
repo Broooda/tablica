@@ -8,6 +8,5 @@ class Raport < ActiveRecord::Base
 		def comparing_dates
     	errors.add(:date_begin, "must be before end date") unless 
  		self.startdate < self.enddate
-      end
- 		end
-	end
+    end
+end
