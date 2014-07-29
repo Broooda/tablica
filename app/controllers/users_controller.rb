@@ -53,6 +53,8 @@ class UsersController < ApplicationController
 	def show
   	@user=User.find(params[:id])
 
+    earliest_hoursplan
+
     respond_to do |format|
       format.html
       format.pdf do
@@ -75,7 +77,15 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
-  
+  def earliest_hoursplan
+    now=DateTime.now
+    @hours_plan = HoursPlan.where('user_id = :user_id and start_date > :now',{user_id: params[:id], now: now}).order(:startdate).first
+    #pobrac wszystkie rozpoczecia przeze mnie i usera
+    #iterowac po nich i spr w kazdej czy jestesmy oboje w pracy
+    #dopoki nie znajde wspolnego
+    #or zamiast and
+    #@commonhours =  = HoursPlan.where('user_id = :user_id and startdate > :now',{user_id: params[:id], now: now}).order(:startdate).first
+  end
 
   private
 
@@ -91,4 +101,4 @@ class UsersController < ApplicationController
       true
     end
   end
-end
+
