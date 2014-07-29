@@ -44,9 +44,8 @@ class UsersController < ApplicationController
     (0..difference).each do |counter|
       DefaultWorkTime.generate_hours_plans(counter, @user.id)    
     end
-  end
+  
     redirect_to users_url
-
 	end
   
 	def show
@@ -55,7 +54,8 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-      render :pdf => "generated.pdf"
+        render :pdf => "generated.pdf"
+      end
     end
 	end
 
@@ -88,6 +88,5 @@ class UsersController < ApplicationController
       end
       true
     end
-
-end
+  end
 end
