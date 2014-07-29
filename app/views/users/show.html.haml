@@ -8,10 +8,7 @@
   -@user.tags_array.each do |tag|
     %span.label.label-default=tag
 
-%p
-  -@hours_plans.each do |hp|
-    %li
-      =hp.startdate
+%p= The user will be at work: @hours_plan.start_date
 
 -if current_user.admin or @user.id==current_user.id
   %p= link_to "Edit profile", edit_user_path(@user.id), :class=>"btn btn-default"
