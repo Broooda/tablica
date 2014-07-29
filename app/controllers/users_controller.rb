@@ -102,7 +102,7 @@ class UsersController < ApplicationController
     def mine_or_admin
       @user = User.find(params[:id])
       unless current_user.id == @user.id or current_user.admin == true
-        redirect_to user_path, alert: "You can't edit that."
+        redirect_to users_path, alert: "You can't edit that."
       end
       true
     end
