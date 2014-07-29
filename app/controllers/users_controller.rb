@@ -90,7 +90,19 @@ class UsersController < ApplicationController
     #iterowac po nich i spr w kazdej czy jestesmy oboje w pracy
     #dopoki nie znajde wspolnego
     #or zamiast and
-    #@commonhours =  = HoursPlan.where('user_id = :user_id and startdate > :now',{user_id: params[:id], now: now}).order(:startdate).first
+
+    #@hours_plan.each do |h|
+    @commonhours = HoursPlan.where('(user_id = :user_id or user_id = :user_id2) and start_date > :now',{user_id: params[:id], user_id2: current_user.id, now: now}).order('start_date')
+      @commonhours.each do |c|
+        HoursPlan.where('start_date == now')
+#dla kazdego co znajdzie musi oytac. spr czy 1 i 2 uzzytk sa
+         if @userhours.start_date == @myhours.start_date
+        #   #success
+        if @commonhours.nil?
+          puts "Brak wspolnego terminu pracy"
+        end
+      #end
+    #end
   end
 
   private
