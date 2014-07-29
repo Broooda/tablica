@@ -46,7 +46,7 @@ before_action :make_sure_its_admin, only: [:accept, :reject]
 	end
 
 	def create
-		@holiday=Holiday.new(holiday_params)
+		@holiday=Holiday.new
     @holiday.status="pending"
     @holiday.user_id=current_user.id
     @holiday.startdate = params[:startdate] +" "+ params[:starttime]
@@ -77,9 +77,7 @@ before_action :make_sure_its_admin, only: [:accept, :reject]
 	end
 
 	private
-		def holiday_params
-		params.require(:holiday).permit(:startdate, :enddate, :description) 
-	end
+
 
   def make_sure_its_mine
       @user = Holiday.find(params[:id]).user
