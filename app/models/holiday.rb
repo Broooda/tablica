@@ -9,11 +9,11 @@ class Holiday < ActiveRecord::Base
 
 private
 
-		def start_date_must_be_before_end_date
-			if self.startdate.blank? == true or self.enddate.blank? == true or description.blank? == true
-			else
-    		errors.add(:startdate, "must be earlier before end date") unless 
- 			self.startdate < self.enddate
- 		end
- 		end
+    def start_date_must_be_before_end_date
+      if self.startdate.blank? == true or self.enddate.blank? == true or description.blank? == true
+      else
+        errors.add(:startdate, "must be earlier before end date") unless 
+      self.startdate < self.enddate
+    end
+    end
 end
