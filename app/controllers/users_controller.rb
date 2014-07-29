@@ -28,7 +28,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
    
     @user.default_work_time.destroy
-    @user.hours_plan.destroy
+    @user.hours_plan.destroy_all
+    @user.holiday.destroy_all
      @user.destroy
     redirect_to users_url
   end
