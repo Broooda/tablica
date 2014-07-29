@@ -1,13 +1,15 @@
 %h1 Edit holiday request
 = form_for(@holiday) do |f|
   %div.form-group
-    = f.label "Start date and time"
-    = f.text_field :startdate, :class => "form-control date-picker"
+    = label_tag "Start date and time", nil,  :style => "width: 100%;"
+    = text_field_tag "startdate", @holiday.startdate.strftime("%Y-%-m-%-d"), class: "form-control date-picker fifty-fifty"
+    = time_field_tag "starttime", @holiday.startdate.strftime("%k:%M"), class: "form-control fifty-fifty"
   %div.form-group
-    = f.label "End date and time"
-    = f.text_field :enddate, :class => "form-control date-picker"
+    = label_tag "End date and time", nil, :style => "width: 100%;"
+    = text_field_tag "enddate", @holiday.enddate.strftime("%Y-%-m-%-d"), class: "form-control date-picker fifty-fifty"
+    = time_field_tag "endtime", @holiday.enddate.strftime("%k:%M") , class: "form-control fifty-fifty"
   %div.form-group
-    = f.label "Description"
-    = f.text_area :description, :class => "form-control"
+    = label_tag "Description"
+    = text_area_tag "description", @holiday.description, class: "form-control"
   %div.form-group
     = f.submit "Edit Holiday", :class => "form-control"

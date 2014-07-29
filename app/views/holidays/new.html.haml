@@ -2,13 +2,15 @@
 
 = form_for(@holiday) do |f|
   %div.form-group
-    = f.label "Start date and time"
-    = f.text_field :startdate, :class => "form-control date-picker"
+    = label_tag "Start date and time", nil,  :style => "width: 100%;"
+    = text_field_tag "startdate", nil, class: "form-control date-picker fifty-fifty"
+    = time_field_tag "starttime",nil, class: "form-control fifty-fifty"
   %div.form-group
-    = f.label "End date and time"
-    = f.text_field :enddate, :class => "form-control date-picker"
+    = label_tag "End date and time", nil, :style => "width: 100%;"
+    = text_field_tag "enddate", nil, class: "form-control date-picker fifty-fifty"
+    = time_field_tag "endtime",nil, class: "form-control fifty-fifty"
   %div.form-group
-    = f.label "Description"
-    = f.text_area :description, :class => "form-control"
+    = label_tag "Description"
+    = text_area_tag "description", nil, class: "form-control"
   %div.form-group
-    = f.submit "Add holiday request", :class => "form-control"
+    = submit_tag "Add holiday request", class: "form-control"

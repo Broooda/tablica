@@ -18,7 +18,7 @@ class DefaultWorkTime < ActiveRecord::Base
 
   belongs_to :user
 
-  def self.generate_hours_plans(week=1, force_update=true)
+  def self.generate_hours_plans(week=1, one_user=0, force_update=true)
     #funkcja generuje hours_plans
     #week (int) oznacza dla którego tygodnia ma wygenerować ( 0=dla aktualnego tygodnia, 1=dla następnego, -1=dla poprzedniego itd)
     #force_update (bool) - jesli sa jakiej godziny juz w tych dniach i force_update==true to napisze je 
@@ -26,7 +26,15 @@ class DefaultWorkTime < ActiveRecord::Base
     #poniedzialek 0:00 (posluzy jako punkt odniesienia)
     monday_midnight_in_current_week = DateTime.commercial(DateTime.now.year, DateTime.now.cweek,1,0,0,0,'+2')
     #iteruj po wszystkich DefaultWorkTime
+    if one_user==0
     default_work_times = DefaultWorkTime.all
+  else
+     default_work_times = DefaultWorkTime.where('user_id=:user_id',
+     {
+      user_id: one_user
+      }
+      )
+  end
     default_work_times.each do |default_work_time|
       #dla kazdego dnia (pon-pt)
       day_num = 0;
@@ -105,6 +113,14 @@ class DefaultWorkTime < ActiveRecord::Base
       day_num += 1;
       end
     end
+    end
+  end
+
+  def self.generate_few_weeks
+   
+      (0..10).each do |counter|
+      DefaultWorkTime.generate_hours_plans(counter)
+      
     end
   end
 end
