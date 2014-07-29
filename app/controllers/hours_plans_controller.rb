@@ -32,7 +32,6 @@ class HoursPlansController < ApplicationController
   end
 
   def earliest_hoursplan
-
     now=DateTime.now
     @hours_plan = HoursPlan.where('user_id = :user_id and start_date > :now',{user_id: params[:id], now: now}).order(:startdate).first
     #pobrac wszystkie rozpoczecia przeze mnie i usera
