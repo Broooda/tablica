@@ -11,16 +11,19 @@ class InboxsController < ApplicationController
   end
 
   def manual_generate_post
-    if current_user.admin
-      current_week=Time.now.to_date.cweek
-      last_week=params['week'].to_date.cweek
-      difference=last_week-current_week
 
-      (0..difference).each do |counter|
-      DefaultWorkTime.generate_hours_plans(counter)    
-    end
+      current_week=Time.now.to_date.cweek
+      last_week=params['week'].to_date.cweek     
+      difference=last_week-current_week
+      if difference > 0
+        (0..difference).each do |counter|
+          DefaultWorkTime.generate_hours_plans(counter)    
+        end
+         redirect_to root_url, alert: "Hours generated"
+      else
+        redirect_to manual_generate_path, alert: "Wrong date!"
+      end
   end
-end
 
   def make_sure_im_admin
      unless current_user.admin
