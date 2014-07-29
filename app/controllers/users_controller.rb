@@ -104,14 +104,20 @@ class UsersController < ApplicationController
     commonhours.each do |c|
       is_man_working = (HoursPlan.where('user_id = :id and start_date <= :start and end_date >= :start', {id: params[:id], start: c.start_date}).size > 0)
       are_you_working = (HoursPlan.where('user_id = :id and start_date <= :start and end_date >= :start', {id: current_user.id, start: c.start_date}).size > 0)
-      #dla kazdego co znajdzie musi oytac. spr czy 1 i 2 uzzytk sa
+      #dla kazdego co znajdzie musi pytac czy 1. i 2. uzytkownik jest
       if is_man_working and are_you_working
         @first_common_hour = c.start_date
         break
       end
     end
-      #end
-    #end
+
+    #zawsze jest 'yes':
+    at_work = HoursPlan.where('user_id = :id and start_date <= :now and end_date >= :now', {id: params[:id], now: now})
+    if at_work
+      @answer = 'yes'
+    else
+      @answer = 'no'
+    end
   end
 
   private
