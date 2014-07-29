@@ -3,14 +3,6 @@ class UsersController < ApplicationController
   before_action :mine_or_admin, except: [:index, :show ]
 
 
-  # def download 
-  #   html = render_to_string(:action => :show, :layout => "pdf_layout.html") 
-  #   pdf = WickedPdf.new.pdf_from_string(html) 
-  #   send_data(pdf, 
-  #     :filename    => "my_pdf_name.pdf", 
-  #     :disposition => 'attachment') 
-  # end
-
   def edit
     @user=User.find(params[:id])
   end
@@ -26,32 +18,25 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
+
    
     @user.default_work_time.destroy
     @user.hours_plan.destroy_all
     @user.holiday.destroy_all
      @user.destroy
+
     redirect_to users_url
   end
 
 	def index
 		@users = User.order('surname')
-
-    WickedPdf.config = {
-      :exe_path => '/usr/local/bin/wkhtmltopdf'
-    }
-
-      respond_to do |format|
-        format.html
-        format.pdf do render :pdf => "generated.pdf", :layout => 'pdfgen.html.erb'
-        end
-      end
 	end
 
 	def accept
 		@user = User.find(params[:id])
 		@user.accepted = true
 		@user.save
+
     DefaultWorkTime.create(week: [['9:00','17:00'],['9:00','17:00'],['9:00','17:00'],['9:00','17:00'],['9:00','17:00']], user_id: @user.id)
 		
     if HoursPlan.all.size > 0
@@ -63,21 +48,26 @@ class UsersController < ApplicationController
     else
       difference=6     
     end
+
      (0..difference).each do |counter|
       DefaultWorkTime.generate_hours_plans(counter, @user.id) 
   end
+
     redirect_to users_url
 	end
   
 	def show
   	@user=User.find(params[:id])
 
+    earliest_hoursplan
+
     respond_to do |format|
       format.html
-      format.pdf do render :pdf => "generated.pdf", :layout => 'pdfgen'
+      format.pdf do
+        render :pdf => "generated.pdf"
       end
     end
-  end
+	end
 
   def make_admin
     @user = User.find(params[:id])
@@ -93,6 +83,16 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
+  def earliest_hoursplan
+    now=DateTime.now
+    @hours_plan = HoursPlan.where('user_id = :user_id and start_date > :now',{user_id: params[:id], now: now}).order('start_date').first
+    #pobrac wszystkie rozpoczecia przeze mnie i usera
+    #iterowac po nich i spr w kazdej czy jestesmy oboje w pracy
+    #dopoki nie znajde wspolnego
+    #or zamiast and
+    #@commonhours =  = HoursPlan.where('user_id = :user_id and startdate > :now',{user_id: params[:id], now: now}).order(:startdate).first
+  end
+
   private
 
     def user_params
@@ -106,5 +106,9 @@ class UsersController < ApplicationController
       end
       true
     end
+
+  end
+
 end
+
 
