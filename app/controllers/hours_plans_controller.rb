@@ -3,6 +3,16 @@ class HoursPlansController < ApplicationController
   before_action :is_mine
   layout false
 
+  def index
+    @hours_plans = HoursPlan.all
+  end
+
+  # def show
+  #   @hours_plan=HoursPlan.find(params[:id])
+
+    
+  # end
+
   def edit
     @hours_plan = HoursPlan.find(params[:id])
   end
@@ -22,6 +32,8 @@ class HoursPlansController < ApplicationController
     end
 
   end
+
+  
 
   private
   def is_mine
