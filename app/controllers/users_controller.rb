@@ -51,7 +51,7 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		@user.accepted = true
 		@user.save
-    DefaultWorkTime.create(week: [['9:00','16:00'],['9:00','16:00'],['9:00','16:00'],['9:00','16:00'],['9:00','16:00']], user_id: @user.id)
+    DefaultWorkTime.create(week: [['9:00','17:00'],['9:00','17:00'],['9:00','17:00'],['9:00','17:00'],['9:00','17:00']], user_id: @user.id)
 		
     if HoursPlan.all.size > 0
     last=HoursPlan.order( 'start_date ASC' )

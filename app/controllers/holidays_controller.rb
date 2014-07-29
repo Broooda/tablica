@@ -24,10 +24,10 @@ before_action :make_sure_its_admin, only: [:accept, :reject]
     @holiday.save
 
     first_week=@holiday.startdate.to_date.cweek-Time.now.to_date.cweek
-    second_week=@holiday.enddate.to_date.cweek-Time.now.to_date.cweek
+    last_week=@holiday.enddate.to_date.cweek-Time.now.to_date.cweek
 
-    (first_week..second_week).each do |counter|
-      DefaultWorkTime.generate_hours_plans(counter)
+    (first_week..last_week).each do |counter|
+      DefaultWorkTime.generate_hours_plans(counter, @holiday.user_id)
    end
     redirect_to inboxs_path, notice: "Holiday accepted"
   end

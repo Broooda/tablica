@@ -37,7 +37,7 @@ before_action :make_sure_its_mine, only: [:destroy, :show]
     difference=last_week-current_week
 
     (0..difference).each do |counter|
-      DefaultWorkTime.generate_hours_plans(counter)
+      DefaultWorkTime.generate_hours_plans(counter, @request.user_id)
     
     end
 
