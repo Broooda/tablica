@@ -121,6 +121,13 @@ class UsersController < ApplicationController
         break
       end
     end
+
+    at_work = HoursPlan.where('user_id = :id and start_date <= :now and end_date >= :now', {id: params[:id], now: now})
+    if at_work.size>0
+      @answer = 'yes'
+    else
+      @answer = 'no'
+    end
 #>>>>>>> a34b640ad094a94afe9c4e0b92e953669833214a
       #end
     #end
