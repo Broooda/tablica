@@ -1,0 +1,15 @@
+%h1 Raport start and end date
+
+
+=form_tag take_day_path do
+  %div.form-group
+    = label_tag "Start date: ", nil,  :style => "width: 100%;"
+    = text_field_tag "start", nil, class: "form-control date-picker fifty-fifty"
+
+    %div.form-group
+    = label_tag "End date: ", nil,  :style => "width: 100%;"
+    = text_field_tag "end", nil, class: "form-control date-picker fifty-fifty"
+
+
+    .form-group
+    =submit_tag "Generate Raport", :class => "form-control"
