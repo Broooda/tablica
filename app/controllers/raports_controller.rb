@@ -46,12 +46,15 @@ class RaportsController < ApplicationController
 		  puts holiday_hours
 		  puts "-------------------------"
 		  
+      @work = work_hours
+      @holiday = holiday_hours
+
 		  redirect_to root_url
 		end
 
-    def show
-      @work = work_hours
-      @holiday = holiday_hours
+    def pdf_view
+      #@work = work_hours
+      #@holiday = holiday_hours
 
       respond_to do |format|
         format.html
