@@ -4,21 +4,15 @@ class RaportsController < ApplicationController
 	end
 
 	def pdf_view
-		puts "------------------- PARAMETRY ------------"
-		puts params[:start]
-		puts params[:end]
+
 		  work_days = HoursPlan.where(
-		  'user_id = ? and start_date > ? and start_date < ?',
-		  current_user.id,params[:start],(params[:end].to_time+1.day)
+		 	  'user_id = ? and start_date > ? and start_date < ?',
+		 	  current_user.id,params[:start],(params[:end].to_time+1.day)
 		  )
 		  holiday_days = HolidaysPlan.where(
-		  'user_id = ? and holiday_date > ? and holiday_date < ?',
-		  current_user.id,params[:start],(params[:end].to_time+1.day)
+		  	'user_id = ? and holiday_date > ? and holiday_date < ?',
+		  	current_user.id,(params[:start].to_time),(params[:end].to_time+1.day)
 		  )
-
-		  puts "------------ size: -----"
-		  puts work_days.all.size
-		  puts holiday_days.all.size
 
 		  work_minutes=0
 		  holiday_minutes=0
@@ -26,7 +20,8 @@ class RaportsController < ApplicationController
 		  work_days.each do |work_day|
 		  	work_minutes+=TimeDifference.between(work_day.end_date, work_day.start_date).in_minutes
 		  end
-		   holiday_days.each do |holiday_day|
+
+		  holiday_days.each do |holiday_day|
 		  	holiday_minutes+=holiday_day.hours
 		  end
 
@@ -38,16 +33,8 @@ class RaportsController < ApplicationController
 
 		  work_hours=work_hours.to_s+" hours and "+work_minutes.to_s+" minutes"
 		  holiday_hours=holiday_hours.to_s+" hours and "+holiday_minutes.to_s+" minutes"
-
-		  puts "-------------------------"
-		  puts "Pracowal: "
-		  puts work_hours
-		  puts "Urlopowal:"
-		  puts holiday_hours
-		  puts "-------------------------"
-		  
-
-      @work = work_hours
+			
+ 			@work = work_hours
       @holiday = holiday_hours
 
       respond_to do |format|
@@ -59,13 +46,7 @@ class RaportsController < ApplicationController
       #redirect_to pdf_view_test_path
 		  
 		end
+	end
 
-     # def pdf_view_test
 
-     #   respond_to do |format|
-     #     format.html
-     #     format.pdf do render :pdf => "generated.pdf", :layout => 'raport.html'
-     #     end
-     #   end
-     # end
-end
+
