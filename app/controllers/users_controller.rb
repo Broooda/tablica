@@ -93,37 +93,27 @@ class UsersController < ApplicationController
   def earliest_hoursplan
     now=DateTime.now
     @hours_plan = HoursPlan.where('user_id = :user_id and start_date > :now',{user_id: params[:id], now: now}).order('start_date').first
-    #pobrac wszystkie rozpoczecia przeze mnie i usera
-    #iterowac po nich i spr w kazdej czy jestesmy oboje w pracy
-    #dopoki nie znajde wspolnego
-    #or zamiast and
 
-    #@hours_plan.each do |h|
-# <<<<<<< HEAD
-#     @commonhours = HoursPlan.where('(user_id = :user_id or user_id = :user_id2) and start_date > :now',{user_id: params[:id], user_id2: current_user.id, now: now}).order('start_date')
-#       @commonhours.each do |c|
-#         HoursPlan.where('start_date == now')
-# #dla kazdego co znajdzie musi oytac. spr czy 1 i 2 uzzytk sa
-#          if @userhours.start_date == @myhours.start_date
-#         #   #success
-#         if @commonhours.nil?
-#           puts "Brak wspolnego terminu pracy"
-#         end
-# =======
+ 
     @first_common_hour = 'nope'
     commonhours = HoursPlan.where('(user_id = :user_id or user_id = :user_id2) and start_date > :now',{user_id: params[:id], user_id2: current_user.id, now: now}).order('start_date')
     commonhours.each do |c|
       is_man_working = (HoursPlan.where('user_id = :id and start_date <= :start and end_date >= :start', {id: params[:id], start: c.start_date}).size > 0)
       are_you_working = (HoursPlan.where('user_id = :id and start_date <= :start and end_date >= :start', {id: current_user.id, start: c.start_date}).size > 0)
-      #dla kazdego co znajdzie musi oytac. spr czy 1 i 2 uzzytk sa
+      #dla kazdego co znajdzie musi pytac czy 1 i 2 uzytkownik jest
       if is_man_working and are_you_working
         @first_common_hour = c.start_date
         break
       end
     end
-#>>>>>>> a34b640ad094a94afe9c4e0b92e953669833214a
-      #end
-    #end
+
+    at_work = HoursPlan.where('user_id = :id and start_date <= :now and end_date >= :now', {id: params[:id], now: now})
+    if at_work.size>0
+      @answer = 'yes'
+    else
+      @answer = 'no'
+    end
+
   end
 
   private
