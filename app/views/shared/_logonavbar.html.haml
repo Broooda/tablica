@@ -17,7 +17,7 @@
       %ul
         %li=link_to "Week plan", week_time_url
         %li=link_to "Holidays", holidays_path
-        %li=link_to "Raports", root_url #zamienic na prawdziwa path/url
+        %li=link_to "Raports", raports_url
         -if current_user.default_work_time
           %li=link_to "Default hours", default_work_time_path(current_user.default_work_time.id)
         %li=link_to "Users", users_url

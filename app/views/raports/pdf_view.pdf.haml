@@ -1,0 +1,19 @@
+%h1
+%table.table
+  %tr
+    %td.text-center
+      Name
+    %td.text-center
+      Surname
+  %tr
+    %td.text-center
+      =current_user.name
+    %td.text-center
+      =current_user.surname
+
+%h2
+  work:
+  =@work
+%h2
+  holiday:
+  =@holiday

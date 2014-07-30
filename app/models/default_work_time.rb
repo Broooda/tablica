@@ -51,11 +51,26 @@ class DefaultWorkTime < ActiveRecord::Base
           monday_midnight_in_current_week + week.week + day_num.day + 1.day
           )
 
-        #jesli sa jakies ogdziny i force_update to usun je
+        holidays_in_that_day = HolidaysPlan.where(
+          'user_id = ? and holiday_date > ? and holiday_date < ?',
+          default_work_time.user_id,
+          monday_midnight_in_current_week + week.week + day_num.day,
+          monday_midnight_in_current_week + week.week + day_num.day + 1.day
+          )
+
+        #jesli sa jakies godziny i force_update to usun je
         if hours_in_that_day.size>0 and force_update            
           hours_in_that_day.each do |hours|
             if hours.start_date.to_date >= DateTime.now.to_date
             hours.destroy
+          end
+          end
+        end
+        #jesli sa jakies urlopy i force_update to usun je
+        if holidays_in_that_day.size>0 and force_update            
+          holidays_in_that_day.each do |holiday|
+            if holiday.holiday_date.to_date >= DateTime.now.to_date
+            holiday.destroy
           end
           end
         end
@@ -75,7 +90,7 @@ class DefaultWorkTime < ActiveRecord::Base
               'accepted'
             )).size > 0
             #------------urlop trwa caly dzien  
-            HolidaysPlan.create(user_id: _id, hours: TimeDifference.between(_end.to_time,_start.to_time).in_minutes, holiday_date: _start.to_date)
+            HolidaysPlan.create(user_id: _id, hours: TimeDifference.between(_end.to_time,_start.to_time).in_minutes, holiday_date: _start)
             #------------
           elsif (holiday=Holiday.where('user_id = :id and :start <= startdate and :end_h >= startdate and 
           :start <= enddate and :end_h >= enddate and status= :status',
@@ -88,7 +103,7 @@ class DefaultWorkTime < ActiveRecord::Base
           }
             )).size > 0
             #------------urlop w srodku dnia
-            HolidaysPlan.create(user_id: _id, hours: TimeDifference.between(holiday[0].enddate.to_time,holiday[0].startdate.to_time).in_minutes, holiday_date: _start.to_date)
+            HolidaysPlan.create(user_id: _id, hours: TimeDifference.between(holiday[0].enddate.to_time,holiday[0].startdate.to_time).in_minutes, holiday_date: _start)
             #------------
             HoursPlan.create(start_date: _start,end_date: holiday[0].startdate, user_id: _id)
             HoursPlan.create(start_date: holiday[0].enddate,end_date: _end, user_id: _id)       
@@ -99,9 +114,9 @@ class DefaultWorkTime < ActiveRecord::Base
             end_h: _end,
             status: 'accepted'
           }
-          )).size > 0
-           #------------urlop na koncu dnia
-            HolidaysPlan.create(user_id: _id, hours: TimeDifference.between(_end.to_time,holiday[0].startdate.to_time).in_minutes, holiday_date: _start.to_date)
+          )).size > 0 
+            #------------urlop na koncu dnia
+            HolidaysPlan.create(user_id: _id, hours:  TimeDifference.between(holiday[0].enddate.to_time,_start.to_time).in_minutes, holiday_date: _start)
             #------------
             _end=holiday[0].startdate
              HoursPlan.create(start_date: _start,end_date: _end, user_id: _id)
@@ -113,9 +128,10 @@ class DefaultWorkTime < ActiveRecord::Base
             status: 'accepted'
            }
             )).size > 0
-           #------------urlop na poczatku dnia
-            HolidaysPlan.create(user_id: _id, hours: TimeDifference.between(holiday[0].enddate.to_time,_start.to_time).in_minutes, holiday_date: _start.to_date)
+            #------------urlop na poczatku dnia
+            HolidaysPlan.create(user_id: _id, hours: TimeDifference.between(holiday[0].enddate.to_time, _start.to_time).in_minutes, holiday_date: _start)   
             #------------
+            
             _start=holiday[0].enddate
             HoursPlan.create(start_date: _start,end_date: _end, user_id: _id)
          else
