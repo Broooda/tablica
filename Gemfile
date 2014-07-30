@@ -15,7 +15,7 @@ gem 'rspec-rails', '~> 3.0.0'
 end
 gem "validates_date_time"
 gem 'rails_12factor', group: :production
-
+gem 'time_difference'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
