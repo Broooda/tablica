@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20140730082151) do
 
   create_table "holidays_plans", force: true do |t|
     t.integer  "user_id"
-    t.datetime "hours"
+    t.float    "hours"
     t.datetime "holiday_date"
   end
 
