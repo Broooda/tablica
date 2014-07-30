@@ -40,6 +40,12 @@ ActiveRecord::Schema.define(version: 20140728114622) do
     t.integer  "user_id"
   end
 
+  create_table "holidays_plans", force: true do |t|
+    t.integer  "user_id"
+    t.float    "hours"
+    t.datetime "holiday_date"
+  end
+
   create_table "hours_plans", force: true do |t|
     t.datetime "start_date"
     t.datetime "end_date"
