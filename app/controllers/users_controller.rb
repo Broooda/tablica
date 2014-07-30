@@ -93,23 +93,7 @@ class UsersController < ApplicationController
   def earliest_hoursplan
     now=DateTime.now
     @hours_plan = HoursPlan.where('user_id = :user_id and start_date > :now',{user_id: params[:id], now: now}).order('start_date').first
-    #pobrac wszystkie rozpoczecia przeze mnie i usera
-    #iterowac po nich i spr w kazdej czy jestesmy oboje w pracy
-    #dopoki nie znajde wspolnego
-    #or zamiast and
-
-    #@hours_plan.each do |h|
-# <<<<<<< HEAD
-#     @commonhours = HoursPlan.where('(user_id = :user_id or user_id = :user_id2) and start_date > :now',{user_id: params[:id], user_id2: current_user.id, now: now}).order('start_date')
-#       @commonhours.each do |c|
-#         HoursPlan.where('start_date == now')
-# #dla kazdego co znajdzie musi oytac. spr czy 1 i 2 uzzytk sa
-#          if @userhours.start_date == @myhours.start_date
-#         #   #success
-#         if @commonhours.nil?
-#           puts "Brak wspolnego terminu pracy"
-#         end
-# =======
+    
     @first_common_hour = 'nope'
     commonhours = HoursPlan.where('(user_id = :user_id or user_id = :user_id2) and start_date > :now',{user_id: params[:id], user_id2: current_user.id, now: now}).order('start_date')
     commonhours.each do |c|
@@ -128,9 +112,6 @@ class UsersController < ApplicationController
     else
       @answer = 'no'
     end
-#>>>>>>> a34b640ad094a94afe9c4e0b92e953669833214a
-      #end
-    #end
   end
 
   private
