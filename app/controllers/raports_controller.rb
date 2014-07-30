@@ -48,4 +48,15 @@ class RaportsController < ApplicationController
 		  
 		  redirect_to root_url
 		end
+
+    def show
+      @work = work_hours
+      @holiday = holiday_hours
+
+      respond_to do |format|
+        format.html
+        format.pdf do render :pdf => "generated.pdf", :layout => 'pdfgen.html'
+        end
+      end
+    end
 end
