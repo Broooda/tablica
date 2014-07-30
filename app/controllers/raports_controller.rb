@@ -12,7 +12,7 @@ class RaportsController < ApplicationController
 		  	'user_id = ? and holiday_date > ? and holiday_date < ?',
 		  	current_user.id,(params[:start].to_time),(params[:end].to_time+1.day)
 		  )
-		  
+
 		  work_minutes=0
 		  holiday_minutes=0
 
@@ -35,4 +35,17 @@ class RaportsController < ApplicationController
 
 		  redirect_to root_url
 	end
+
+
+
+
+    def pdf_view
+      #@work = work_hours
+      #@holiday = holiday_hours
+
+      respond_to do |format|
+        format.html
+        format.pdf do render :pdf => "generated.pdf", :layout => 'pdfgen.html'
+       end
+     end
 end

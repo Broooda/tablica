@@ -37,6 +37,8 @@ Rails.application.routes.draw do
   post 'hours_plans/update/:id' => 'hours_plans#update', as: "update_hours_plans"
 
   resources :raports, only: [:index]
+  get 'pdf_view' => 'raports#pdf_view', as: :pdf_view
+
   post 'take_day' => 'raports#take_day', as: :take_day
 
 
