@@ -1,18 +1,17 @@
 class RaportsController < ApplicationController
-  def index
-  end
+  
+	def index
+	end
 
-def take_day
-  take_day = HoursPlan.where(
-  'user_id = ? and start_date > ? and start_date < ?',
-  currentuser_id,zmienna_ktora_ma_poczatek_daty,  zmienna_ktora_ma_koniec_daty
-  )
-end
-
-  def count_day_of_work
-    TimeDifference.between(start_time, end_time).in_general
-  end
-
- 
+	def take_day
+		  work_days = HoursPlan.where(
+		  'user_id = ? and start_date > ? and start_date < ?',
+		  current_user.id,params[:start],params[:end]
+		  )
+		  holiday_day = HolidaysPlan.where(
+		  'user_id = ? and holiday_date > ? and holiday_date < ?',
+		  current_user.id,params[:start],params[:end]
+		  )
+	end
 
 end
