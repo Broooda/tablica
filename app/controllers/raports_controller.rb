@@ -3,7 +3,8 @@ class RaportsController < ApplicationController
 	def index
 	end
 
-	def take_day
+	def pdf_view
+
 		  work_days = HoursPlan.where(
 		 	  'user_id = ? and start_date > ? and start_date < ?',
 		 	  current_user.id,params[:start],(params[:end].to_time+1.day)
@@ -32,20 +33,20 @@ class RaportsController < ApplicationController
 
 		  work_hours=work_hours.to_s+" hours and "+work_minutes.to_s+" minutes"
 		  holiday_hours=holiday_hours.to_s+" hours and "+holiday_minutes.to_s+" minutes"
+			
+ 			@work = work_hours
+      @holiday = holiday_hours
 
-		  redirect_to root_url
+      respond_to do |format|
+        #format.html
+        format.pdf do render :pdf => "generated.pdf", :layout => 'raport.html'
+        end
+      end
+
+      #redirect_to pdf_view_test_path
+		  
+		end
 	end
 
 
 
-
-    def pdf_view
-      #@work = work_hours
-      #@holiday = holiday_hours
-
-      respond_to do |format|
-        format.html
-        format.pdf do render :pdf => "generated.pdf", :layout => 'pdfgen.html'
-       end
-     end
-end
