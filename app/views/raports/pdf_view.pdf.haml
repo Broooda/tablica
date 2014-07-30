@@ -1,6 +1,16 @@
 %h1
-  =current_user.name
-  =current_user.surname
+%table.table
+  %tr
+    %td.text-center
+      Name
+    %td.text-center
+      Surname
+  %tr
+    %td.text-center
+      =current_user.name
+    %td.text-center
+      =current_user.surname
+
 %h2
   work:
   =@work
