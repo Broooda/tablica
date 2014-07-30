@@ -19,9 +19,9 @@
           %b=w[1]
         %td
           =label_tag "from"
-          =text_field_tag days[day_counter]+start_end[0], @d.week[day_counter][0], size: '4'
+          =time_field_tag days[day_counter]+start_end[0], @d.week[day_counter][0], size: '4'
           =label_tag "to"
-          =text_field_tag days[day_counter]+start_end[1],  @d.week[day_counter][1], size: '4'
+          =time_field_tag days[day_counter]+start_end[1],  @d.week[day_counter][1], size: '4'
 
       -day_counter+=1   
   .form-group
