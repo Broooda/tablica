@@ -68,12 +68,22 @@ class DefaultWorkTime < ActiveRecord::Base
           #jesli nie jest w przeszlosci to apdejt
        unless _start.to_date < DateTime.now.to_date
         #Sprawdzenie urlopow
-          if Holiday.where('user_id = ? and startdate < ? and enddate > ? and status= ?',
+          if (holiday=Holiday.where('user_id = ? and startdate < ? and enddate > ? and status= ?',
               user_id = _id,
               _start,
               _end,
               'accepted'
-            ).size > 0
+            )).size > 0
+            #------------urlop trwa caly dzien  
+            # puts "----------------------------"
+            # puts "----------------------------"
+            # puts _end
+            # puts _start
+            # puts (_end-_start)/3600
+            # puts "----------------------------"
+            # puts "----------------------------"
+            # HolidaysPlan.create(user_id: _id, hours: _end-_start, holiday_date: _start.to_date)
+            #------------
           elsif (holiday=Holiday.where('user_id = :id and :start <= startdate and :end_h >= startdate and 
           :start <= enddate and :end_h >= enddate and status= :status',
           {
@@ -84,6 +94,16 @@ class DefaultWorkTime < ActiveRecord::Base
 
           }
             )).size > 0
+            #------------urlop w srodku dnia
+            # puts "----------------------------"
+            # puts "----------------------------"
+            # puts holiday[0].enddate
+            # puts holiday[0].startdate
+            # puts (holiday[0].enddate-holiday[0].startdate)/3600
+            # puts "----------------------------"
+            # puts "----------------------------"
+            # HolidaysPlan.create(user_id: _id, hours: holiday[0].enddate-holiday[0].startdate, holiday_date: _start.to_date)
+            #------------
             HoursPlan.create(start_date: _start,end_date: holiday[0].startdate, user_id: _id)
             HoursPlan.create(start_date: holiday[0].enddate,end_date: _end, user_id: _id)       
           elsif (holiday=Holiday.where('user_id = :id and :start <= startdate and :end_h >= startdate and status= :status',
@@ -94,6 +114,16 @@ class DefaultWorkTime < ActiveRecord::Base
             status: 'accepted'
           }
           )).size > 0
+           #------------urlop na koncu dnia
+            # puts "----------------------------"
+            # puts "----------------------------"
+            # puts _end
+            # puts holiday[0].startdate
+            # puts (_end-holiday[0].startdate)/3600
+            # puts "----------------------------"
+            # puts "----------------------------"
+            # HolidaysPlan.create(user_id: _id, hours: _end-holiday[0].startdate, holiday_date: _start.to_date)
+            #------------
             _end=holiday[0].startdate
              HoursPlan.create(start_date: _start,end_date: _end, user_id: _id)
           elsif (holiday=Holiday.where('user_id = :id and :start <= enddate and :end_h >= enddate and status= :status',
@@ -104,6 +134,16 @@ class DefaultWorkTime < ActiveRecord::Base
             status: 'accepted'
            }
             )).size > 0
+           #------------urlop na poczatku dnia
+           # puts "----------------------------"
+           #  puts "----------------------------"
+           #  puts  holiday[0].enddate
+           #  puts _start
+           #  puts (holiday[0].enddate-_start)/3600
+           #  puts "----------------------------"
+           #  puts "----------------------------"
+           #  HolidaysPlan.create(user_id: _id, hours: holiday[0].enddate-_start, holiday_date: _start.to_date)
+            #------------
             _start=holiday[0].enddate
             HoursPlan.create(start_date: _start,end_date: _end, user_id: _id)
          else
