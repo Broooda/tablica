@@ -1,0 +1,7 @@
+%html{lang: "en", "xml:lang" => "en", xmlns: "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    = wicked_pdf_stylesheet_link_tag "pdf"
+    = wicked_pdf_javascript_include_tag "number_pages"
+  %body{onload: "number_pages"}
+    = yield

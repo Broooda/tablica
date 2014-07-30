@@ -36,6 +36,10 @@ Rails.application.routes.draw do
   get 'ajax/hours_plans/edit/:id' => 'hours_plans#edit', as: "edit_hours_plans_ajax"
   post 'hours_plans/update/:id' => 'hours_plans#update', as: "update_hours_plans"
 
+  resources :raports, only: [:index]
+  get 'pdf_view' => 'raports#pdf_view', as: :pdf_view
+
+  post 'take_day' => 'raports#take_day', as: :take_day
 
 
   resources :hours_plans
