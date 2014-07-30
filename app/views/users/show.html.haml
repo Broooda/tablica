@@ -9,6 +9,10 @@
     %span.label.label-default=tag
 
 %p
+  At work:
+  =@answer
+
+%p
   The user will be at work:
   -if @hours_plan
     %b=@hours_plan.start_date.strftime('%Y-%-m-%-d %k:%M')
