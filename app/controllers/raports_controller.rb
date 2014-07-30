@@ -3,7 +3,7 @@ class RaportsController < ApplicationController
 	def index
 	end
 
-	def take_day
+	def pdf_view
 		puts "------------------- PARAMETRY ------------"
 		puts params[:start]
 		puts params[:end]
@@ -46,20 +46,26 @@ class RaportsController < ApplicationController
 		  puts holiday_hours
 		  puts "-------------------------"
 		  
+
       @work = work_hours
       @holiday = holiday_hours
 
-		  redirect_to root_url
-		end
-
-    def pdf_view
-      #@work = work_hours
-      #@holiday = holiday_hours
-
       respond_to do |format|
-        format.html
-        format.pdf do render :pdf => "generated.pdf", :layout => 'pdfgen.html'
+        #format.html
+        format.pdf do render :pdf => "generated.pdf", :layout => 'raport.html'
         end
       end
-    end
+
+      #redirect_to pdf_view_test_path
+		  
+		end
+
+     # def pdf_view_test
+
+     #   respond_to do |format|
+     #     format.html
+     #     format.pdf do render :pdf => "generated.pdf", :layout => 'raport.html'
+     #     end
+     #   end
+     # end
 end
