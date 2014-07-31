@@ -39,7 +39,7 @@ Rails.application.routes.draw do
   resources :raports, only: [:index, :pdf_view, :new, :create]#:history]
 
   get 'pdf_view' => 'raports#pdf_view', as: :pdf_view
-  #get 'history' => 'raports#history', as: :history
+ 
   #get 'pdf_view_test' => 'raports#pdf_view_test', as: :pdf_view_test
 
   #get 'take_day' => 'raports#take_day', as: :take_day

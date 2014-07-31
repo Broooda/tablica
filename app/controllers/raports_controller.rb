@@ -4,9 +4,6 @@ class RaportsController < ApplicationController
 		@raports=Raport.all
 	end
 
-	# def history
-	# 	@raports=Raport.all
-	# end
 
 	def new
 		@raport=Raport.new
