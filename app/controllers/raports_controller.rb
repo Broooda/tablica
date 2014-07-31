@@ -19,8 +19,6 @@ class RaportsController < ApplicationController
 	# end
 
 	def pdf_view
-
-			this_raport = Raport.generate_raport(params[:start], params[:end], current_user.id)
       #@raports = Raport.where(user_id = current_user.id)
 		  #start, end, ID usera ktorego chcemy wygenerowac, obecny user
 			this_raport = Raport.generate_raport(params[:start], params[:end], current_user.id, current_user)
@@ -30,15 +28,16 @@ class RaportsController < ApplicationController
       @raport_start = params[:start]
       @raport_end = params[:end]
 
-
-  #   file=WickedPdf.new.pdf_from_string(
-  # 		render_to_string('pdf_view.pdf.haml', :layout => 'raport.html'),
- 	# 		:footer => {
-  #   		:content => render_to_string(:layout => 'raport.html')
-  # 		}
-		# )
-
-  #     Mailer.raport(current_user, file).deliver
+   # Wysylanie raportu e-mailem (po wygenerowaniu go):
+   #
+   #
+   #   file=WickedPdf.new.pdf_from_string(
+   # 		render_to_string('pdf_view.pdf.haml', :layout => 'raport.html'),
+ 	 # 		:footer => {
+   #   		:content => render_to_string(:layout => 'raport.html')
+   # 		}
+	 # )
+   #    Mailer.raport(current_user, file).deliver
 
       respond_to do |format|
         #format.html

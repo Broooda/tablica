@@ -5,7 +5,7 @@ class Mailer < ActionMailer::Base
    def raport(recipient, raport)
     @recipient = recipient
 
-    attachments['raport.pdf'] = File.read(raport)
+    attachments['raport.pdf'] = raport
 
     mail(to: recipient.email,
          subject: "Raport binarplaner")
