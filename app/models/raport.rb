@@ -6,12 +6,12 @@ class Raport < ActiveRecord::Base
 
 	private
 		def comparing_dates
-    	errors.add(:date_begin, "must be before end date") unless 
+          	errors.add(:date_begin, "must be before end date") unless 
  		self.date_begin < self.date_end
     end
 
     #Raport.generate_raport(start_date, end_date, user_id)
-    def self.generate_raport(start_date=Time.now-4.week, end_date=Time.now, user_id=1)
+    def self.generate_raport(start_date=Time.now-4.week, end_date=Time.now, user_id=1, current_user)
 
       work_days = HoursPlan.where(
         'user_id = ? and start_date > ? and start_date < ?',
