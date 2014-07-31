@@ -1,15 +1,6 @@
-%h1 Raport start and end date
+%h2 History of raports
 
+%h4 history
 
-=form_tag pdf_view_path(format: :pdf), method: :get do
-  %div.form-group
-    = label_tag "Start date: ", nil,  :style => "width: 100%;"
-    = text_field_tag "start", nil, class: "form-control date-picker fifty-fifty"
-
-    %div.form-group
-    = label_tag "End date: ", nil,  :style => "width: 100%;"
-    = text_field_tag "end", nil, class: "form-control date-picker fifty-fifty"
-
-
-    .form-group
-    =submit_tag "Generate Raport", :class => "form-control"
+  / -@raports.each do |raport|
+  
