@@ -18,10 +18,7 @@ class Raport < ActiveRecord::Base
       self.date_begin < self.date_end
     end
   end
-		# def comparing_dates
-  #   	errors.add(:date_begin, "must be before end date") unless 
- 	# 	self.date_begin < self.date_end
-  #   end
+
 
 		def comparing_dates
           	errors.add(:date_begin, "must be before end date") unless 
@@ -65,4 +62,5 @@ class Raport < ActiveRecord::Base
       Raport.create(user_id: current_user.id, holiday_hours: holiday_hours, work_hours: work_hours, date_begin: start_date, date_end: end_date)
       
     end
+end
 end
