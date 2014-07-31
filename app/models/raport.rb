@@ -1,22 +1,33 @@
 class Raport < ActiveRecord::Base
-	validate :date_begin, :user_id, :date_end, :holiday_hours, :work_hours, presence: true
-	validate :comparing_dates
+	validate :date_begin,presence: true
+  validate :user_id,presence: true
+  validate :date_end, presence: true
+  validate :holiday_hours, presence: true
+  validate :work_hours, presence: true
 
+
+  before_action :comparing_dates
 
 
 	private
-		def comparing_dates
-    	errors.add(:date_begin, "must be before end date") unless 
- 		self.date_begin < self.date_end
+  def comparing_dates
+   if self.date_begin.empty? == false or self.date_end.empty? == false
+      else
+      errors.add(:date_begin, "must be earlier before end date") unless 
+      self.date_begin < self.date_end
     end
-    
-    #Raport.generate_raport(start_date, end_date, user_id)
-    def self.generate_raport(start_date=Time.now-4.week, end_date=Time.now, user_id=1)
+  end
+		# def comparing_dates
+  #   	errors.add(:date_begin, "must be before end date") unless 
+ 	# 	self.date_begin < self.date_end
+  #   end
 
-      work_days = HoursPlan.where(
-        'user_id = ? and start_date > ? and start_date < ?',
-        user_id,start_date.to_time,(end_date.to_time+1.day)
-      )
+    # Raport.generate_raport(start_date, end_date, user_id)
+    def self.generate_raport(start_date=Time.now-4.week, end_date=Time.now, user_id=1)
+        work_days = HoursPlan.where(
+          'user_id = ? and start_date > ? and start_date < ?',
+          user_id,start_date.to_time,(end_date.to_time + 1.day)       
+        )
       holiday_days = HolidaysPlan.where(
         'user_id = ? and holiday_date > ? and holiday_date < ?',
         user_id,start_date.to_time,end_date.to_time+1.day
