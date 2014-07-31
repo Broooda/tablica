@@ -1,6 +1,6 @@
 class HoursPlan < ActiveRecord::Base
 	belongs_to :user
-	validate :start_date ,:end_date ,presence: true
+	validates :start_date ,:end_date ,presence: true
 	validate :start_date_must_be_before_end_date
 	validate :date_must_be_the_same_end_date
 

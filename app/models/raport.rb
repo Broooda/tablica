@@ -1,13 +1,15 @@
 class Raport < ActiveRecord::Base
-	validate :date_begin, :user_id, :date_end, :holiday_hours, :work_hours, presence: true
-	validate :comparing_dates
+	validates :user_id, :date_end, :holiday_hours, :work_hours, presence: true
+	validate :Comparing_dates
 
 
 
 	private
-		def comparing_dates
+		def Comparing_dates
+      unless self.date_begin.blank? == true or self.date_end.blank? == true
           	errors.add(:date_begin, "must be before end date") unless 
  		self.date_begin < self.date_end
+  end
     end
 
     #Raport.generate_raport(start_date, end_date, user_id)
