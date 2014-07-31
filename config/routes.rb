@@ -36,9 +36,10 @@ Rails.application.routes.draw do
   get 'ajax/hours_plans/edit/:id' => 'hours_plans#edit', as: "edit_hours_plans_ajax"
   post 'hours_plans/update/:id' => 'hours_plans#update', as: "update_hours_plans"
 
-  resources :raports, only: [:index, :pdf_view]
+  resources :raports, only: [:index, :pdf_view, :new, :create]#:history]
 
   get 'pdf_view' => 'raports#pdf_view', as: :pdf_view
+  #get 'history' => 'raports#history', as: :history
   #get 'pdf_view_test' => 'raports#pdf_view_test', as: :pdf_view_test
 
   #get 'take_day' => 'raports#take_day', as: :take_day
@@ -49,7 +50,7 @@ Rails.application.routes.draw do
 
   get 'layouts/pdfgen' =>'users#index', as: "generate_pdf"
 
-  resources :raports
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

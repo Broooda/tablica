@@ -1,6 +1,24 @@
 class RaportsController < ApplicationController
   
 	def index
+		@raports=Raport.all
+	end
+
+	# def history
+	# 	@raports=Raport.all
+	# end
+
+	def new
+		@raport=Raport.new
+	end
+
+	def create
+		@raport = Raport.new(raport_params)
+		if @raport.save
+			redirect_to raports_path, notice: "Utworzono"
+		else
+			render new
+		end
 	end
 
 	def pdf_view
