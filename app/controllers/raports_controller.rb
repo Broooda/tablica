@@ -23,6 +23,8 @@ class RaportsController < ApplicationController
 
  			@work = this_raport.work_hours
       @holiday = this_raport.holiday_hours
+      @raport_start = params[:start]
+      @raport_end = params[:end]
 
       respond_to do |format|
         #format.html
