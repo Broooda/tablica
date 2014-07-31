@@ -10,6 +10,7 @@ class Raport < ActiveRecord::Base
 
 
 	private
+
   def comparing_dates
    if self.date_begin.empty? == false or self.date_end.empty? == false
       else
@@ -21,6 +22,14 @@ class Raport < ActiveRecord::Base
   #   	errors.add(:date_begin, "must be before end date") unless 
  	# 	self.date_begin < self.date_end
   #   end
+
+		def comparing_dates
+          	errors.add(:date_begin, "must be before end date") unless 
+ 		self.date_begin < self.date_end
+    end
+
+    #Raport.generate_raport(start_date, end_date, user_id)
+    def self.generate_raport(start_date=Time.now-4.week, end_date=Time.now, user_id=1, current_user)
 
     # Raport.generate_raport(start_date, end_date, user_id)
     def self.generate_raport(start_date=Time.now-4.week, end_date=Time.now, user_id=1)
@@ -53,7 +62,7 @@ class Raport < ActiveRecord::Base
       work_hours=work_hours.to_s+" hours and "+work_minutes.to_s+" minutes"
       holiday_hours=holiday_hours.to_s+" hours and "+holiday_minutes.to_s+" minutes"
       
-      Raport.create(user_id: user_id, holiday_hours: holiday_hours, work_hours: work_hours, date_begin: start_date, date_end: end_date)
+      Raport.create(user_id: current_user.id, holiday_hours: holiday_hours, work_hours: work_hours, date_begin: start_date, date_end: end_date)
       
     end
 end

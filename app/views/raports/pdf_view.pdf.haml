@@ -1,19 +1,40 @@
-%h1
-%table.table
-  %tr
-    %td.text-center
-      Name
-    %td.text-center
-      Surname
-  %tr
-    %td.text-center
-      =current_user.name
-    %td.text-center
-      =current_user.surname
+:css
+  div{background-color:E84916; width:800px}
+  ml5px{margin-left:5px}
 
-%h2
-  work:
-  =@work
-%h2
-  holiday:
-  =@holiday
+
+-@raports.each do |raport|
+  =raport.user_id
+
+
+%div
+  %ml5px
+    %img{src:"https://binarapps.com/img/logo1.png"}
+
+%table{style: "width:800px", border: "1"}
+  %tr{style: "color:#FF3A25"}
+    %th
+      Name
+    %th
+      Surname
+    %th
+      From
+    %th
+      To
+    %th
+      Worked
+    %th
+      Holiday
+  %tr
+    %td
+      =current_user.name
+    %td
+      =current_user.surname
+    %td
+      =@raport_start    
+    %td
+      =@raport_end
+    %td
+      =@work
+    %td
+      =@holiday
