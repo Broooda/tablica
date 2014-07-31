@@ -19,8 +19,6 @@ class RaportsController < ApplicationController
 	# end
 
 	def pdf_view
-
-			this_raport = Raport.generate_raport(params[:start], params[:end], current_user.id)
       #@raports = Raport.where(user_id = current_user.id)
 		  #start, end, ID usera ktorego chcemy wygenerowac, obecny user
 			this_raport = Raport.generate_raport(params[:start], params[:end], current_user.id, current_user)
