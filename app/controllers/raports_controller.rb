@@ -1,6 +1,21 @@
 class RaportsController < ApplicationController
   
 	def index
+		@raports=Raport.all
+	end
+
+
+	def new
+		@raport=Raport.new
+	end
+
+	def create
+		@raport = Raport.new(raport_params)
+		if @raport.save
+			redirect_to raports_path, notice: "Utworzono"
+		else
+			render new
+		end
 	end
 
 	def pdf_view
@@ -8,6 +23,8 @@ class RaportsController < ApplicationController
 
  			@work = this_raport.work_hours
       @holiday = this_raport.holiday_hours
+      @raport_start = params[:start]
+      @raport_end = params[:end]
 
       respond_to do |format|
         #format.html
