@@ -1,5 +1,3 @@
-
-
 %h1 Raport start and end date
  
  
@@ -40,6 +38,7 @@
  
   =form_tag pdf_admin_view_path(format: :pdf), method: :get do
  
+
     %div.form-group
  
       = label_tag "Start date: ", nil,  :style => "width: 100%;"
@@ -50,6 +49,7 @@
  
     %div.form-group
  
+
       =label_tag "End date: ", nil,  :style => "width: 100%;"
  
       = text_field_tag "end", nil, class: "form-control date-picker fifty-fifty"
