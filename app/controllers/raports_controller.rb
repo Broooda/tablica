@@ -5,9 +5,9 @@ class RaportsController < ApplicationController
 	end
 
 
-	# def new
-	# 	@raport=Raport.new
-	# end
+	 def new
+	 	@raport=Raport.new
+	 end
 
 	# def create
 	# 	@raport = Raport.new(raport_params)
@@ -22,11 +22,12 @@ class RaportsController < ApplicationController
       #@raports = Raport.where(user_id = current_user.id)
 		  #start, end, ID usera ktorego chcemy wygenerowac, obecny user
 			this_raport = Raport.generate_raport(params[:start], params[:end], current_user.id, current_user)
-
- 			@work = this_raport.work_hours
-      @holiday = this_raport.holiday_hours
-      @raport_start = params[:start]
-      @raport_end = params[:end]
+      if this_raport.valid?
+        this_raport.save
+   			@work = this_raport.work_hours
+        @holiday = this_raport.holiday_hours
+        @raport_start = params[:start]
+        @raport_end = params[:end]
 
    # Wysylanie raportu e-mailem (po wygenerowaniu go):
    #
@@ -44,14 +45,43 @@ class RaportsController < ApplicationController
         format.pdf do render :pdf => "generated.pdf", :layout => 'raport.html'
         end
       end
+      else
 
-      #redirect_to pdf_view_test_path
-		  
+      redirect_to new_raport_path, alert: "Wrong date"
+		  end
 		end
 
-		def generate_email
-				Mailer.raport(current_user.email, params[:raport])
-		end
+    def pdf_admin_view
+      this_raport = Raport.generate_admin_raport(params[:start], params[:end], current_user.id, current_user)
+      if this_raport.valid?
+        this_raport.save
+        @work = this_raport.work_hours
+        @holiday = this_raport.holiday_hours
+        @raport_start = params[:start]
+        @raport_end = params[:end]
+
+   # Wysylanie raportu e-mailem (po wygenerowaniu go):
+   #
+   #
+   #   file=WickedPdf.new.pdf_from_string(
+   #    render_to_string('pdf_view.pdf.haml', :layout => 'raport.html'),
+   #    :footer => {
+   #      :content => render_to_string(:layout => 'raport.html')
+   #    }
+   # )
+   #    Mailer.raport(current_user, file).deliver
+
+      respond_to do |format|
+        #format.html
+        format.pdf do render :pdf => "generated.pdf", :layout => 'raport.html'
+        end
+      end
+      else
+
+      redirect_to new_raport_path, alert: "Wrong date"
+      end
+
+    end
 	end
 
 

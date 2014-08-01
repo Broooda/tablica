@@ -1,6 +1,6 @@
 %h1 Add holiday request
-/ - @holiday.errors.full_messages.each do |err|
-/   %li= err
+  - @holiday.errors.full_messages.each do |err|
+  %li= err
 = form_for(@holiday) do |f|
   %div.form-group
     = label_tag "Start date and time", nil,  :style => "width: 100%;"
