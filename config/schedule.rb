@@ -15,6 +15,10 @@ every :saturday, :at => '3am' do
   runner "DefaultWorkTime.generate_few_weeks"
 end
 
+# every '0 2 31 * *' do
+#   runner "Mailer.send_friend_sheet"
+# end
+
 # Example:
 #
 # set :output, "/path/to/my/cron_log.log"
