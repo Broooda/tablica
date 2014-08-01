@@ -22,6 +22,7 @@ class RaportsController < ApplicationController
       #@raports = Raport.where(user_id = current_user.id)
 		  #start, end, ID usera ktorego chcemy wygenerowac, obecny user
 			this_raport = Raport.generate_raport(params[:start], params[:end], current_user.id, current_user)
+
       if this_raport.valid?
         this_raport.save
    			@work = this_raport.work_hours
@@ -34,11 +35,9 @@ class RaportsController < ApplicationController
         end
       end
       else
-
       redirect_to new_raport_path, alert: "Wrong date"
 		  end
 		end
-
     def pdf_admin_view
       flag=0
       this_raport = Raport.generate_admin_raport(params[:start], params[:end], current_user)
@@ -57,6 +56,7 @@ class RaportsController < ApplicationController
             counter+=1
           else
             flag+=1
+            redirect_to new_raport_path, alert: "Wrong date"
           end
         end
         if flag==0
