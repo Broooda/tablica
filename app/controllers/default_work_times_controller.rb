@@ -8,11 +8,11 @@ before_action :make_sure_its_mine, only: [:destroy, :show]
 
   def update_work_time
     #If user has DefaultWorkTimeRequest object
-    if User.find(current_user.id).default_work_time_request
+    if current_user.default_work_time_request
       #If this object's status is 'pending'
-      if User.find(current_user.id).default_work_time_request.status=="pending"
+      if current_user.default_work_time_request.status=="pending"
         #Error, redirect 
-        redirect_to default_work_time_path(User.find(current_user.id).default_work_time.id), alert: "Request already exists"
+        redirect_to default_work_time_path(current_user.default_work_time.id), alert: "Request already exists"
       else
         create_new_request
       end
@@ -24,17 +24,20 @@ before_action :make_sure_its_mine, only: [:destroy, :show]
 
   def accept
     @request = DefaultWorkTimeRequest.find(params[:id])
-    #DefaultWorkTimeRequest.find(params[:id]).destroy
     @request.status = "accepted"
     @request.user.default_work_time.week=@request.week
     @request.save
     @request.user.default_work_time.save
 
-    last=HoursPlan.order( 'start_date ASC' )
-    last=last.last
+    last=HoursPlan.order( 'start_date ASC' ).last
     current_week=Time.now.to_date.cweek
+    if last
     last_week=last.start_date.to_date.cweek
     difference=last_week-current_week
+    else
+      difference=5
+    end
+        
 
     (0..difference).each do |counter|
       DefaultWorkTime.generate_hours_plans(counter, @request.user_id)
@@ -54,7 +57,7 @@ before_action :make_sure_its_mine, only: [:destroy, :show]
   end
 
   def generate_hours_plans_admin
-    if(current_user.admin)
+    if current_user.admin
       DefaultWorkTime.generate_hours_plans
       flash[:notice] = "Hours plans generated"
     end
@@ -62,7 +65,7 @@ before_action :make_sure_its_mine, only: [:destroy, :show]
   end
 
   def generate_few_weeks
-  if(current_user.admin)
+  if current_user.admin
       DefaultWorkTime.generate_few_weeks
       flash[:notice] = "Hours plans generated"
     end
@@ -79,10 +82,10 @@ before_action :make_sure_its_mine, only: [:destroy, :show]
     #If valid save object and redirect
     if new_default.valid?
       new_default.save
-      redirect_to default_work_time_path(User.find(current_user.id).default_work_time.id), notice: "Request added"
+      redirect_to default_work_time_path(current_user.default_work_time.id), notice: "Request added"
     #If not valid redirect with notice
     else
-      redirect_to default_work_time_path(User.find(current_user.id).default_work_time.id), alert: new_default.errors.full_messages.first
+      redirect_to default_work_time_path(current_user.default_work_time.id), alert: new_default.errors.full_messages.first
     end
   end
 

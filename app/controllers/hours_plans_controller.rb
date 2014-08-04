@@ -10,9 +10,6 @@ class HoursPlansController < ApplicationController
   def update
     @hours_plan = HoursPlan.find(params[:id])
 
-    #@hours_plan.start_date = @hours_plan.start_date.strftime("%Y-%-m-%-d ") + params[:start_hour]
-    #@hours_plan.end_date = @hours_plan.end_date.strftime("%Y-%-m-%-d ") + params[:end_hour]
-
     @hours_plan.over_hours = params[:over_hours]
 
     if @hours_plan.save
@@ -24,6 +21,7 @@ class HoursPlansController < ApplicationController
   end
 
   private
+  
   def is_mine
     @hours_plan = HoursPlan.find(params[:id])
     unless @hours_plan.user == current_user
