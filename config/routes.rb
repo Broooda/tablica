@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'users/makeadmin/:id' => 'users#make_admin', as: "make_admin"
   get 'users/unmakeadmin/:id' => 'users#unmake_admin', as: "unmake_admin"
 
+  
   get 'week/time' => 'week#showtime'
   get 'week/time/:year/:week' => 'week#showtime', as: "week_time_date"
   get 'week/time/:fulldate' => 'week#showtime', as: "week_time_fulldate"
@@ -15,6 +16,7 @@ Rails.application.routes.draw do
   get 'week/people/:fulldate' => 'week#showpeople', as: "week_people_fulldate"
   get 'week/people/:year/:week' => 'week#showpeople', as: "week_people_date"
 
+  
   get 'default_work_times/generate' => 'default_work_times#generate_few_weeks', as: "generate_hours_plans"
   get 'raports/generate_email' => 'raports#generate_email', as: "generate_email"
   resources :default_work_times, only: [:show]

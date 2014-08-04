@@ -13,6 +13,8 @@ def destroy
     end
   end
 
+  private
+
   def make_sure_its_mine
       @user = DefaultWorkTimeRequest.find(params[:id]).user
       unless current_user.id == @user.id or current_user.admin == true

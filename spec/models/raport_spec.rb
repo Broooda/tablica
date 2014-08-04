@@ -15,5 +15,5 @@ RSpec.describe Raport, :type => :model do
 	# expect(Raport.new(date_end: DateTime.now + 7.days)).not_to be_valid
 	expect(Raport.new(user_id: :nill)).not_to be_valid
 	expect(Raport.new(holiday_hours: :nill)).not_to be_valid
-	end
+end
 end

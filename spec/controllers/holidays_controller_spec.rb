@@ -18,13 +18,23 @@ RSpec.describe HolidaysController, type: :controller do
    expect(response).to render_template("index")
    end
    # New test
-  describe "GET #new" do
+    describe "GET #new" do
     it "assigns a new Project to @holiday" do
     get :new
     assigns(:holiday).should be_a_new(Holiday)
     end
   end
-  
+      ###
+      #Wrócić do tego 
+      ###
+      # it 'loads all holidays into @holiday' do
+        
+      #   # user1=Holiday.create(id: "2", startdate: DateTime.now, enddate: DateTime.now, description: "bo tak", status: "pending", reason: "ca", created_at: "2014-08-01 09:32:10", updated_at: "2014-08-01 09:32:10", user_id: "2")
+      #   # user2=Holiday.create(id: "3", startdate: DateTime.now, enddate: DateTime.now, description: "bo tak", status: "pending", reason: "ca", created_at: "2014-08-01 09:32:10", updated_at: "2014-08-01 09:32:10", user_id: "2")
+      #   get :index
+
+      #   expect(assigns(:holiday)).to match_array([user1, user2])
+      # end
 end
 
 
