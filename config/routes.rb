@@ -8,15 +8,14 @@ Rails.application.routes.draw do
   get 'users/makeadmin/:id' => 'users#make_admin', as: "make_admin"
   get 'users/unmakeadmin/:id' => 'users#unmake_admin', as: "unmake_admin"
 
-  scope '/week' do
-    get 'time' => 'week#showtime'
-    get 'time/:year/:week' => 'week#showtime', as: "week_time_date"
-    get 'time/:fulldate' => 'week#showtime', as: "week_time_fulldate"
-    get 'people' => 'week#showpeople'
-    get 'people/:fulldate' => 'week#showpeople', as: "week_people_fulldate"
-    get 'people/:year/:week' => 'week#showpeople', as: "week_people_date"
+  
+  get 'week/time' => 'week#showtime'
+  get 'week/time/:year/:week' => 'week#showtime', as: "week_time_date"
+  get 'week/time/:fulldate' => 'week#showtime', as: "week_time_fulldate"
+  get 'week/people' => 'week#showpeople'
+  get 'week/people/:fulldate' => 'week#showpeople', as: "week_people_fulldate"
+  get 'week/people/:year/:week' => 'week#showpeople', as: "week_people_date"
 
-  end
   
   get 'default_work_times/generate' => 'default_work_times#generate_few_weeks', as: "generate_hours_plans"
   get 'raports/generate_email' => 'raports#generate_email', as: "generate_email"
