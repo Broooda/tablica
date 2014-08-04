@@ -34,20 +34,11 @@ RSpec.describe UsersController, type: :controller do
    end
 
    # describe "PUT #update" do
-      
    #  end
-
 
    #  describe "DELETE #destroy" do
-
-   #  end
-
-
-   #  describe "GET #edit" do
-
    #  end
 
    #  describe "GET #show" do
-
    #  end
 end

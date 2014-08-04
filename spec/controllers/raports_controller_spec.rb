@@ -21,23 +21,4 @@ RSpec.describe RaportsController, :type => :controller do
       expect(assigns(:users)).to match_array([user1, user2,@user])
     end
  end
-
- # describe "PUT #update" do
-    
- #  end
-
-
- #  describe "DELETE #destroy" do
-
- #  end
-
-
- #  describe "GET #edit" do
-
- #  end
-
- #  describe "GET #show" do
-
- #  end
-
 end

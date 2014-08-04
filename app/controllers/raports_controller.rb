@@ -5,9 +5,9 @@ class RaportsController < ApplicationController
 	end
 
 
-	 def new
-	 	@raport=Raport.new
-	 end
+ def new
+ 	@raport=Raport.new
+ end
 
 	# def create
 	# 	@raport = Raport.new(raport_params)
@@ -19,8 +19,8 @@ class RaportsController < ApplicationController
 	# end
 
 	def pdf_view
-      #@raports = Raport.where(user_id = current_user.id)
-		  #start, end, ID usera ktorego chcemy wygenerowac, obecny user
+      # @raports = Raport.where(user_id = current_user.id)
+		  # start, end, ID usera ktorego chcemy wygenerowac, obecny user
 			this_raport = Raport.generate_raport(params[:start], params[:end], current_user.id, current_user)
 
       if this_raport.valid?
@@ -30,7 +30,7 @@ class RaportsController < ApplicationController
         @raport_start = params[:start]
         @raport_end = params[:end]
       respond_to do |format|
-        #format.html
+        # format.html
         format.pdf do render :pdf => "generated.pdf", :layout => 'raport.html'
         end
       end
@@ -60,7 +60,7 @@ class RaportsController < ApplicationController
           end
         end
         if flag==0
-    #Wysylanie raportu e-mailem (po wygenerowaniu go):
+    # Wysylanie raportu e-mailem (po wygenerowaniu go):
       file=WickedPdf.new.pdf_from_string(
        render_to_string('pdf_admin_view.pdf.haml', :layout => 'raport.html'),
        :footer => {
@@ -70,7 +70,7 @@ class RaportsController < ApplicationController
        Mailer.raport(current_user, file).deliver
 
       respond_to do |format|
-        #format.html
+        # format.html
         format.pdf do render :pdf => "generated.pdf", :layout => 'raport.html'
         end
       end
