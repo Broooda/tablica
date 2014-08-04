@@ -6,6 +6,7 @@ RSpec.describe InboxsController, type: :controller do
   before(:each) do
     @user=User.create(name: "Jan", surname: "Kowalski", email: "test@mail.pl", password: "razdwatrzycztery", accepted: true, admin: true)
     sign_in @user
+    DefaultWorkTime.create(week: [['9:00','16:00'],['9:00','16:00'],['9:00','16:00'],['9:00','16:00'],['9:00','16:00']], user_id: User.last.id)
    end
 
 
@@ -29,8 +30,8 @@ RSpec.describe InboxsController, type: :controller do
 
    describe "manual_generate_post" do
       it 'generate 2 weeks hours, redirect to root' do
-        post :manual_generate_post, week: ("10:30".to_time+2.week).to_s
-        #expect(HoursPlan.all.size).to be > 10
+        post :manual_generate_post, week: Time.now+2.week
+        expect(HoursPlan.all.size).to be > 10
         expect(response).to redirect_to(root_url)
       end
     end
