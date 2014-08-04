@@ -24,7 +24,9 @@ class Raport < ActiveRecord::Base
           user_id,start_date.to_time,end_date.to_time+1.day
         )
         hours=Raport.hours_counter(work_days,holiday_days)
-        Raport.new(user_id: current_user.id, holiday_hours: hours[1], work_hours: hours[2], date_begin: start_date, date_end: end_date, generator_id: user_id)
+
+        Raport.new(user_id: current_user.id, holiday_hours: hours[1], work_hours: hours[0], date_begin: start_date, date_end: end_date, generator_id: user_id)
+
       else
         Raport.new()
       end
