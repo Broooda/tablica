@@ -1,33 +1,132 @@
+
+
 %h1 Raport start and end date
-
-
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 =form_tag pdf_view_path(format: :pdf), method: :get do
+ 
+ 
+ 
   %div.form-group
-    = label_tag "Start date: ", nil,  :style => "width: 100%;"
-    = text_field_tag "start", nil, class: "form-control date-picker fifty-fifty"
-
-    %div.form-group
-    = label_tag "End date: ", nil,  :style => "width: 100%;"
-    = text_field_tag "end", nil, class: "form-control date-picker fifty-fifty"
-
-
-    .form-group
+ 
+ 
+ 
+    =label_tag "Start date: ", nil,  :style => "width: 100%;"
+ 
+ 
+ 
+    =text_field_tag "start", nil, class: "form-control date-picker fifty-fifty"
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  %div.form-group
+ 
+ 
+ 
+    =label_tag "End date: ", nil,  :style => "width: 100%;"
+ 
+ 
+ 
+    =text_field_tag "end", nil, class: "form-control date-picker fifty-fifty"
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  .form-group
+ 
+ 
+ 
     =submit_tag "Generate Raport", :class => "form-control", target: "_blank"
-
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 -if current_user.admin? == true
+ 
+ 
+ 
   %h1 Generate raport for all users
-  
-  =form_tag pdf_view_path(format: :pdf), method: :get do
-  %div.form-group
-    = label_tag "Start date: ", nil,  :style => "width: 100%;"
-    = text_field_tag "start", nil, class: "form-control date-picker fifty-fifty"
-
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  =form_tag pdf_admin_view_path(format: :pdf), method: :get do
+ 
+ 
+ 
     %div.form-group
-    = label_tag "End date: ", nil,  :style => "width: 100%;"
-    = text_field_tag "end", nil, class: "form-control date-picker fifty-fifty"
-
-
+ 
+ 
+ 
+      = label_tag "Start date: ", nil,  :style => "width: 100%;"
+ 
+ 
+ 
+      = text_field_tag "start", nil, class: "form-control date-picker fifty-fifty"
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+    %div.form-group
+ 
+ 
+ 
+      =label_tag "End date: ", nil,  :style => "width: 100%;"
+ 
+ 
+ 
+      = text_field_tag "end", nil, class: "form-control date-picker fifty-fifty"
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
     .form-group
-    =submit_tag "Generate Raport", :class => "form-control", target: "_blank"
-
+ 
+ 
+ 
+      =submit_tag "Generate Raport", :class => "form-control", target: "_blank"
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 %h4=link_to "History of raports", raports_url
+
