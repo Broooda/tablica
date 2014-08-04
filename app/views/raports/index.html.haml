@@ -6,12 +6,14 @@
   
   -raport=@raports.where(user_id: current_user.id.to_s)
   -raport.each do |r|
-    from 
+    %b from 
     =r.date_begin 
-    to 
+    %b to 
     =r.date_end
+
     =link_to "link", root_url #tu bedzie link do konkretnego raportu
     / = link_to "(PDF)", raports_path(raport1=Raport.generate_raport(params[:date_begin], params[:date_end], :format => "pdf", :layout => 'raport.html') 
     = link_to "Create PDF document", raports_pdf_path(@raport, :format => :pdf)
+
     %br
 
