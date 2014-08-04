@@ -15,10 +15,10 @@ RSpec.describe RaportsController, :type => :controller do
   #     expect(response).to render_template("index")
   #   end
 
-    # it 'loads all raports into @raports' do
-    #   raport1, raport2 = Raport.create(name: "Anna", surname: "Owczarek", email: "test222@mail.pl", password: "razdwatrzycztery", accepted: true), User.create(name: "Robert", surname: "Kowalski", email: "test424@mail.pl", password: "razdwatrzycztery", accepted: true)
-    #   get :index
-    #   expect(assigns(:users)).to match_array([user1, user2,@user])
-    # end
+  # it 'loads all raports into @raports' do
+  #   raport1, raport2 = Raport.create(name: "Anna", surname: "Owczarek", email: "test222@mail.pl", password: "razdwatrzycztery", accepted: true), User.create(name: "Robert", surname: "Kowalski", email: "test424@mail.pl", password: "razdwatrzycztery", accepted: true)
+  #   get :index
+  #   expect(assigns(:users)).to match_array([user1, user2,@user])
+  # end
  # end
 end
