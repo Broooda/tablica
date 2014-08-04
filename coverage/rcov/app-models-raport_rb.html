@@ -1,0 +1,341 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang='en' xml:lang='en' xmlns='http://www.w3.org/1999/xhtml'>
+  <head>
+    <title>app/models/raport.rb</title>
+    <link href="./assets/0.2.3/screen.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="./assets/0.2.3/print.css" media="print" rel="stylesheet" type="text/css" />
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <script type="text/javascript" src="./assets/0.2.3/rcov.js"></script>
+  </head>
+  <body>
+    <h1>Tablica C0 Coverage Information - Simploco - RCov</h1>
+    <h2>app/models/raport.rb</h2>
+
+    <div class="report_table_wrapper">
+      <table class='report' id='report_table'>
+        <thead>
+          <tr>
+            <th class="left_align">Name</th>
+            <th class="right_align">Total Lines</th>
+            <th class="right_align">Lines of Code</th>
+            <th class="left_align">Total Coverage</th>
+            <th class="left_align">Code Coverage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="left_align"><a href="app-models-raport_rb.html">app/models/raport.rb</a></td>
+            <td class='right_align'><tt>94</tt></td>
+            <td class='right_align'><tt>52</tt></td>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>55.32%</tt></div>
+      <div class="percent_graph">
+        <div class="covered" style="width:55px"></div>
+        <div class="uncovered" style="width:45px"></div>
+      </div></td>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>19.23%</tt></div>
+      <div class="percent_graph">
+        <div class="covered" style="width:19px"></div>
+        <div class="uncovered" style="width:81px"></div>
+      </div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Key</h3>
+
+    <div class="key"><pre><span class='marked'>Code reported as executed by Ruby looks like this...</span><span class='marked1'>and this: this line is also marked as covered.</span><span class='inferred'>Lines considered as run by rcov, but not reported by Ruby, look like this,</span><span class='inferred1'>and this: these lines were inferred by rcov (using simple heuristics).</span><span class='uncovered'>Finally, here's a line marked as not executed.</span></pre></div>
+
+    <h3>Coverage Details</h3>
+
+    <table class="details">
+      <tbody>
+        <tr class="marked">
+          <td><pre><a name="line2">2</a> class Raport &lt; ActiveRecord::Base</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line3">3</a> </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line4">4</a> 	validates :user_id, :date_begin, :holiday_hours, :work_hours, presence: true</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line5">5</a>   validates :date_end, presence: true</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line6">6</a> 	validate :Comparing_dates</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line7">7</a> </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line8">8</a> 	private</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line9">9</a> 		def Comparing_dates</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line10">10</a>       unless self.date_begin.blank? == true or self.date_end.blank? == true</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line11">11</a>             errors.add(:date_begin, &quot;must be before end date&quot;) unless </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line12">12</a>     self.date_begin &lt; self.date_end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line13">13</a>   end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line14">14</a>     end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line15">15</a> </pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line16">16</a>     #Raport.generate_raport(start_date, end_date, user_id)</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line17">17</a>     def self.generate_raport(start_date=Time.now-4.week, end_date=Time.now, user_id=1, current_user)</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line18">18</a>       if end_date.to_time</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line19">19</a>         work_days = HoursPlan.where(</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line20">20</a>           &#39;user_id = ? and start_date &gt; ? and start_date &lt; ?&#39;,</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line21">21</a>           user_id,start_date.to_time,(end_date.to_time+1.day)</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line22">22</a>         )</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line23">23</a>         holiday_days = HolidaysPlan.where(</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line24">24</a>           &#39;user_id = ? and holiday_date &gt; ? and holiday_date &lt; ?&#39;,</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line25">25</a>           user_id,start_date.to_time,end_date.to_time+1.day</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line26">26</a>         )</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line27">27</a> </pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line28">28</a>         work_minutes=0</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line29">29</a>         holiday_minutes=0</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line30">30</a> </pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line31">31</a>         work_days.each do |work_day|</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line32">32</a>           work_minutes+=TimeDifference.between(work_day.end_date, work_day.start_date).in_minutes</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line33">33</a>         end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line34">34</a> </pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line35">35</a>         holiday_days.each do |holiday_day|</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line36">36</a>           holiday_minutes+=holiday_day.hours</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line37">37</a>         end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line38">38</a> </pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line39">39</a>         work_hours=(work_minutes/60).to_i</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line40">40</a>         holiday_hours=(holiday_minutes/60).to_i</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line41">41</a> </pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line42">42</a>         work_minutes=(work_minutes-work_hours*60).to_i</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line43">43</a>         holiday_minutes=(holiday_minutes-holiday_hours*60).to_i</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line44">44</a> </pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line45">45</a>         work_hours=work_hours.to_s+&quot; hours and &quot;+work_minutes.to_s+&quot; minutes&quot;</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line46">46</a>         holiday_hours=holiday_hours.to_s+&quot; hours and &quot;+holiday_minutes.to_s+&quot; minutes&quot;</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line47">47</a>         </pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line48">48</a>         Raport.new(user_id: current_user.id, holiday_hours: holiday_hours, work_hours: work_hours, date_begin: start_date, date_end: end_date, generator_id: user_id)</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line49">49</a>       else</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line50">50</a>         Raport.new()</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line51">51</a>       end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line52">52</a>     end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line53">53</a> </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line54">54</a>     def self.generate_admin_raport(start_date=Time.now-4.week, end_date=Time.now, current_user)</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line55">55</a>       raports=[]</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line56">56</a>      if end_date.to_time</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line57">57</a>         counter=0</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line58">58</a>         </pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line59">59</a>         User.all.each do |user|</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line60">60</a>           work_days = HoursPlan.where(</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line61">61</a>           &#39;user_id = ? and start_date &gt; ? and start_date &lt; ?&#39;,</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line62">62</a>           user.id,start_date.to_time,(end_date.to_time+1.day)</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line63">63</a>         )</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line64">64</a>         holiday_days = HolidaysPlan.where(</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line65">65</a>           &#39;user_id = ? and holiday_date &gt; ? and holiday_date &lt; ?&#39;,</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line66">66</a>           user.id,start_date.to_time,end_date.to_time+1.day</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line67">67</a>         )</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line68">68</a>         work_minutes=0</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line69">69</a>         holiday_minutes=0</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line70">70</a> </pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line71">71</a>         work_days.each do |work_day|</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line72">72</a>           work_minutes+=TimeDifference.between(work_day.end_date, work_day.start_date).in_minutes</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line73">73</a>         end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line74">74</a> </pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line75">75</a>         holiday_days.each do |holiday_day|</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line76">76</a>           holiday_minutes+=holiday_day.hours</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line77">77</a>         end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line78">78</a> </pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line79">79</a>         work_hours=(work_minutes/60).to_i</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line80">80</a>         holiday_hours=(holiday_minutes/60).to_i</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line81">81</a> </pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line82">82</a>         work_minutes=(work_minutes-work_hours*60).to_i</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line83">83</a>         holiday_minutes=(holiday_minutes-holiday_hours*60).to_i</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line84">84</a> </pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line85">85</a>         work_hours=work_hours.to_s+&quot; hours and &quot;+work_minutes.to_s+&quot; minutes&quot;</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line86">86</a>         holiday_hours=holiday_hours.to_s+&quot; hours and &quot;+holiday_minutes.to_s+&quot; minutes&quot;</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line87">87</a>         raports[counter]=Raport.new(user_id: current_user.id, holiday_hours: holiday_hours, work_hours: work_hours, date_begin: start_date, date_end: end_date, generator_id: user.id)      </pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line88">88</a>         counter+=1</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line89">89</a>         end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line90">90</a>       else</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line91">91</a>         raports[0]=Raport.new() </pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line92">92</a>       end</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line93">93</a>       return raports</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line94">94</a>     end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line95">95</a> end</pre></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Generated on 2014-08-04 12:26:04 +0200 with <a href="https://github.com/fguillen/simplecov-rcov">SimpleCov-RCov 0.2.3</a></p>
+
+  </body>
+</html>

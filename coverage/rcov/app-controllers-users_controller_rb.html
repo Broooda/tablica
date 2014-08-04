@@ -1,0 +1,464 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang='en' xml:lang='en' xmlns='http://www.w3.org/1999/xhtml'>
+  <head>
+    <title>app/controllers/users_controller.rb</title>
+    <link href="./assets/0.2.3/screen.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="./assets/0.2.3/print.css" media="print" rel="stylesheet" type="text/css" />
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <script type="text/javascript" src="./assets/0.2.3/rcov.js"></script>
+  </head>
+  <body>
+    <h1>Tablica C0 Coverage Information - Simploco - RCov</h1>
+    <h2>app/controllers/users_controller.rb</h2>
+
+    <div class="report_table_wrapper">
+      <table class='report' id='report_table'>
+        <thead>
+          <tr>
+            <th class="left_align">Name</th>
+            <th class="right_align">Total Lines</th>
+            <th class="right_align">Lines of Code</th>
+            <th class="left_align">Total Coverage</th>
+            <th class="left_align">Code Coverage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="left_align"><a href="app-controllers-users_controller_rb.html">app/controllers/users_controller.rb</a></td>
+            <td class='right_align'><tt>135</tt></td>
+            <td class='right_align'><tt>77</tt></td>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>57.04%</tt></div>
+      <div class="percent_graph">
+        <div class="covered" style="width:57px"></div>
+        <div class="uncovered" style="width:43px"></div>
+      </div></td>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>24.68%</tt></div>
+      <div class="percent_graph">
+        <div class="covered" style="width:25px"></div>
+        <div class="uncovered" style="width:75px"></div>
+      </div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Key</h3>
+
+    <div class="key"><pre><span class='marked'>Code reported as executed by Ruby looks like this...</span><span class='marked1'>and this: this line is also marked as covered.</span><span class='inferred'>Lines considered as run by rcov, but not reported by Ruby, look like this,</span><span class='inferred1'>and this: these lines were inferred by rcov (using simple heuristics).</span><span class='uncovered'>Finally, here's a line marked as not executed.</span></pre></div>
+
+    <h3>Coverage Details</h3>
+
+    <table class="details">
+      <tbody>
+        <tr class="marked">
+          <td><pre><a name="line2">2</a> class UsersController &lt; ApplicationController</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line3">3</a>   before_action :authenticate_user!</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line4">4</a>   before_action :mine_or_admin, except: [:index, :show ]</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line5">5</a> </pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line6">6</a> </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line7">7</a>   def edit</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line8">8</a>     @user=User.find(params[:id])</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line9">9</a>   end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line10">10</a> </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line11">11</a>   def update</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line12">12</a>     @user=User.find(params[:id])</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line13">13</a>     if @user.update(user_params)</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line14">14</a>       redirect_to @user, notice: &quot;Edytowano&quot;</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line15">15</a>     else</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line16">16</a>       render &#39;edit&#39;</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line17">17</a>     end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line18">18</a>   end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line19">19</a> </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line20">20</a>   def destroy</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line21">21</a>     @user = User.find(params[:id])</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line22">22</a> </pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line23">23</a>    </pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line24">24</a>     @user.default_work_time.destroy</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line25">25</a>     @user.hours_plan.destroy_all</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line26">26</a>     @user.holiday.destroy_all</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line27">27</a>      @user.destroy</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line28">28</a> </pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line29">29</a>     redirect_to users_url</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line30">30</a>   end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line31">31</a> </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line32">32</a> 	def index</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line33">33</a> 		@users = User.order(&#39;surname&#39;)</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line34">34</a> </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line35">35</a>       respond_to do |format|</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line36">36</a>         format.html</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line37">37</a>         format.pdf do render :pdf =&gt; &quot;generated.pdf&quot;, :layout =&gt; &#39;pdfgen.html&#39;</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line38">38</a>         end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line39">39</a>       end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line40">40</a> </pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line41">41</a> 	end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line42">42</a> </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line43">43</a> 	def accept</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line44">44</a> 		@user = User.find(params[:id])</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line45">45</a> 		@user.accepted = true</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line46">46</a> 		@user.save</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line47">47</a> </pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line48">48</a>     DefaultWorkTime.create(week: [[&#39;09:00&#39;,&#39;17:00&#39;],[&#39;09:00&#39;,&#39;17:00&#39;],[&#39;09:00&#39;,&#39;17:00&#39;],[&#39;09:00&#39;,&#39;17:00&#39;],[&#39;09:00&#39;,&#39;17:00&#39;]], user_id: @user.id)</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line49">49</a> 		</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line50">50</a>     if HoursPlan.all.size &gt; 0</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line51">51</a>       last=HoursPlan.order( &#39;start_date ASC&#39; )</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line52">52</a>       last=last.last</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line53">53</a>       current_week=Time.now.to_date.cweek</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line54">54</a>       last_week=last.start_date.to_date.cweek</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line55">55</a>       difference=last_week-current_week</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line56">56</a>     else</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line57">57</a>       difference=6     </pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line58">58</a>     end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line59">59</a> </pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line60">60</a>      (0..difference).each do |counter|</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line61">61</a>       DefaultWorkTime.generate_hours_plans(counter, @user.id) </pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line62">62</a>   end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line63">63</a> </pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line64">64</a>     redirect_to users_url</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line65">65</a> 	end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line66">66</a>   </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line67">67</a> 	def show</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line68">68</a>   	@user=User.find(params[:id])</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line69">69</a> </pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line70">70</a>     earliest_hoursplan</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line71">71</a> </pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line72">72</a>     respond_to do |format|</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line73">73</a>       format.html</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line74">74</a>       format.pdf do</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line75">75</a>         render :pdf =&gt; &quot;generated.pdf&quot;</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line76">76</a>       end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line77">77</a>     end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line78">78</a> 	end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line79">79</a> </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line80">80</a>   def make_admin</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line81">81</a>     @user = User.find(params[:id])</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line82">82</a>     @user.admin = true</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line83">83</a>     @user.save</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line84">84</a>     redirect_to users_url</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line85">85</a>   end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line86">86</a> </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line87">87</a>   def unmake_admin</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line88">88</a>     @user = User.find(params[:id])</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line89">89</a>     @user.admin = false</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line90">90</a>     @user.save</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line91">91</a>     redirect_to users_url</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line92">92</a>   end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line93">93</a> </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line94">94</a>   def earliest_hoursplan</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line95">95</a>     now=DateTime.now</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line96">96</a>     @hours_plan = HoursPlan.where(&#39;user_id = :user_id and start_date &gt; :now&#39;,{user_id: params[:id], now: now}).order(&#39;start_date&#39;).first</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line97">97</a> </pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line98">98</a>  </pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line99">99</a>     @first_common_hour = &#39;nope&#39;</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line100">100</a>     commonhours = HoursPlan.where(&#39;(user_id = :user_id or user_id = :user_id2) and start_date &gt; :now&#39;,{user_id: params[:id], user_id2: current_user.id, now: now}).order(&#39;start_date&#39;)</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line101">101</a>     commonhours.each do |c|</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line102">102</a>       is_man_working = (HoursPlan.where(&#39;user_id = :id and start_date &lt;= :start and end_date &gt;= :start&#39;, {id: params[:id], start: c.start_date}).size &gt; 0)</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line103">103</a>       are_you_working = (HoursPlan.where(&#39;user_id = :id and start_date &lt;= :start and end_date &gt;= :start&#39;, {id: current_user.id, start: c.start_date}).size &gt; 0)</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line104">104</a>       #dla kazdego co znajdzie musi pytac czy 1 i 2 uzytkownik jest</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line105">105</a>       if is_man_working and are_you_working</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line106">106</a>         @first_common_hour = c.start_date</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line107">107</a>         break</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line108">108</a>       end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line109">109</a>     end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line110">110</a> </pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line111">111</a>     at_work = HoursPlan.where(&#39;user_id = :id and start_date &lt;= :now and end_date &gt;= :now&#39;, {id: params[:id], now: now})</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line112">112</a>     if at_work.size&gt;0</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line113">113</a>       @answer = &#39;yes&#39;</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line114">114</a>     else</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line115">115</a>       @answer = &#39;no&#39;</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line116">116</a>     end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line117">117</a> </pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line118">118</a>   end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line119">119</a> </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line120">120</a>   private</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line121">121</a> </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line122">122</a>     def user_params</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line123">123</a>       params.require(:user).permit(:name, :surname, :email, :password, :password_confirmation, :tags)</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line124">124</a>     end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line125">125</a> </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line126">126</a>     def mine_or_admin</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line127">127</a>       @user = User.find(params[:id])</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line128">128</a>       unless current_user.id == @user.id or current_user.admin == true</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line129">129</a>         redirect_to users_path, alert: &quot;You can&#39;t edit that.&quot;</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line130">130</a>       end</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line131">131</a>       true</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line132">132</a>     end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line133">133</a> </pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line134">134</a> end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line135">135</a> </pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line136">136</a> </pre></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Generated on 2014-08-04 12:26:04 +0200 with <a href="https://github.com/fguillen/simplecov-rcov">SimpleCov-RCov 0.2.3</a></p>
+
+  </body>
+</html>

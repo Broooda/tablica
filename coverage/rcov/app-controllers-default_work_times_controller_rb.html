@@ -1,0 +1,353 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang='en' xml:lang='en' xmlns='http://www.w3.org/1999/xhtml'>
+  <head>
+    <title>app/controllers/default_work_times_controller.rb</title>
+    <link href="./assets/0.2.3/screen.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="./assets/0.2.3/print.css" media="print" rel="stylesheet" type="text/css" />
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <script type="text/javascript" src="./assets/0.2.3/rcov.js"></script>
+  </head>
+  <body>
+    <h1>Tablica C0 Coverage Information - Simploco - RCov</h1>
+    <h2>app/controllers/default_work_times_controller.rb</h2>
+
+    <div class="report_table_wrapper">
+      <table class='report' id='report_table'>
+        <thead>
+          <tr>
+            <th class="left_align">Name</th>
+            <th class="right_align">Total Lines</th>
+            <th class="right_align">Lines of Code</th>
+            <th class="left_align">Total Coverage</th>
+            <th class="left_align">Code Coverage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="left_align"><a href="app-controllers-default_work_times_controller_rb.html">app/controllers/default_work_times_controller.rb</a></td>
+            <td class='right_align'><tt>98</tt></td>
+            <td class='right_align'><tt>54</tt></td>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>61.22%</tt></div>
+      <div class="percent_graph">
+        <div class="covered" style="width:61px"></div>
+        <div class="uncovered" style="width:39px"></div>
+      </div></td>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>29.63%</tt></div>
+      <div class="percent_graph">
+        <div class="covered" style="width:30px"></div>
+        <div class="uncovered" style="width:70px"></div>
+      </div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Key</h3>
+
+    <div class="key"><pre><span class='marked'>Code reported as executed by Ruby looks like this...</span><span class='marked1'>and this: this line is also marked as covered.</span><span class='inferred'>Lines considered as run by rcov, but not reported by Ruby, look like this,</span><span class='inferred1'>and this: these lines were inferred by rcov (using simple heuristics).</span><span class='uncovered'>Finally, here's a line marked as not executed.</span></pre></div>
+
+    <h3>Coverage Details</h3>
+
+    <table class="details">
+      <tbody>
+        <tr class="marked">
+          <td><pre><a name="line2">2</a> class DefaultWorkTimesController &lt; ApplicationController</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line3">3</a> before_action :make_sure_its_mine, only: [:destroy, :show]</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line4">4</a>  </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line5">5</a>   def show </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line6">6</a>     @d=DefaultWorkTime.find(params[:id])</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line7">7</a>     @dr=DefaultWorkTimeRequest.all</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line8">8</a>   end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line9">9</a> </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line10">10</a>   def update_work_time</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line11">11</a>     #If user has DefaultWorkTimeRequest object</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line12">12</a>     if User.find(current_user.id).default_work_time_request</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line13">13</a>       #If this object&#39;s status is &#39;pending&#39;</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line14">14</a>       if User.find(current_user.id).default_work_time_request.status==&quot;pending&quot;</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line15">15</a>         #Error, redirect </pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line16">16</a>         redirect_to default_work_time_path(User.find(current_user.id).default_work_time.id), alert: &quot;Request already exists&quot;</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line17">17</a>       else</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line18">18</a>         create_new_request</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line19">19</a>       end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line20">20</a>     #If user has no DefaultWorkTimeRequest object</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line21">21</a>     else</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line22">22</a>       create_new_request</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line23">23</a>     end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line24">24</a>   end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line25">25</a> </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line26">26</a>   def accept</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line27">27</a>     @request = DefaultWorkTimeRequest.find(params[:id])</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line28">28</a>     #DefaultWorkTimeRequest.find(params[:id]).destroy</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line29">29</a>     @request.status = &quot;accepted&quot;</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line30">30</a>     @request.user.default_work_time.week=@request.week</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line31">31</a>     @request.save</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line32">32</a>     @request.user.default_work_time.save</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line33">33</a> </pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line34">34</a>     last=HoursPlan.order( &#39;start_date ASC&#39; )</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line35">35</a>     last=last.last</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line36">36</a>     current_week=Time.now.to_date.cweek</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line37">37</a>     last_week=last.start_date.to_date.cweek</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line38">38</a>     difference=last_week-current_week</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line39">39</a> </pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line40">40</a>     (0..difference).each do |counter|</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line41">41</a>       DefaultWorkTime.generate_hours_plans(counter, @request.user_id)</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line42">42</a>     </pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line43">43</a>     end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line44">44</a> </pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line45">45</a>     redirect_to inboxs_path, notice: &quot;Default hours accepted&quot;</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line46">46</a>   end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line47">47</a> </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line48">48</a>   def reject</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line49">49</a>     @request = DefaultWorkTimeRequest.find(params[:id])</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line50">50</a>     #DefaultWorkTimeRequest.find(params[:id]).destroy</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line51">51</a>     @request.status = &quot;rejected&quot;</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line52">52</a>     @request.reason = params[&#39;description&#39;]</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line53">53</a>     @request.save</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line54">54</a>     redirect_to inboxs_path, notice: &quot;Default hours rejected&quot;</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line55">55</a>   end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line56">56</a> </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line57">57</a>   def generate_hours_plans_admin</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line58">58</a>     if(current_user.admin)</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line59">59</a>       DefaultWorkTime.generate_hours_plans</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line60">60</a>       flash[:notice] = &quot;Hours plans generated&quot;</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line61">61</a>     end</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line62">62</a>     redirect_to root_path</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line63">63</a>   end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line64">64</a> </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line65">65</a>   def generate_few_weeks</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line66">66</a>   if(current_user.admin)</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line67">67</a>       DefaultWorkTime.generate_few_weeks</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line68">68</a>       flash[:notice] = &quot;Hours plans generated&quot;</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line69">69</a>     end</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line70">70</a>     redirect_to root_path</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line71">71</a>   end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line72">72</a> </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line73">73</a>   private</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line74">74</a>   def create_new_request</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line75">75</a>     #usun aktualne requesty uzytkownika</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line76">76</a>     DefaultWorkTimeRequest.where(&#39;user_id = :user_id&#39;, {user_id: current_user.id}).destroy_all</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line77">77</a> </pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line78">78</a>     #Create object with params</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line79">79</a>     new_default=DefaultWorkTimeRequest.new(week: [[params[&#39;monday_start&#39;],params[&#39;monday_end&#39;]],[params[&#39;tuesday_start&#39;], params[&#39;tuesday_end&#39;]],[params[&#39;wednesday_start&#39;], params[&#39;wednesday_end&#39;]],[params[&#39;thursday_start&#39;],params[&#39;thursday_end&#39;]],[params[&#39;friday_start&#39;],params[&#39;friday_end&#39;]]],description: params[&#39;description&#39;], user_id: current_user.id, status: &#39;pending&#39;)</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line80">80</a>     #If valid save object and redirect</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line81">81</a>     if new_default.valid?</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line82">82</a>       new_default.save</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line83">83</a>       redirect_to default_work_time_path(User.find(current_user.id).default_work_time.id), notice: &quot;Request added&quot;</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line84">84</a>     #If not valid redirect with notice</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line85">85</a>     else</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line86">86</a>       redirect_to default_work_time_path(User.find(current_user.id).default_work_time.id), alert: new_default.errors.full_messages.first</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line87">87</a>     end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line88">88</a>   end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line89">89</a> </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line90">90</a>   def make_sure_its_mine</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line91">91</a>       @user = DefaultWorkTime.find(params[:id]).user</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line92">92</a>       unless current_user.id == @user.id or current_user.admin == true</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line93">93</a>         redirect_to user_path, alert: &quot;You can&#39;t edit that.&quot;</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line94">94</a>       end</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line95">95</a>       true</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line96">96</a>     end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line97">97</a> </pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line98">98</a> end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line99">99</a> </pre></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Generated on 2014-08-04 12:26:04 +0200 with <a href="https://github.com/fguillen/simplecov-rcov">SimpleCov-RCov 0.2.3</a></p>
+
+  </body>
+</html>
