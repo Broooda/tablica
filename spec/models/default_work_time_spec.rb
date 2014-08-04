@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe DefaultWorkTime, type: :model do
+  
   it 'should have validate "it must be array with length 5 of arrays length 2" ' do
    expect(DefaultWorkTime.new).not_to be_valid
     expect(DefaultWorkTime.new(week: [['9:00','16:00'],['9:00','16:00'],['9:00','16:00'],['9:00','16:00'],['9:00','16:00']], user_id: 1)).to be_valid
@@ -9,6 +10,22 @@ RSpec.describe DefaultWorkTime, type: :model do
     t= DefaultWorkTime.reflect_on_association(:user)
     expect(t.macro).to equal :belongs_to
   end
+
+  it 'should generate 5 hours plans' do
+    user=User.create(name: "Jan", surname: "Kowalski", email: "test@mail.pl", password: "razdwatrzycztery", accepted: true)
+    DefaultWorkTime.create(week: [['09:00','16:00'],['09:00','16:00'],['09:00','16:00'],['09:00','16:00'],['09:00','16:00']], user_id: user.id)
+    DefaultWorkTime.generate_hours_plans(1,user.id)
+
+    expect(HoursPlan.all.size).to match(6-Time.now.wday)
+  end
+
+  it 'should generate 11 weeks hours plans (50)' do
+   user=User.create(name: "Jan", surname: "Kowalski", email: "test@mail.pl", password: "razdwatrzycztery", accepted: true)
+    DefaultWorkTime.create(week: [['09:00','16:00'],['09:00','16:00'],['09:00','16:00'],['09:00','16:00'],['09:00','16:00']], user_id: user.id)
+    DefaultWorkTime.generate_few_weeks
+    expect(HoursPlan.all.size).to match(50+6-Time.now.wday)
+      
+    end
 
 
 

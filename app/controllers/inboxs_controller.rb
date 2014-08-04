@@ -7,8 +7,7 @@ class InboxsController < ApplicationController
       @dr=DefaultWorkTimeRequest.where("status='pending'")
   end
 
-  def manual_generate
-  end
+  def manual_generate; end
 
   def manual_generate_post
 
@@ -24,6 +23,8 @@ class InboxsController < ApplicationController
         redirect_to manual_generate_path, alert: "Wrong date!"
       end
   end
+
+  private
 
   def make_sure_im_admin
      unless current_user.admin
