@@ -11,9 +11,9 @@ RSpec.describe Raport, :type => :model do
   it 'should require date_end,date_begin' do	
 	expect(Raport.new(date_begin: :nill)).not_to be_valid
 	# expect(Raport.new(date_begin: DateTime.now)).to be_valid
-	expect(Raport.new(date_end: "")).not_to be_valid
+	expect(Raport.new(date_end: :nill)).not_to be_valid
 	# expect(Raport.new(date_end: DateTime.now + 7.days)).not_to be_valid
-	expect(Raport.new(user_id: "")).not_to be_valid
-	expect(Raport.new(holiday_hours: "")).not_to be_valid
+	expect(Raport.new(user_id: :nill)).not_to be_valid
+	expect(Raport.new(holiday_hours: :nill)).not_to be_valid
 	end
 end
