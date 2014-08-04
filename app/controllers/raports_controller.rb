@@ -78,7 +78,7 @@ class RaportsController < ApplicationController
       redirect_to new_raport_path, alert: "Wrong date"
     end
       
-
+    
     end
 	end
 
