@@ -6,9 +6,10 @@
   
   -raport=@raports.where(user_id: current_user.id.to_s)
   -raport.each do |r|
-    from 
+    %b from 
     =r.date_begin 
-    to 
-    =r.date_end 
+    %b to 
+    =r.date_end
+    =link_to "link", root_url
     %br
 

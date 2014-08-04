@@ -1,0 +1,37 @@
+:css
+  div{background-color:E84916; width:800px}
+  ml5px{margin-left:5px}
+
+
+%div
+  %ml5px
+    %img{src:"https://binarapps.com/img/logo1.png"}
+%h1 
+  All users raport  
+  %br
+  from
+  =@raports[0].date_begin
+  to  
+  =@raports[0].date_end
+-counter=0
+%table{style: "width:800px", border: "1"}
+  %tr{style: "color:#FF3A25"}
+    %th
+      Name
+    %th
+      Surname
+    %th
+      Worked
+    %th
+      Holiday
+    -@raports.each do |raport|
+      %tr
+        %td
+          =User.find(raport.generator_id).name
+        %td
+          =User.find(raport.generator_id).surname
+        %td
+          =@work[counter]
+        %td
+          =@holiday[counter]
+          -counter+=1
