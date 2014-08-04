@@ -54,3 +54,5 @@ gem 'whenever', :require => false
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'simplecov', :require => false
+gem 'simplecov-rcov'
