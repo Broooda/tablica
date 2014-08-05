@@ -39,4 +39,5 @@ RSpec.describe Raport, :type => :model do
   end
 
 
+
 end

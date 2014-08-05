@@ -1,5 +1,6 @@
 # coding: UTF-8
 
+
 # Validator sprawdzający wilekość tablicy. Array 5 elementowy, zawierający arraye 2 elementowe
 class WeekValidator < ActiveModel::Validator
   def validate(record)
