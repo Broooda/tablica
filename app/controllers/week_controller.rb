@@ -1,9 +1,11 @@
 class WeekController < ApplicationController
   
-  layout 'nocontainer' 
+  layout 'nocontainer'
 
   before_action :selectweek
   before_action :gethoursplan
+
+
 
   def showtime #wyswietla kalendarz
     @start_hour = 9
@@ -55,4 +57,5 @@ class WeekController < ApplicationController
       end
     end
   end
+
 end
