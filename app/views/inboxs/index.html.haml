@@ -1,6 +1,5 @@
 / Komentarz: @dr = default work time request
 /             @d = default work time 
-- days = ['monday', 'tuesday','wednesday','thursday','friday']
 
 %h1 Holidays requests:
 -if @holiday.size == 0
@@ -49,7 +48,7 @@
       -request.week.each do |day|
         -unless day[0] == actuall_week[day_counter][0] and day[1] == actuall_week[day_counter][1]
           %b
-            =days[day_counter]
+            =Days[day_counter]
           from
           %b=actuall_week[day_counter][0]+"-"+actuall_week[day_counter][1]
           to

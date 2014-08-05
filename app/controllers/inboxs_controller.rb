@@ -10,7 +10,6 @@ class InboxsController < ApplicationController
   def manual_generate; end
 
   def manual_generate_post
-
       current_week=Time.now.to_date.cweek
       last_week=params['week'].to_date.cweek     
       difference=last_week-current_week
@@ -31,6 +30,4 @@ class InboxsController < ApplicationController
        redirect_to root_url, alert: "Only for Admins"
      end
   end
-
-
 end
