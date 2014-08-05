@@ -99,6 +99,27 @@ body {
   .authors {display: none;}
 }
 
+.meeting {
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.2  );
+
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+
+  .people {
+    display: none;
+  }
+}
+
+#stand-up-loader 
+{
+  text-align: center;
+  margin: 50px;
+  display: none;
+}
+
 .inbox-block {
   border-left: 3px solid #777;
   padding: 3px 0px 3px 5px;

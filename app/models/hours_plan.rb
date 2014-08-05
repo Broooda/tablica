@@ -19,7 +19,11 @@ class HoursPlan < ActiveRecord::Base
 
     starts = HoursPlan.where('start_date >= :from and start_date <= :to',{ from: from, to: to}).order('start_date')
     starts.each do |start|
-      people_at_work = HoursPlan.where('start_date <= :this_time and end_date >= :this_time',{this_time: start.start_date}).order('surname')
+      hours_plans = HoursPlan.where('start_date <= :this_time and end_date >= :this_time',{this_time: start.start_date})
+      people_at_work = []
+      hours_plans.each do |hours_plan|
+        people_at_work <<  hours_plan.user
+      end
       if people_at_work.size > ret[:max_people]
         ret = {max_people: people_at_work.size, people: people_at_work, time: start.start_date}
       end

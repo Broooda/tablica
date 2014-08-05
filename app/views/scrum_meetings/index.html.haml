@@ -1,18 +1,14 @@
 %h1 Stand-up meetings
 %form.form-inline#stand-up-meeting-form{method: "get"}
   .form-group
-    %input.date-picker.form-control{name: "start_date",placeholder: "start date"}
+    %input.date-picker.form-control{name: "start_date",placeholder: "start date", value: DateTime.now.strftime("%Y-%m-%d")}
     %select.form-control{name: "period"}
-      %option day
-      %option week
-      %option month 
-    %select.form-control{name: "count"}
-      %option{value: 1} 1x
-      %option{value: 2} 2x
-      %option{value: 3} 3x 
-      %option{value: 5} 5x 
-      %option{value: 7} 7x 
-      %option{value: 10} 10x 
-      %option{value: 20} 20x 
+      %option{value: "day"} day meeting
+      %option{value: "week"} week meeting
+      %option{value: "month"} month meeting 
     %button.btn.btn-default{type: "submit"} find
+#stand-up-loader
+  =image_tag("loading.gif")
+  %p
+    %b loading...
 #stand-up-meetings
