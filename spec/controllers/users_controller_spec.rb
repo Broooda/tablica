@@ -48,14 +48,17 @@ RSpec.describe UsersController, type: :controller do
     end
      end
 # powinno dzialac, nie dziala. GG
-    # describe "accept" do
-    #   it 'should accept user' do
-    #     user1 = User.create(name: "Anna", surname: "Owczarek", email: "test222@mail.pl", password: "razdwatrzycztery", accepted: false)
-    #     post :accept, id: user1.id
-    #     expect(user1.accepted).to match(true)
-    #     expect(response).to redirect_to(users_url)
-    #   end
-    # end
+    describe "accept" do
+      it 'should accept user' do
+        user1 = User.create(name: "Anna", surname: "Owczarek", email: "test222@mail.pl", password: "razdwatrzycztery", accepted: false)
+        post :accept, id: user1.id
+        puts user1
+        puts user1.id
+        puts user1.accepted
+        expect(user1.accepted).to match(true)
+        expect(response).to redirect_to(users_url)
+      end
+    end
   # DZIALA TEORETYCZNIE......
   # # MUSI KLIKNAC "OK" W JAVASCRIPT OKNIE
     # describe "make admin" do
