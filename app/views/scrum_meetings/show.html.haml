@@ -1,0 +1,15 @@
+/ =@meetings.to_yaml
+
+/ =@deb
+
+-@meetings.each do |meeting|
+  -if meeting[:max_people] > 0
+    %h4.text-center
+      at
+      =params[:period]
+      %b=meeting[:start_date].strftime("%Y-%-m-%-d")
+      best possible time for stand-up meeting is:
+    %h3.text-center
+      =meeting[:time].strftime("%Y-%-m-%-d %k:%M")
+    %h5
+      =meeting[:max_people]

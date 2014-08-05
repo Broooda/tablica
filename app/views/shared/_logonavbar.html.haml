@@ -5,6 +5,8 @@
   .col-md-7.text-right#nav
     %ul
       -if user_signed_in?
+        -if current_user.tags_array.include?('ScramMaster') or current_user.admin
+          %li=link_to (raw('<span class="glyphicon glyphicon-briefcase"></span>')), scrum_meeting_path
         -if current_user.admin
           %li= link_to (raw('<span class="glyphicon glyphicon-stats"></span>')), manual_generate_path
           %li=link_to (raw('<span class="glyphicon glyphicon-envelope"></span>'+@inbox_msgs)), inboxs_path
@@ -13,7 +15,7 @@
       -else
         %li=link_to "sign in", new_user_session_url
         %li=link_to "sign up", new_user_registration_url
-    -if current_user
+    -if user_signed_in?
       %ul
         %li=link_to "Week plan", week_time_url
         %li=link_to "Holidays", holidays_path

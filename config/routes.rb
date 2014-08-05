@@ -16,7 +16,9 @@ Rails.application.routes.draw do
   get 'week/people/:fulldate' => 'week#showpeople', as: "week_people_fulldate"
   get 'week/people/:year/:week' => 'week#showpeople', as: "week_people_date"
 
-  
+  get 'stand_up' => 'scrum_meetings#index', as: "scrum_meeting"
+  get 'ajax/stand_up/show' => 'scrum_meetings#show', as: "scrum_meeting_ajax"
+
   get 'default_work_times/generate' => 'default_work_times#generate_few_weeks', as: "generate_hours_plans"
   get 'raports/generate_email' => 'raports#generate_email', as: "generate_email"
   resources :default_work_times, only: [:show]
