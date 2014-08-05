@@ -19,7 +19,23 @@ class DefaultWorkTime < ActiveRecord::Base
 
   belongs_to :user
 
-  
+  def self.accepted(request)
+    request.status = "accepted"
+    request.user.default_work_time.week=request.week
+    request.save
+    request.user.default_work_time.save
+    last=HoursPlan.order( 'start_date ASC' ).last
+    current_week=Time.now.to_date.cweek
+    if last
+    last_week=last.start_date.to_date.cweek
+    difference=last_week-current_week
+    else
+    difference=5
+    end
+    (0..difference).each do |counter|
+      DefaultWorkTime.generate_hours_plans(counter, request.user_id)
+    end
+  end
 
   def self.generate_few_weeks
       (0..10).each do |counter|
