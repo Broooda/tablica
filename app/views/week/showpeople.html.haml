@@ -1,4 +1,3 @@
-- days = [nil,'monday', 'tuesday','wednesday','thursday','friday']
 
 -# przekazanie zmiennych do JS
 :javascript
@@ -23,7 +22,7 @@
                 -User.get_all_tags.each do |tag|
                   %span.label.label-default=tag
         -else
-          .dayname=raw(days[day_num])
+          .dayname=raw(DaysNil[day_num])
           .daydate=comercial_date
       -now_hour = @start_hour
       -@users.each do |user|

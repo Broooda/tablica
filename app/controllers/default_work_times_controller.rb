@@ -7,47 +7,23 @@ before_action :make_sure_its_mine, only: [:destroy, :show]
   end
 
   def update_work_time
-    if current_user.default_work_time_request
-      if current_user.default_work_time_request.status=="pending"
+      if current_user.default_work_time_request && current_user.default_work_time_request.status=="pending"
         redirect_to default_work_time_path(current_user.default_work_time.id), alert: "Request already exists"
       else
         create_new_request
-      end
-    else
-      create_new_request
     end
   end
 
   def accept
-    @request = DefaultWorkTimeRequest.find(params[:id])
-    @request.status = "accepted"
-    @request.user.default_work_time.week=@request.week
-    @request.save
-    @request.user.default_work_time.save
-
-    last=HoursPlan.order( 'start_date ASC' ).last
-    current_week=Time.now.to_date.cweek
-    if last
-    last_week=last.start_date.to_date.cweek
-    difference=last_week-current_week
-    else
-      difference=5
-    end
-        
-
-    (0..difference).each do |counter|
-      DefaultWorkTime.generate_hours_plans(counter, @request.user_id)
-    
-    end
-
+    DefaultWorkTime.accepted(DefaultWorkTimeRequest.find(params[:id]))
     redirect_to inboxs_path, notice: "Default hours accepted"
   end
 
   def reject
-    @request = DefaultWorkTimeRequest.find(params[:id])
-    @request.status = "rejected"
-    @request.reason = params['description']
-    @request.save
+    request = DefaultWorkTimeRequest.find(params[:id])
+    request.status = "rejected"
+    request.reason = params['description']
+    request.save
     redirect_to inboxs_path, notice: "Default hours rejected"
   end
 
