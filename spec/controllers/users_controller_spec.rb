@@ -60,6 +60,7 @@ RSpec.describe UsersController, type: :controller do
     #   end
     # end
 
+
   # DZIALA TEORETYCZNIE......
   # # MUSI KLIKNAC "OK" W JAVASCRIPT OKNIE
     # describe "make admin" do

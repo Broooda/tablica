@@ -1,4 +1,7 @@
 %h1 Your default work hours
+- if @dr
+  - @dr.errors.full_messages.each do |err|
+    %li= err
 
 =form_tag update_work_time_path do
   %table.table

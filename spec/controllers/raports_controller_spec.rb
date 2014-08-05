@@ -2,16 +2,7 @@ require 'rails_helper'
 
 RSpec.describe RaportsController, type: :controller do
 
-<<<<<<< HEAD
-before(:each) do
-@user=User.create(email: 'admin@test.pl', password: 'admin123')
-sign_in @user
-end
 
-
-
-end
-=======
   before(:each) do
     @user=User.create(name: "Jan", surname: "Kowalski", email: "test@mail.pl", password: "razdwatrzycztery", accepted: true)
     sign_in @user
@@ -44,4 +35,4 @@ end
 
 
 end
->>>>>>> 8fe408f738c7e02fa92a6c902da6567417defaba
+

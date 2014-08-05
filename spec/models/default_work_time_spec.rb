@@ -35,10 +35,5 @@ RSpec.describe DefaultWorkTime, type: :model do
       expect(DefaultWorkTimeRequest.last.status).to match("accepted")
       expect(user.default_work_time.week[0][0]).to match('10:00')
       expect(HoursPlan.all.size).to be > 0
-
-
     end
-
-
-
 end
