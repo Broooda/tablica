@@ -23,6 +23,7 @@ class RaportsController < ApplicationController
     else
       redirect_to new_raport_path, alert: "Wrong date"
     end
+
   end
     
   def pdf_admin_view
@@ -43,7 +44,7 @@ class RaportsController < ApplicationController
       else
         redirect_to new_raport_path, alert: "Wrong date"
       end
-    end
+end
     respond_to do |format|
       # format.html
       format.pdf do render :pdf => "generated.pdf", :layout => 'raport.html'

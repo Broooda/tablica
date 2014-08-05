@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe RaportsController, type: :controller do
 
+
   before(:each) do
     @user=User.create(name: "Jan", surname: "Kowalski", email: "test@mail.pl", password: "razdwatrzycztery", accepted: true)
     sign_in @user
@@ -34,3 +35,4 @@ RSpec.describe RaportsController, type: :controller do
 
 
 end
+
