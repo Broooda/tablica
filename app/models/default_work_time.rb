@@ -19,7 +19,6 @@ class DefaultWorkTime < ActiveRecord::Base
 
   belongs_to :user
 
-
   def self.accepted(request)
     request.status = "accepted"
     request.user.default_work_time.week=request.week

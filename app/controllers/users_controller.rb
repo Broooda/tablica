@@ -28,13 +28,11 @@ class UsersController < ApplicationController
 
 	def index
 		@users = User.order('surname')
-
-      respond_to do |format|
-        format.html
-        format.pdf do render :pdf => "generated.pdf", :layout => 'pdfgen.html'
-        end
+    respond_to do |format|
+      format.html
+      format.pdf do render :pdf => "generated.pdf", :layout => 'pdfgen.html'
       end
-
+    end
 	end
 
 	def accept
@@ -58,9 +56,7 @@ class UsersController < ApplicationController
   
 	def show
   	@user=User.find(params[:id])
-
     earliest_hoursplan
-
     respond_to do |format|
       format.html
       format.pdf do
@@ -97,7 +93,6 @@ class UsersController < ApplicationController
         break
       end
     end
-
     at_work = HoursPlan.where('user_id = :id and start_date <= :now and end_date >= :now', {id: params[:id], now: now})
     if at_work.size>0
       @answer = 'yes'
@@ -115,10 +110,8 @@ class UsersController < ApplicationController
 
     def mine_or_admin
       @user = User.find(params[:id])
-      unless current_user.id == @user.id or current_user.admin == true
+      return false if current_user.id == @user.id or current_user.admin == true
         redirect_to users_path, alert: "You can't edit that."
-      end
-      true
     end
 
 end

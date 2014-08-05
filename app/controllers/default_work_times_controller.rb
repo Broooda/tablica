@@ -7,10 +7,10 @@ before_action :make_sure_its_mine, only: [:destroy, :show]
   end
 
   def update_work_time
-      if current_user.default_work_time_request && current_user.default_work_time_request.status=="pending"
-        redirect_to default_work_time_path(current_user.default_work_time.id), alert: "Request already exists"
-      else
-        create_new_request
+    if current_user.default_work_time_request && current_user.default_work_time_request.status=="pending"
+      redirect_to default_work_time_path(current_user.default_work_time.id), alert: "Request already exists"
+    else
+       create_new_request
     end
   end
 
@@ -36,7 +36,7 @@ before_action :make_sure_its_mine, only: [:destroy, :show]
   end
 
   def generate_few_weeks
-  if current_user.admin
+    if current_user.admin
       DefaultWorkTime.generate_few_weeks
       flash[:notice] = "Hours plans generated"
     end
@@ -56,12 +56,10 @@ before_action :make_sure_its_mine, only: [:destroy, :show]
   end
 
   def make_sure_its_mine
-      @user = DefaultWorkTime.find(params[:id]).user
-      unless current_user.id == @user.id or current_user.admin == true
-        redirect_to user_path, alert: "You can't edit that."
-      end
-      true
-    end
+    @user = DefaultWorkTime.find(params[:id]).user
+    return false if current_user.id == @user.id or current_user.admin == true
+      redirect_to user_path, alert: "You can't edit that."
+  end
 
 end
 
