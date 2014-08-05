@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
         has_many :hours_plan
         has_many :holiday
 
+  scope :active,-> { where("accepted = true") }
+
   def full_name(badge=false)
     ret = "".html_safe
     ret << name+" "+surname
