@@ -5,7 +5,7 @@ class RaportsController < ApplicationController
 	end
 
 	def new
-	 @raport=Raport.new
+	  @raport=Raport.new
 	end
 
 	def pdf_view

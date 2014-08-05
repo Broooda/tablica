@@ -1,8 +1,4 @@
-- days = ['monday', 'tuesday','wednesday','thursday','friday']
-- start_end = ['_start','_end']
-
 %h1 Your default work hours
-
 
 =form_tag update_work_time_path do
   %table.table
@@ -11,18 +7,17 @@
       %tr
         %td
           %b
-            =days[day_counter]
-          %br/
+            =Days[day_counter]
+          %br
           from
           %b=w[0]
           to 
           %b=w[1]
         %td
           =label_tag "from"
-          =time_field_tag days[day_counter]+start_end[0], @d.week[day_counter][0], size: '4'
+          =time_field_tag Days[day_counter]+StartEnd[0], @d.week[day_counter][0], size: '4'
           =label_tag "to"
-          =time_field_tag days[day_counter]+start_end[1],  @d.week[day_counter][1], size: '4'
-
+          =time_field_tag Days[day_counter]+StartEnd[1],  @d.week[day_counter][1], size: '4'
       -day_counter+=1   
   .form-group
     =label_tag "description:"
@@ -30,10 +25,9 @@
   .form-group
     =submit_tag "Send Request", :class => "form-control"
 
-
--if User.find(@d.user_id).default_work_time_request
+-if @d.user.default_work_time_request
   -day_count=0
-  -d_request=User.find(@d.user_id).default_work_time_request
+  -d_request=@d.user.default_work_time_request
   %h3 Your current request:
   %p=d_request.description
   %table.table
@@ -41,7 +35,7 @@
     -d_request.week.each do |w|
       %td
         %b
-          =days[day_count]
+          =Days[day_count]
         %br
         %b=w[0]+' - '+w[1]
         -day_count+=1
