@@ -26,11 +26,11 @@ RSpec.describe RaportsController, type: :controller do
     end
   end
 
-  describe "Type pdf" do
-    it "creates a resource" do  
-      expect(response).to respond_with_content_type(:pdf)
-    end
-  end
+  # describe "Type pdf" do
+  #   it "creates a resource" do  
+  #     expect(response).to respond_with_content_type(:pdf)
+  #   end
+  # end
 
 
 end
