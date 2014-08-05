@@ -2,8 +2,8 @@ class DefaultWorkTimesController < ApplicationController
 before_action :make_sure_its_mine, only: [:destroy, :show]
  
   def show 
-    @d=DefaultWorkTime.find(params[:id])
-    @dr=DefaultWorkTimeRequest.all
+    @d=current_user.default_work_time
+    @dr=@d.user.default_work_time_request
   end
 
   def update_work_time
@@ -44,6 +44,7 @@ before_action :make_sure_its_mine, only: [:destroy, :show]
   end
 
   private
+
   def create_new_request
     DefaultWorkTimeRequest.where('user_id = :user_id', {user_id: current_user.id}).destroy_all
     new_default=DefaultWorkTimeRequest.new(week: [[params['monday_start'],params['monday_end']],[params['tuesday_start'], params['tuesday_end']],[params['wednesday_start'], params['wednesday_end']],[params['thursday_start'],params['thursday_end']],[params['friday_start'],params['friday_end']]],description: params['description'], user_id: current_user.id, status: 'pending')
@@ -51,7 +52,9 @@ before_action :make_sure_its_mine, only: [:destroy, :show]
       new_default.save
       redirect_to default_work_time_path(current_user.default_work_time.id), notice: "Request added"
     else
-      redirect_to default_work_time_path(current_user.default_work_time.id), alert: new_default.errors.full_messages.first
+       @d=current_user.default_work_time
+       @dr=new_default
+      render 'show'
     end
   end
 
