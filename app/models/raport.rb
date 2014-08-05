@@ -78,4 +78,5 @@ class Raport < ActiveRecord::Base
       hours[1]=holiday_hours.to_s+" hours and "+holiday_minutes.to_s+" minutes"
       hours
     end
+
 end

@@ -7,6 +7,10 @@ class Holiday < ActiveRecord::Base
   validates :description, :reason, length: { maximum: 500 }
   validate :start_date_must_be_before_end_date
 
+  scope :accepted,-> { where("status = 'accepted'") }
+  scope :rejected,-> { where("status = 'rejected'") }
+  scope :pending,-> { where("status = 'pending'") }
+
   private
   
   def start_date_must_be_before_end_date
