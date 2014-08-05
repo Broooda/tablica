@@ -55,11 +55,10 @@ RSpec.describe UsersController, type: :controller do
     #     expect(user1.accepted).to match(true)
     #     expect(response).to redirect_to(users_url)
     #   end
-<<<<<<< HEAD
-    # end 
-=======
-    # end
->>>>>>> 8fe408f738c7e02fa92a6c902da6567417defaba
+        # end 
+
+
+
   # DZIALA TEORETYCZNIE......
   # # MUSI KLIKNAC "OK" W JAVASCRIPT OKNIE
     # describe "make admin" do
