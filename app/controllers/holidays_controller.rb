@@ -19,9 +19,9 @@ before_action :make_sure_its_admin, only: [:accept, :reject]
 	end
 
   def accept
-    holiday = Holiday.find(params[:id])
-    holiday.status = "accepted"
-    holiday.save
+    @holiday = Holiday.find(params[:id])
+    @holiday.status = "accepted"
+    @holiday.save
     first_week=@holiday.startdate.to_date.cweek-Time.now.to_date.cweek
     last_week=@holiday.enddate.to_date.cweek-Time.now.to_date.cweek
     (first_week..last_week).each do |counter|
