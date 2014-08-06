@@ -1,41 +1,49 @@
 :css
-  div{background-color:E84916; width:800px}
-  ml5px{margin-left:5px}
+  #header img { width: 100%; }
+  #top { margin: 3mm 12mm; height: 15mm; }
+  #binar-logo { margin-top: 2mm; float: left; }
+  #binar-logo img { height: 11mm; }
+  #planer-logo { float: right; }
+  #planer-logo img { height: 15mm; } 
+  body { margin: 0; padding: 0; }
+  table { width: 95%; margin: 0 auto; }
+  h1 { font-weight: light; text-align: center; }
+  th, td { padding: 1.5mm; }
+  table, th, td { border: 0.2mm solid #170f35; border-collapse: collapse; }
 
+#header
+  =wicked_pdf_image_tag("binar_top.png")
+#top
+  #binar-logo
+    =wicked_pdf_image_tag("binar_logo.png")
+  #planer-logo
+    =wicked_pdf_image_tag("pink_logo.png")
 
-%div
-  %ml5px
-    %img{src:"https://binarapps.com/img/logo1.png"}
-%h1 
-  All users raport  
-  %br
-  from
+%h1
+  Raport from
   =@raports[0].date_begin
-  to  
+  to
   =@raports[0].date_end
 -counter=0
-%table{style: "width:800px", border: "1"}
-  %tr{style: "color:#FF3A25"}
+%table
+  %tr
     %th
       Name
-    %th
-      Surname
     %th
       Worked
     %th
       Holiday
     %th
       Over Hours
-    -@raports.each do |raport|
-      %tr
-        %td
-          =User.find(raport.generator_id).name
-        %td
-          =User.find(raport.generator_id).surname
-        %td
-          =@work[counter]
-        %td
-          =@holiday[counter]
-        %td
-          =@over_hours[counter]
-          -counter+=1
+  -@raports.each do |raport|
+    %tr
+      %td
+        =User.find(raport.generator_id).name
+        =User.find(raport.generator_id).surname
+      %td
+        =@work[counter]
+      %td
+        =@holiday[counter]
+      %td
+        =@over_hours[counter]
+        -counter+=1
