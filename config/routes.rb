@@ -37,14 +37,12 @@ Rails.application.routes.draw do
   post 'update_work_time' => 'default_work_times#update_work_time', as: :update_work_time
   get 'manual_generate' => 'inboxs#manual_generate', as: :manual_generate
   post 'manual_generate_post' => 'inboxs#manual_generate_post', as: :manual_generate_post
-  
-  get 'ajax/hours_plans/edit/:id' => 'hours_plans#edit', as: "edit_hours_plans_ajax"
-  post 'hours_plans/update/:id' => 'hours_plans#update', as: "update_hours_plans"
+
 
   resources :raports, only: [:index, :pdf_view, :new, :create]#:history]
 
-  get 'pdf_view' => 'raports#pdf_view', as: :pdf_view
-  get 'pdf_admin_view' => 'raports#pdf_admin_view', as: :pdf_admin_view
+  post 'pdf_view' => 'raports#pdf_view', as: :pdf_view
+  post 'pdf_admin_view' => 'raports#pdf_admin_view', as: :pdf_admin_view
  
   #get 'pdf_view_test' => 'raports#pdf_view_test', as: :pdf_view_test
 

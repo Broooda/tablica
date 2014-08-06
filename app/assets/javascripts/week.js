@@ -144,12 +144,7 @@ $(function(){
     moveNowLine();
     setInterval(function(){moveNowLine();}, 1000);
 
-    $('.hours-plan.hours_plan_owner').click(function(){
-      $.ajax('/ajax/hours_plans/edit/'+$(this).attr('hours_plan_id')).done(function(data){
-        $('.modal-body').html(data);
-      });
-      $('#modal').modal();
-    });
+
 
     $('.hours-plan').hover(function(){
       $('.tooltip-inner').css('background-color', $(this).css('background-color'));
