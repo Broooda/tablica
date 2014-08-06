@@ -25,7 +25,21 @@ body {
 
   #logo {
 
+    position: relative;
+
     padding-left: 70px;
+
+    #hour_hand, #minute_hand , #second_hand{
+      position: absolute;
+      left: 70+40px;
+      top: 59px;
+
+      transform-origin: center 2px;
+      -webkit-transform-origin: center 2px;
+
+      transform: rotate(180deg);
+      -webkit-transform: rotate(180deg);
+    }
     
 
     p{
