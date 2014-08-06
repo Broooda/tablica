@@ -7,7 +7,7 @@ RSpec.describe DefaultWorkTimesRequestController, :type => :controller do
 
     it 'should destroy object' do
       DefaultWorkTimeRequest.should_receive(:delete!)
-      delete :destroy, :user_id => '1'
+      delete :destroy, :user_id => "1"
     end
   end 
 end
