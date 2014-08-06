@@ -50,7 +50,7 @@ class UsersController < ApplicationController
     end
      (0..difference).each do |counter|
       DefaultWorkTime.generate_hours_plans(counter, @user.id) 
-  end
+    end
     redirect_to users_url
 	end
   
