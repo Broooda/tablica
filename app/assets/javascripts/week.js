@@ -25,7 +25,6 @@ function moveNowLine() {
 }
 
 function setUpHoursPlans(tags) {
-  console.log(tags);
 
   colors=[
    'hsl(30,75%,50%)',
