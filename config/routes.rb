@@ -41,8 +41,8 @@ Rails.application.routes.draw do
 
   resources :raports, only: [:index, :pdf_view, :new, :create]#:history]
 
-  post 'pdf_view' => 'raports#pdf_view', as: :pdf_view
-  post 'pdf_admin_view' => 'raports#pdf_admin_view', as: :pdf_admin_view
+  get 'pdf_view' => 'raports#pdf_view', as: :pdf_view
+  get 'pdf_admin_view' => 'raports#pdf_admin_view', as: :pdf_admin_view
  
   #get 'pdf_view_test' => 'raports#pdf_view_test', as: :pdf_view_test
 
