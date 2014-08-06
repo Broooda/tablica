@@ -1,7 +1,14 @@
 .row#top
   .col-md-5#logo
-    =link_to image_tag("logo.png",), root_url
-    %p= link_to "#binar-planner", root_url
+    %a(href="#{root_url}")
+      =image_tag("logo_without_hands.png")
+      #hour_hand
+        =image_tag("hour_hand.png")
+      #minute_hand
+        =image_tag("minute_hand.png")
+      #second_hand
+        =image_tag("second_hand.png")
+      %p #binar-planner
   .col-md-7.text-right#nav
     %ul
       -if user_signed_in?
