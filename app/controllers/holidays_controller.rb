@@ -6,9 +6,9 @@ before_action :make_sure_its_admin, only: [:accept, :reject]
 		@holiday= Holiday.where('user_id=:user_id',{user_id: current_user.id})
 	end
 	
-	def show
-		@holiday= Holiday.find(params[:id])
-	end
+	# def show
+	# 	@holiday= Holiday.find(params[:id])
+	# end
 
 	def destroy
   	if Holiday.find(params[:id]).destroy
