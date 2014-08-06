@@ -15,9 +15,10 @@ every :saturday, :at => '3am' do
   runner "DefaultWorkTime.generate_few_weeks"
 end
 
-# every '0 2 31 * *' do
-#   runner "Mailer.send_friend_sheet"
-# end
+  #every '0 2 31 * *' do
+    # OD DateTime.now.to_date-4.week TO DateTime.now.to_date
+ #   runner pdf_admin_view.pdf?utf8=%E2%9C%93&start="2014-09-01"&end="2014-09-30"&commit=Generate+Raport
+  #end
 
 # Example:
 #

@@ -1,0 +1,26 @@
+%h1 Over Hours requests
+- @over_hour.errors.full_messages.each do |err|
+  %li= err
+=form_for(@over_hour) do |n|
+  = n.label "Day", :style => "width: 100%;"
+  = n.text_field "date", class: "form-control date-picker fifty-fifty"
+  = n.label "Over hours count", :style => "width: 100%;"
+  = n.text_field "hours", :class => "form-control", :style => "width: 35%;"
+  = n.text_area "description", size: '19', :class => "form-control", :placeholder => "Why, and what were you doing?"
+  = n.submit "Send Request", :class => "form-control"
+
+-if @overs.size > 0
+  -@overs.each do |o|
+    Date:
+    =o.date.to_date
+    Hours:
+    =o.hours
+    Description:
+    =o.description
+    Status:
+    =o.status
+    -if o.status=='pending'
+      =link_to 'Distroj', over_hour_path(o.id), method: :delete
+-else
+  %hr
+  No requests, you are not working too much 

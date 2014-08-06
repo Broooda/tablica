@@ -53,6 +53,9 @@ Rails.application.routes.draw do
 
   resources :hours_plans
 
+  resources :over_hours
+  post 'accept/:id' => 'over_hours#accept', as: :over_accept
+  post 'reject/:id' => 'over_hours#reject', as: :over_reject
 
   get 'layouts/pdfgen' =>'users#index', as: "generate_pdf"
 
