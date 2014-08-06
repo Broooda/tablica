@@ -23,9 +23,14 @@ class Raport < ActiveRecord::Base
           'user_id = ? and holiday_date > ? and holiday_date < ?',
           user_id,start_date.to_time,end_date.to_time+1.day
         )
-        hours=Raport.hours_counter(work_days,holiday_days)
+        over_hours = OverHour.where(
+          'user_id = ? and date > ? and date < ? and status = ?',
+          user_id,start_date.to_time,end_date.to_time+1.day,'accepted'
+          )      
 
-        Raport.new(user_id: current_user.id, holiday_hours: hours[1], work_hours: hours[0], date_begin: start_date, date_end: end_date, generator_id: user_id)
+        hours=Raport.hours_counter(work_days,holiday_days,over_hours)
+
+        Raport.new(user_id: current_user.id, holiday_hours: hours[1], work_hours: hours[0], over_hours: hours[2], date_begin: start_date, date_end: end_date, generator_id: user_id)
 
       else
         Raport.new()
@@ -37,17 +42,22 @@ class Raport < ActiveRecord::Base
       hours=[]
      if end_date.to_time
         counter=0
-        User.all.each do |user|
+        User.where(accepted: true).each do |user|
           work_days = HoursPlan.where(
           'user_id = ? and start_date > ? and start_date < ?',
-          user.id,start_date.to_time,(end_date.to_time+1.day)
+          user.id,start_date.to_time,end_date.to_time+1.day,
         )
         holiday_days = HolidaysPlan.where(
           'user_id = ? and holiday_date > ? and holiday_date < ?',
           user.id,start_date.to_time,end_date.to_time+1.day
         )
-        hours=Raport.hours_counter(work_days,holiday_days)
-        raports[counter]=Raport.new(user_id: current_user.id, holiday_hours: hours[1], work_hours: hours[0], date_begin: start_date, date_end: end_date, generator_id: user.id)      
+        over_hours = OverHour.where(
+          'user_id = ? and date > ? and date < ? and status = ?',
+          user.id,start_date.to_time,end_date.to_time+1.day,'accepted'
+          )
+
+        hours=Raport.hours_counter(work_days,holiday_days, over_hours)
+        raports[counter]=Raport.new(user_id: current_user.id, holiday_hours: hours[1], over_hours: hours[2], work_hours: hours[0], date_begin: start_date, date_end: end_date, generator_id: user.id)      
         counter+=1
         end
       else
@@ -56,9 +66,10 @@ class Raport < ActiveRecord::Base
      raports
     end
 
-    def self.hours_counter(work_days, holiday_days)
+    def self.hours_counter(work_days, holiday_days, over_hours)
       work_minutes=0
       holiday_minutes=0
+      over_minutes=0
 
       work_days.each do |work_day|
         work_minutes+=TimeDifference.between(work_day.end_date, work_day.start_date).in_minutes
@@ -68,14 +79,21 @@ class Raport < ActiveRecord::Base
         holiday_minutes+=holiday_day.hours
       end
 
+      over_hours.each do |over_h|
+        over_minutes+=over_h.hours*60
+      end
       work_hours=(work_minutes/60).to_i
       holiday_hours=(holiday_minutes/60).to_i
+      over_hour=(over_minutes/60).to_i
 
       work_minutes=(work_minutes-work_hours*60).to_i
       holiday_minutes=(holiday_minutes-holiday_hours*60).to_i
+      over_minutes=(over_minutes-over_hour*60).to_i
+
       hours=[]
       hours[0]=work_hours.to_s+" hours and "+work_minutes.to_s+" minutes"
       hours[1]=holiday_hours.to_s+" hours and "+holiday_minutes.to_s+" minutes"
+      hours[2]=over_hour.to_s+" hours and "+over_minutes.to_s+" minutes "
       hours
     end
 

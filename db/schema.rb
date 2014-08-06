@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140806082741) do
+ActiveRecord::Schema.define(version: 20140806113804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20140806082741) do
   create_table "over_hours", force: true do |t|
     t.integer  "user_id"
     t.datetime "date"
-    t.integer  "hours"
+    t.float    "hours"
     t.string   "description"
     t.string   "status"
   end
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20140806082741) do
     t.string   "holiday_hours"
     t.string   "work_hours"
     t.integer  "generator_id"
+    t.string   "over_hours"
   end
 
   create_table "users", force: true do |t|
