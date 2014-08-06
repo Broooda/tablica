@@ -1,34 +1,46 @@
 :css
-  div{background-color:E84916; width:800px}
-  ml5px{margin-left:5px}
-%div
-  %ml5px
-    %img{src:"https://binarapps.com/img/logo1.png"}
+  #header img { width: 100%; }
+  #top { margin: 3mm 12mm; height: 15mm; }
+  #binar-logo { margin-top: 2mm; float: left; }
+  #binar-logo img { height: 11mm; }
+  #planer-logo { float: right; }
+  #planer-logo img { height: 15mm; } 
+  body { margin: 0; padding: 0; }
+  table { width: 95%; margin: 0 auto; }
+  h1 { font-weight: light; text-align: center; }
+  th, td { padding: 1.5mm; }
+  table, th, td { border: 0.2mm solid #170f35; border-collapse: collapse; }
 
-%table{style: "width:800px", border: "1"}
-  %tr{style: "color:#FF3A25"}
+#header
+  =wicked_pdf_image_tag("binar_top.png")
+#top
+  #binar-logo
+    =wicked_pdf_image_tag("binar_logo.png")
+  #planer-logo
+    =wicked_pdf_image_tag("pink_logo.png")
+
+%h1
+  Raport from
+  =@raport_start
+  to
+  =@raport_end
+%table
+  %tr
     %th
       Name
-    %th
-      Surname
-    %th
-      From
-    %th
-      To
     %th
       Worked
     %th
       Holiday
+    %th
+      Over hours
   %tr
     %td
       =current_user.name
-    %td
       =current_user.surname
-    %td
-      =@raport_start    
-    %td
-      =@raport_end
     %td
       =@work
     %td
       =@holiday
+    %td
+      =@over_hours
