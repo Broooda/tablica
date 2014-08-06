@@ -53,9 +53,9 @@ RSpec.describe UsersController, type: :controller do
     #   it 'should accept user' do
     #     user1 = User.create(name: "Anna", surname: "Owczarek", email: "test222@mail.pl", password: "razdwatrzycztery", accepted: false)
     #     post :accept, id: user1.id
-    #     puts user1
-    #     puts user1.id
-    #     puts user1.accepted
+    #     # puts user1
+    #     # puts user1.id
+    #     # puts user1.accepted
     #     expect(user1.accepted).to match(true)
     #     expect(response).to redirect_to(users_url)
     #   end

@@ -37,8 +37,8 @@ class UsersController < ApplicationController
 
 	def accept
 		@user = User.find(params[:id])
-		@user.accepted = true
-		@user.save
+		  @user.accepted = true
+      @user.save
     DefaultWorkTime.create(week: [['09:00','17:00'],['09:00','17:00'],['09:00','17:00'],['09:00','17:00'],['09:00','17:00']], user_id: @user.id)	
     if HoursPlan.all.size > 0
       last=HoursPlan.order( 'start_date ASC' ).last
@@ -53,6 +53,7 @@ class UsersController < ApplicationController
     end
     redirect_to users_url
 	end
+
   
 	def show
   	@user=User.find(params[:id])

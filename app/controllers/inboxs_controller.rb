@@ -5,6 +5,7 @@ class InboxsController < ApplicationController
   def index
       @holiday=Holiday.where("status='pending'")
       @dr=DefaultWorkTimeRequest.where("status='pending'")
+      @oh=OverHour.where("status='pending'")
   end
 
   def manual_generate; end
