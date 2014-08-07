@@ -1,9 +1,6 @@
 require 'rails_helper'
 
-<<<<<<< HEAD
-RSpec.describe RaportsController, :type => :controller do
-  
-=======
+
 RSpec.describe RaportsController, type: :controller do
 
 
