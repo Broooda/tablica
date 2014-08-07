@@ -70,22 +70,18 @@ class Raport < ActiveRecord::Base
       work_minutes=0
       holiday_minutes=0
       over_minutes=0
-
       work_days.each do |work_day|
         work_minutes+=TimeDifference.between(work_day.end_date, work_day.start_date).in_minutes
       end
-
       holiday_days.each do |holiday_day|
         holiday_minutes+=holiday_day.hours
       end
-
       over_hours.each do |over_h|
         over_minutes+=over_h.hours*60
       end
       work_hours=(work_minutes/60).to_i
       holiday_hours=(holiday_minutes/60).to_i
       over_hour=(over_minutes/60).to_i
-
       work_minutes=(work_minutes-work_hours*60).to_i
       holiday_minutes=(holiday_minutes-holiday_hours*60).to_i
       over_minutes=(over_minutes-over_hour*60).to_i
