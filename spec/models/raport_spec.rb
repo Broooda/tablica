@@ -1,7 +1,5 @@
 require 'rails_helper'
 
-# :user_id, :date_end, :holiday_hours, :work_hours
-
 RSpec.describe Raport, :type => :model do
   pending "add some examples to (or delete) #{__FILE__}"
 
