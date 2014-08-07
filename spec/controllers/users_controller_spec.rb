@@ -47,17 +47,4 @@ RSpec.describe UsersController, type: :controller do
         expect(assigns(:user)).to match(@user)
       end
     end
-
-# powinno dzialac, nie dziala. GG
-    # describe "accept" do
-    #   it 'should accept user' do
-    #     user1 = User.create(name: "Anna", surname: "Owczarek", email: "test222@mail.pl", password: "razdwatrzycztery", accepted: false)
-    #     post :accept, id: user1.id
-    #     # puts user1
-    #     # puts user1.id
-    #     # puts user1.accepted
-    #     expect(user1.accepted).to match(true)
-    #     expect(response).to redirect_to(users_url)
-    #   end
-    # end 
 end
