@@ -7,7 +7,7 @@
     = n.text_field "date", class: "form-control date-picker fifty-fifty"
   %div.form-group
     = n.label "Over hours count", :style => "width: 100%;"
-    = n.range_field 'hours', :in => 0..5, :step => '.5'
+    = n.number_field 'hours', :in => 1..5, :step => '.5', :value => '1'
   %div.form-group
     = n.text_area "description", size: '19', :class => "form-control", :placeholder => "Why, and what were you doing?"
     = n.submit "Send Request", :class => "form-control"
