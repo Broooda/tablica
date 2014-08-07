@@ -14,11 +14,12 @@ class DefaultWorkTime < ActiveRecord::Base
   
   include GeneratingHours
 
-  #pola: tablica arraów
+  # pola: tablica arraów
   validates_with WeekValidator
   validates :user_id, presence: true
 
   belongs_to :user
+
 
   def self.accepted(request)
     request.status = "accepted"

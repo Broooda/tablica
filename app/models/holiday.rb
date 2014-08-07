@@ -1,3 +1,5 @@
+# coding: UTF-8
+
 class Holiday < ActiveRecord::Base
   belongs_to :user
   validates :startdate, :enddate, :description, :user_id, presence: true

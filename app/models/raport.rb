@@ -7,8 +7,8 @@ class Raport < ActiveRecord::Base
 	private
 		def comparing_dates
       unless self.date_begin.blank? == true or self.date_end.blank? == true
-            errors.add(:date_begin, "must be before end date") unless self.date_begin < self.date_end
-  end
+        errors.add(:date_begin, "must be before end date") unless self.date_begin < self.date_end
+      end
     end
 
     # Raport.generate_raport(start_date, end_date, user_id)

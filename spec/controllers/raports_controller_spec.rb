@@ -30,14 +30,5 @@ RSpec.describe RaportsController, type: :controller do
     expect(response).to have_http_status(200)
     end
   end
-
-  # describe "Type pdf" do
-  #   it "creates a resource" do  
-  #     expect(response).to respond_with_content_type(:pdf)
-  #   end
-  # end
-
-
->>>>>>> 83ada5babcc24bc00c09182e120bab3be8cb3e83
 end
 
