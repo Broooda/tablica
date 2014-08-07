@@ -1,0 +1,68 @@
+#credits-fog {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 13;
+  background: rgba(0,0,0,0.9);
+}
+
+#credits-photo {
+    height: 400px;
+    position: fixed;
+    top: 30px;
+    left: 200px;
+    z-index: 14;
+    -webkit-transform: rotate(-7deg);
+
+    -webkit-box-shadow: 7px 7px 13px 0px #000;
+    box-shadow:         7px 7px 13px 0px #000;
+}
+
+.throw_photo {
+   -webkit-animation: throw_photo_animation 1.5s ease-out 0s;
+}
+
+@-webkit-keyframes throw_photo_animation {
+    0%   {
+      opacity: 0;
+      -webkit-transform: translate(100px,70px) rotate(30deg) ;
+    }
+    100% {
+      opacity: 1;
+      -webkit-transform: translate(0,0) rotate(-7deg) ;
+    }
+}
+
+#credits-made, #credits-with, #credits-love, #credits-forbinar {
+  background-image: url("/assets/credits_sheet.png");
+  background-repeat: no-repeat;
+  display: none;
+  z-index: 15;
+  position: fixed;
+  left: 650px;
+  top: 50px;
+  width: 450px;
+  height: 160px;
+}
+
+#credits-with {
+  left: 880px;
+  top: 75px;
+  height: 85px;
+  background-position: 0 -186px;
+}
+
+#credits-love {
+  left: 770px;
+  top: 145px;
+  background-position: 0 -276px;
+}
+
+#credits-forbinar {
+  left: 650px;
+  top: 295px;
+  background-position: 0 -432px;
+}
