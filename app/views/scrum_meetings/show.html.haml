@@ -1,0 +1,35 @@
+-@meetings.each do |meeting|
+  -if meeting[:max_people] > 0
+    .meeting
+      %h4.text-center
+        at
+        =params[:period]
+        ="starting at" unless params[:period]=="day"
+        %b=meeting[:start_date].strftime("%Y-%-m-%-d")
+        best possible time for stand-up meeting is:
+      %h3.text-center
+        =meeting[:time].strftime("%Y-%-m-%-d %k:%M")
+      %div.progress_with_people
+        .progress
+          .progress-bar.progress-bar-success{style: "width: "+(meeting[:max_people].to_f/@active_user_number*100).to_s+"%", role: "progressbar"}
+            =meeting[:max_people]
+            at work 
+          .progress-bar.progress-bar-warning{style: "width: "+(meeting[:people_at_holidays].size.to_f/@active_user_number*100).to_s+"%", role: "progressbar"}
+            =meeting[:people_at_holidays].size
+            at holidays
+        .people
+          %table.table
+            / =debug meeting
+            %tr
+              %td{style: "width: 50%"}
+                %p.text-center
+                  %b At work:
+                %ol
+                  -meeting[:people].each do |person|
+                    %li=person.full_name(true)
+              %td
+                %p.text-center
+                  %b At holidays:
+                %ol
+                  -meeting[:people_at_holidays].each do |person|
+                    %li=person.full_name(true)

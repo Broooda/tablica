@@ -1,4 +1,3 @@
-- days = [nil,'monday', 'tuesday','wednesday','thursday','friday']
 
 -# przekazanie zmiennych do JS
 :javascript
@@ -23,7 +22,7 @@
                 -User.get_all_tags.each do |tag|
                   %span.label.label-default=tag
         -else
-          .dayname=raw(days[day_num])
+          .dayname=raw(DaysNil[day_num])
           .daydate=comercial_date
       -now_hour = @start_hour
       -@users.each do |user|
@@ -42,8 +41,4 @@
                     %span.hour-text=user_hours_plan.start_date.strftime('%k:%M')
                     to
                     %span.hour-text=user_hours_plan.end_date.strftime('%k:%M')
-                  -if user_hours_plan.over_hours and user_hours_plan.over_hours>0 # TODO: napisać to ładniej po tym jak dodam wartość default 0 w over_hours w bazie
-                    %p.over-hours
-                      %span.hour-text=user_hours_plan.over_hours
-                      over hours
 

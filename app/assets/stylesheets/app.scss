@@ -25,7 +25,21 @@ body {
 
   #logo {
 
+    position: relative;
+
     padding-left: 70px;
+
+    #hour_hand, #minute_hand , #second_hand{
+      position: absolute;
+      left: 70+40px;
+      top: 59px;
+
+      transform-origin: center 2px;
+      -webkit-transform-origin: center 2px;
+
+      transform: rotate(180deg);
+      -webkit-transform: rotate(180deg);
+    }
     
 
     p{
@@ -97,6 +111,27 @@ body {
   font-family: 'Open Sans', sans-serif;
  
   .authors {display: none;}
+}
+
+.meeting {
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.2  );
+
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+
+  .people {
+    display: none;
+  }
+}
+
+#stand-up-loader 
+{
+  text-align: center;
+  margin: 50px;
+  display: none;
 }
 
 .inbox-block {

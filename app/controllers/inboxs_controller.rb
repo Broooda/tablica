@@ -5,13 +5,12 @@ class InboxsController < ApplicationController
   def index
       @holiday=Holiday.where("status='pending'")
       @dr=DefaultWorkTimeRequest.where("status='pending'")
+      @oh=OverHour.where("status='pending'")
   end
 
-  def manual_generate
-  end
+  def manual_generate; end
 
   def manual_generate_post
-
       current_week=Time.now.to_date.cweek
       last_week=params['week'].to_date.cweek     
       difference=last_week-current_week
@@ -25,11 +24,11 @@ class InboxsController < ApplicationController
       end
   end
 
+  private
+
   def make_sure_im_admin
      unless current_user.admin
        redirect_to root_url, alert: "Only for Admins"
      end
   end
-
-
 end

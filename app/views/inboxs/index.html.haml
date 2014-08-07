@@ -1,6 +1,5 @@
 / Komentarz: @dr = default work time request
 /             @d = default work time 
-- days = ['monday', 'tuesday','wednesday','thursday','friday']
 
 %h1 Holidays requests:
 -if @holiday.size == 0
@@ -49,7 +48,7 @@
       -request.week.each do |day|
         -unless day[0] == actuall_week[day_counter][0] and day[1] == actuall_week[day_counter][1]
           %b
-            =days[day_counter]
+            =Days[day_counter]
           from
           %b=actuall_week[day_counter][0]+"-"+actuall_week[day_counter][1]
           to
@@ -64,3 +63,21 @@
           .btn-group
             =link_to "Accept", default_work_time_accept_url(request.id), :class => "btn btn-success"
             =submit_tag "Reject", :class => "btn btn-danger", data: { confirm: "This this person will be sad because of your decision. Are you sure you want to reject?"}
+%hr
+
+  %h1 Over hours requests:
+  -if @oh.size==0
+    %h3 no over hours requests, noone wants to work more
+  -else
+    -@oh.each do |over|
+      .inbox-block
+        %b=over.user.full_name
+        Date:
+        =over.date.to_date
+        Hours:
+        =over.hours
+        Description:
+        =over.description
+        .btn-group
+          =link_to 'Accept', over_accept_path(over.id), method: :post, :class => "btn btn-success"
+          =link_to 'Reject', over_reject_path(over.id), method: :post, :class => "btn btn-danger"

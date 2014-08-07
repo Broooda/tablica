@@ -1,26 +1,36 @@
 .row#top
   .col-md-5#logo
-    =link_to image_tag("logo.png",), root_url
-    %p= link_to "#binar-planner", root_url
+    %a(href="#{root_url}")
+      =image_tag("logo_without_hands.png")
+      #hour_hand
+        =image_tag("hour_hand.png")
+      #minute_hand
+        =image_tag("minute_hand.png")
+      #second_hand
+        =image_tag("second_hand.png")
+      %p #binar-planner
   .col-md-7.text-right#nav
     %ul
       -if user_signed_in?
+        %li=link_to (raw('<span class="glyphicon glyphicon-list-alt"></span>')), users_url
+        -if current_user.tags_array.include?('ScrumMaster') or current_user.admin
+          %li=link_to (raw('<span class="glyphicon glyphicon-briefcase"></span>')), scrum_meeting_path
         -if current_user.admin
           %li= link_to (raw('<span class="glyphicon glyphicon-stats"></span>')), manual_generate_path
           %li=link_to (raw('<span class="glyphicon glyphicon-envelope"></span>'+@inbox_msgs)), inboxs_path
-        %li=link_to raw('logged as <b>'+current_user.name+' '+current_user.surname+'</b>'), user_url(current_user.id) #link do profilu użytkownika
+        %li=link_to raw('<b>'+current_user.name+' '+current_user.surname+'</b>'), user_url(current_user.id) #link do profilu użytkownika
         %li=link_to "sign out", destroy_user_session_url, :method => :delete
       -else
         %li=link_to "sign in", new_user_session_url
         %li=link_to "sign up", new_user_registration_url
-    -if current_user
+    -if user_signed_in?
       %ul
         %li=link_to "Week plan", week_time_url
         %li=link_to "Holidays", holidays_path
         %li=link_to "Raports", new_raport_url
+        %li=link_to "Over hour", over_hours_path
         -if current_user.default_work_time
           %li=link_to "Default hours", default_work_time_path(current_user.default_work_time.id)
-        %li=link_to "Users", users_url
 .row
   .col-md-12
     -if flash[:error]

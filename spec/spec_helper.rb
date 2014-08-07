@@ -15,6 +15,9 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
+
+
+
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin
@@ -75,4 +78,21 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 =end
+end
+require 'simplecov'
+require 'simplecov-rcov'
+SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
+SimpleCov.start do
+    add_filter 'spec/'
+      add_filter 'config/'
+        add_group 'Library', '/lib'
+
+          Dir['app/*'].each do |path|
+                name = path.split('/').last.capitalize
+                    add_group name, path unless %w(assets).include?(name)
+                      end
+
+            add_group 'Long files' do |src_file|
+                  src_file.lines.count > 100
+                    end
 end

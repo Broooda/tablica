@@ -12,6 +12,9 @@
   -if current_user.admin == true
     %div.form-group
       = f.label "Tags"
+      %p
+        %b Hint:
+        you can add "ScrumMaster" tag to this user to give him permmision to "Stand-up meetings" tool
       = f.text_field :tags, :class => "form-control"
   %div.form-group
     = f.submit "Save", :class => "form-control"

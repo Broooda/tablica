@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
+  
   protect_from_forgery with: :exception
 
   before_action :unaccepted_user
@@ -15,7 +16,8 @@ class ApplicationController < ActionController::Base
     if current_user and current_user.admin
       @inbox_msgs = Holiday.where("status='pending'").size
       @inbox_msgs += DefaultWorkTimeRequest.where("status='pending'").size
-
+      @inbox_msgs += OverHour.where("status='pending'").size
+    
       if @inbox_msgs > 0
         @inbox_msgs = ' <span class="badge pulse">'+@inbox_msgs.to_s+'</span>'
       else

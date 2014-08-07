@@ -8,12 +8,16 @@ Rails.application.routes.draw do
   get 'users/makeadmin/:id' => 'users#make_admin', as: "make_admin"
   get 'users/unmakeadmin/:id' => 'users#unmake_admin', as: "unmake_admin"
 
+  
   get 'week/time' => 'week#showtime'
   get 'week/time/:year/:week' => 'week#showtime', as: "week_time_date"
   get 'week/time/:fulldate' => 'week#showtime', as: "week_time_fulldate"
   get 'week/people' => 'week#showpeople'
   get 'week/people/:fulldate' => 'week#showpeople', as: "week_people_fulldate"
   get 'week/people/:year/:week' => 'week#showpeople', as: "week_people_date"
+
+  get 'stand_up' => 'scrum_meetings#index', as: "scrum_meeting"
+  get 'ajax/stand_up/show' => 'scrum_meetings#show', as: "scrum_meeting_ajax"
 
   get 'default_work_times/generate' => 'default_work_times#generate_few_weeks', as: "generate_hours_plans"
   get 'raports/generate_email' => 'raports#generate_email', as: "generate_email"
@@ -33,9 +37,7 @@ Rails.application.routes.draw do
   post 'update_work_time' => 'default_work_times#update_work_time', as: :update_work_time
   get 'manual_generate' => 'inboxs#manual_generate', as: :manual_generate
   post 'manual_generate_post' => 'inboxs#manual_generate_post', as: :manual_generate_post
-  
-  get 'ajax/hours_plans/edit/:id' => 'hours_plans#edit', as: "edit_hours_plans_ajax"
-  post 'hours_plans/update/:id' => 'hours_plans#update', as: "update_hours_plans"
+
 
   resources :raports, only: [:index, :pdf_view, :new, :create]#:history]
 
@@ -49,6 +51,9 @@ Rails.application.routes.draw do
 
   resources :hours_plans
 
+  resources :over_hours
+  post 'accept/:id' => 'over_hours#accept', as: :over_accept
+  post 'reject/:id' => 'over_hours#reject', as: :over_reject
 
   get 'layouts/pdfgen' =>'users#index', as: "generate_pdf"
 
