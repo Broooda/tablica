@@ -5,11 +5,14 @@ class WeekController < ApplicationController
   before_action :selectweek
   before_action :gethoursplan
 
-
-
-  def showtime #wyswietla kalendarz
-    @start_hour = 9
-    @end_hour = 22
+  def showtime
+    if @hours_plans.size>0
+      @start_hour = @hours_plans.minimum('start_date').strftime("%k").to_i+1
+      @end_hour = @hours_plans.maximum('end_date').strftime("%k").to_i+3
+    else
+      @start_hour = 9
+      @end_hour = 15
+    end
   end
 
   def showpeople
@@ -21,7 +24,6 @@ class WeekController < ApplicationController
     get_to = DateTime.commercial(@year, @week_num, 6,0,0,0,'+2') #do sobota 0:00
 
     @hours_plans = HoursPlan.where('start_date > :from and start_date < :to', { from: get_from, to: get_to})
-
   end
 
   def selectweek
