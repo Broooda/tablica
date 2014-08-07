@@ -21,7 +21,7 @@ $(function() {
   $('.inbox-block textarea').focus(function(){
     $(this).animate({height: 90, width: 420});
   });
-
+  
   clock_animation_start = 0 ;
 
   $hour_hand = $('#hour_hand');

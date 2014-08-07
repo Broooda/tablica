@@ -7,7 +7,7 @@
     = n.text_field "date", class: "form-control date-picker fifty-fifty"
   %div.form-group
     = n.label "Over hours count", :style => "width: 100%;"
-    = n.text_field "hours", :class => "form-control", :style => "width: 35%;"
+    = n.range_field 'hours', :in => 0..5, :step => '.5'
   %div.form-group
     = n.text_area "description", size: '19', :class => "form-control", :placeholder => "Why, and what were you doing?"
     = n.submit "Send Request", :class => "form-control"
@@ -31,3 +31,4 @@
             =link_to 'Delete', over_hour_path(o.id), method: :delete, data: { confirm: 'Are you sure?'}, :class=>"btn btn-danger"
 -else
   %p No requests, you are not working too much 
+
