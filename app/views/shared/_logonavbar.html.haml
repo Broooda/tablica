@@ -28,7 +28,7 @@
         %li=link_to "Week plan", week_time_url
         %li=link_to "Holidays", holidays_path
         %li=link_to "Raports", new_raport_url
-        %li=link_to "Over hour", over_hours_path
+        %li=link_to "Over hours", over_hours_path
         -if current_user.default_work_time
           %li=link_to "Default hours", default_work_time_path(current_user.default_work_time.id)
 .row
