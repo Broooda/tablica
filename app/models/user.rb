@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
         has_one :default_work_time
         has_one :default_work_time_request
 
+        has_many :over_hour
         has_many :hours_plan
         has_many :holiday
 

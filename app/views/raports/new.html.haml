@@ -25,9 +25,9 @@
  
  
   .form-group
- 
-    =submit_tag "Generate Raport", :class => "form-control", target: "_blank"
- 
+    =check_box_tag 'send_email', 'yes', false
+    Send me e-mail with this raport
+    =submit_tag "Generate", :class => "form-control", target: "_blank"
  
  
 -if current_user.admin? == true
@@ -57,9 +57,9 @@
  
  
     .form-group
+      =check_box_tag 'send_email', 'yes', false
+      Send me e-mail with this raport
+      =submit_tag "Generate", :class => "form-control", target: "_blank"
  
-      =submit_tag "Generate Raport", :class => "form-control", target: "_blank"
  
- 
- 
-%h4=link_to "History of raports", raports_url
+/%h4=link_to "History of raports", raports_url

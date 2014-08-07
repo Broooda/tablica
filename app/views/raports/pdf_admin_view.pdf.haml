@@ -8,6 +8,7 @@
   body { margin: 0; padding: 0; }
   table { width: 95%; margin: 0 auto; }
   h1 { font-weight: light; text-align: center; }
+  .small { font-weight: light; text-align: center; font-size: 70%;}
   th, td { padding: 1.5mm; }
   table, th, td { border: 0.2mm solid #170f35; border-collapse: collapse; }
 
@@ -24,7 +25,9 @@
   =@raports[0].date_begin
   to
   =@raports[0].date_end
--counter=0
+.small
+  Generated
+  =Time.now.to_date
 %table
   %tr
     %th
@@ -41,9 +44,8 @@
         =User.find(raport.generator_id).name
         =User.find(raport.generator_id).surname
       %td
-        =@work[counter]
+        =raport.work_hours
       %td
-        =@holiday[counter]
+        =raport.holiday_hours
       %td
-        =@over_hours[counter]
-        -counter+=1
+        =raport.over_hours
