@@ -12,8 +12,8 @@
 #credits-photo {
     height: 400px;
     position: fixed;
-    top: 30px;
-    left: 200px;
+    top: 80px;
+    left: 70px;
     z-index: 14;
     -webkit-transform: rotate(-7deg);
 
@@ -36,33 +36,70 @@
     }
 }
 
-#credits-made, #credits-with, #credits-love, #credits-forbinar {
+#credits-made, #credits-with, #credits-love, #credits-forbinar,
+#credits-justyna, #credits-kamil, #credits-adam, #credits-maciek, #credits-przemek {
   background-image: url("/assets/credits_sheet.png");
   background-repeat: no-repeat;
   display: none;
   z-index: 15;
   position: fixed;
-  left: 650px;
+  left: 820px;
   top: 50px;
   width: 450px;
   height: 160px;
 }
 
 #credits-with {
-  left: 880px;
+  left: 1050px;
   top: 75px;
   height: 85px;
   background-position: 0 -186px;
 }
 
 #credits-love {
-  left: 770px;
+  left: 940px;
   top: 145px;
   background-position: 0 -276px;
 }
 
 #credits-forbinar {
-  left: 650px;
+  left: 820px;
   top: 295px;
+  height: 115px;
   background-position: 0 -432px;
+}
+
+#credits-maciek {
+  left: 10px;
+  top: 55px;
+  height: 100px;
+  background-position: 0 -543px;
+}
+
+#credits-justyna {
+  left: 620px;
+  top: 335px;
+  height: 172px;
+  background-position: 0 -637px;
+}
+
+#credits-adam {
+  left: 310px;
+  top: 5px;
+  height: 125px;
+  background-position: 0 -812px;
+}
+
+#credits-przemek {
+  left: 10px;
+  top: 455px;
+  height: 66px;
+  background-position: 0 -939px;
+}
+
+#credits-kamil {
+  left: 390px;
+  top: 395px;
+  height: 96px;
+  background-position: 0 -1005px;
 }

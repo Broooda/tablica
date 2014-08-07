@@ -14,10 +14,23 @@ $(function() {
         $('body').append('<div id="credits-love"></div>');    
         $('body').append('<div id="credits-forbinar"></div>');
 
+        $('body').append('<div id="credits-justyna"></div>');
+        $('body').append('<div id="credits-adam"></div>'); 
+        $('body').append('<div id="credits-kamil"></div>'); 
+        $('body').append('<div id="credits-maciek"></div>'); 
+        $('body').append('<div id="credits-przemek"></div>'); 
+
         $('#credits-made').delay( 1300 ).fadeIn( 700 );
         $('#credits-with').delay( 1800 ).fadeIn( 700 );
         $('#credits-love').delay( 2300 ).fadeIn( 700 );
         $('#credits-forbinar').delay( 2800 ).fadeIn( 700 );
+
+        $('#credits-justyna').delay( 3700 ).fadeIn( 700 );
+        $('#credits-kamil').delay( 4200 ).fadeIn( 700 );
+        $('#credits-przemek').delay( 4700 ).fadeIn( 700 );
+        $('#credits-maciek').delay( 5200 ).fadeIn( 700 );
+        $('#credits-adam').delay( 5700 ).fadeIn( 700 );
+
 
       });
     });
