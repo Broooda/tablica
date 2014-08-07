@@ -1,7 +1,7 @@
 class DefaultWorkTimesRequestController < ApplicationController
 before_action :make_sure_its_mine, only: [:destroy]
 
-def destroy
+  def destroy
     @default_work_time_request=DefaultWorkTimeRequest.find(params[:id])
     default_work_time_id=User.find(@default_work_time_request.user_id).default_work_time.id
     if @default_work_time_request.destroy
@@ -17,5 +17,5 @@ def destroy
       @user = DefaultWorkTimeRequest.find(params[:id]).user
       return false if current_user.id == @user.id or current_user.admin == true
         redirect_to user_path, alert: "It's not yours!"
-    end
+  end
 end
