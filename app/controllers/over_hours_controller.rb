@@ -1,7 +1,7 @@
 class OverHoursController < ApplicationController
   
   def index
-    @overs=OverHour.where(user_id: current_user.id)
+    @overs=OverHour.where(user_id: current_user.id).order('date DESC')
     @over_hour=OverHour.new
   end
 

@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
     if current_user and current_user.admin
       @inbox_msgs = Holiday.where("status='pending'").size
       @inbox_msgs += DefaultWorkTimeRequest.where("status='pending'").size
+      @inbox_msgs += OverHour.where("status='pending'").size
     
       if @inbox_msgs > 0
         @inbox_msgs = ' <span class="badge pulse">'+@inbox_msgs.to_s+'</span>'
