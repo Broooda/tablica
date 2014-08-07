@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   
 
   resources :default_work_times_request, only: [:destroy]
+  match "delete" => "default_work_times_request#destroy", :via => :delete
 
   resources :holidays
   get 'holidays/accept/:id' => 'holidays#accept', as: "holiday_accept"

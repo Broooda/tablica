@@ -9,7 +9,7 @@ class RaportsController < ApplicationController
 	end
 
 	def pdf_view
-    #start, end, ID usera ktorego chcemy wygenerowac, obecny user
+    # start, end, ID usera ktorego chcemy wygenerowac, obecny user
   	this_raport = Raport.generate_raport(params[:start], params[:end], current_user.id, current_user)
     if this_raport.save
       @raport = this_raport
@@ -58,7 +58,6 @@ class RaportsController < ApplicationController
       end
     end
   end
-
 end
 
 
