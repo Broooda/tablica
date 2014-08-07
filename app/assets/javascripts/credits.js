@@ -19,7 +19,6 @@ $(function() {
         $('#credits-love').delay( 2300 ).fadeIn( 700 );
         $('#credits-forbinar').delay( 2800 ).fadeIn( 700 );
 
-
       });
     });
   });

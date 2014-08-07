@@ -9,8 +9,6 @@ function rotate(object, degree) {
   });
 }
 
-
-
 $(function() {
   $('#footer').hover(function(){
     $('#footer').css('background','rgba(0,0,0,0.3)');
@@ -21,7 +19,7 @@ $(function() {
   $('.date-picker').datepicker({format: 'yyyy-mm-dd', weekStart: 1});
 
   $('.inbox-block textarea').focus(function(){
-   $(this).animate({height: 90, width: 420});
+    $(this).animate({height: 90, width: 420});
   });
 
   clock_animation_start = 0 ;
@@ -45,11 +43,5 @@ $(function() {
     rotate($second_hand, SecondDeg*clock_animation_start - 180);
 
   }, 40);
-
-
-
-  
-
-
 
 });
