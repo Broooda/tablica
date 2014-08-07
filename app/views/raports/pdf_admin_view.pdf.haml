@@ -33,6 +33,8 @@
       Worked
     %th
       Holiday
+    %th
+      Over Hours
   -@raports.each do |raport|
     %tr
       %td
@@ -42,4 +44,6 @@
         =@work[counter]
       %td
         =@holiday[counter]
-    -counter+=1
+      %td
+        =@over_hours[counter]
+        -counter+=1

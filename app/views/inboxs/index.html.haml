@@ -64,16 +64,20 @@
             =link_to "Accept", default_work_time_accept_url(request.id), :class => "btn btn-success"
             =submit_tag "Reject", :class => "btn btn-danger", data: { confirm: "This this person will be sad because of your decision. Are you sure you want to reject?"}
 %hr
+
   %h1 Over hours requests:
   -if @oh.size==0
     %h3 no over hours requests, noone wants to work more
   -else
     -@oh.each do |over|
-      Date:
-      =over.date.to_date
-      Hours:
-      =over.hours
-      Description:
-      =over.description
-      =link_to 'Accept', over_accept_path(over.id), method: :post
-      =link_to 'Reject', over_reject_path(over.id), method: :post
+      .inbox-block
+        %b=over.user.full_name
+        Date:
+        =over.date.to_date
+        Hours:
+        =over.hours
+        Description:
+        =over.description
+        .btn-group
+          =link_to 'Accept', over_accept_path(over.id), method: :post, :class => "btn btn-success"
+          =link_to 'Reject', over_reject_path(over.id), method: :post, :class => "btn btn-danger"

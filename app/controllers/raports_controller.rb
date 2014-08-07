@@ -14,6 +14,7 @@ class RaportsController < ApplicationController
     if this_raport.save
   		@work = this_raport.work_hours
       @holiday = this_raport.holiday_hours
+      @over_hours=this_raport.over_hours
       @raport_start = params[:start]
       @raport_end = params[:end]
       respond_to do |format|
@@ -32,12 +33,14 @@ class RaportsController < ApplicationController
     @raports=[]
     @work=[]
     @holiday=[]
+    @over_hours=[]
     this_raport.each do |raport|
       if raport.valid?
         raport.save
         @raports[counter]=raport
         @work[counter] = raport.work_hours
         @holiday[counter] = raport.holiday_hours
+        @over_hours[counter]=raport.over_hours
         @raport_start = params[:start]
         @raport_end = params[:end]
         counter+=1
