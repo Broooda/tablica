@@ -26,18 +26,18 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
-	def index
-		@users = User.order('surname')
+  def index
+    @users = User.order('surname')
     respond_to do |format|
       format.html
       format.pdf do render :pdf => "generated.pdf", :layout => 'pdfgen.html'
       end
     end
-	end
+  end
 
-	def accept
-		@user = User.find(params[:id])
-		  @user.accepted = true
+  def accept
+    @user = User.find(params[:id])
+      @user.accepted = true
       @user.save
     DefaultWorkTime.create(week: [['09:00','17:00'],['09:00','17:00'],['09:00','17:00'],['09:00','17:00'],['09:00','17:00']], user_id: @user.id)	
     if HoursPlan.all.size > 0
@@ -52,11 +52,11 @@ class UsersController < ApplicationController
       DefaultWorkTime.generate_hours_plans(counter, @user.id) 
     end
     redirect_to users_url
-	end
+  end
 
   
-	def show
-  	@user=User.find(params[:id])
+  def show
+    @user=User.find(params[:id])
     earliest_hoursplan
     respond_to do |format|
       format.html
