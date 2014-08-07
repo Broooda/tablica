@@ -8,6 +8,7 @@
   body { margin: 0; padding: 0; }
   table { width: 95%; margin: 0 auto; }
   h1 { font-weight: light; text-align: center; }
+  .small { font-weight: light; text-align: center; font-size: 70%;}
   th, td { padding: 1.5mm; }
   table, th, td { border: 0.2mm solid #170f35; border-collapse: collapse; }
 
@@ -21,9 +22,12 @@
 
 %h1
   Raport from
-  =@raport_start
+  =@raport.date_begin
   to
-  =@raport_end
+  =@raport.date_end
+.small
+  Generated
+  =Time.now.to_date
 %table
   %tr
     %th
@@ -39,8 +43,8 @@
       =current_user.name
       =current_user.surname
     %td
-      =@work
+      =@raport.work_hours
     %td
-      =@holiday
+      =@raport.holiday_hours
     %td
-      =@over_hours
+      =@raport.over_hours

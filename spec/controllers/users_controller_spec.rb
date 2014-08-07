@@ -40,11 +40,4 @@ RSpec.describe UsersController, type: :controller do
       expect(assigns(:user)).to match(@user)
     end
   end
-
-  describe "GET #show" do
-    it 'should display one user' do
-      get :show, id: @user.id
-      expect(assigns(:user)).to match(@user)
-    end
-  end 
 end

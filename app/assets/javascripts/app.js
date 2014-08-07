@@ -9,8 +9,6 @@ function rotate(object, degree) {
   });
 }
 
-
-
 $(function() {
   $('#footer').hover(function(){
     $('#footer').css('background','rgba(0,0,0,0.3)');
@@ -21,10 +19,14 @@ $(function() {
   $('.date-picker').datepicker({format: 'yyyy-mm-dd', weekStart: 1});
 
   $('.inbox-block textarea').focus(function(){
-   $(this).animate({height: 90, width: 420});
+    $(this).animate({height: 90, width: 420});
   });
 
   clock_animation_start = 0 ;
+
+  $hour_hand = $('#hour_hand');
+  $minute_hand = $('#minute_hand');
+  $second_hand = $('#second_hand');
 
   setInterval(function(){
     d = new Date();
@@ -36,16 +38,10 @@ $(function() {
     MinuteDeg = d.getMinutes()*360/60 + d.getSeconds()*360/60/60;
     SecondDeg = d.getSeconds()*360/60 + d.getMilliseconds()*360/60/1000;
 
-    rotate($('#hour_hand'), HourDeg*clock_animation_start - 180);
-    rotate($('#minute_hand'), MinuteDeg*clock_animation_start - 180);
-    rotate($('#second_hand'), SecondDeg*clock_animation_start - 180);
+    rotate($hour_hand, HourDeg*clock_animation_start - 180);
+    rotate($minute_hand, MinuteDeg*clock_animation_start - 180);
+    rotate($second_hand, SecondDeg*clock_animation_start - 180);
 
   }, 40);
-
-
-
-  
-
-
 
 });
