@@ -36,5 +36,5 @@ $(function() {
     });
   });
 
-  //$('.heart').click();
+  //  $('.heart').click();
 });
