@@ -15,7 +15,7 @@ RSpec.describe HoursPlan, :type => :model do
   DefaultWorkTime.create(week: [['9:00','16:00'],['9:00','16:00'],['9:00','16:00'],['9:00','16:00'],['9:00','16:00']], user_id: User.last.id)
   DefaultWorkTime.generate_few_weeks
 
-  expect(HoursPlan.most_people_at_the_same_time(Time.now, Time.now+1.day)).to include({max_people: 2, people: [@user,@user2]})
+  expect(HoursPlan.most_people_at_the_same_time(DateTime.commercial(Date.today.year, Date.today.cweek+1, 1,0,0,0,'+2'), DateTime.commercial(Date.today.year, Date.today.cweek+1, 2,0,0,0,'+2'))).to include({max_people: 2, people: [@user,@user2]})
  end
  end
 

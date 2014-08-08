@@ -4,14 +4,14 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :rememberable, :trackable, :validatable
 
-        validates :name, :surname, presence: true
-      
-        has_one :default_work_time
-        has_one :default_work_time_request
+  validates :name, :surname, presence: true
 
-        has_many :over_hour
-        has_many :hours_plan
-        has_many :holiday
+  has_one :default_work_time
+  has_one :default_work_time_request
+
+  has_many :over_hour
+  has_many :hours_plan
+  has_many :holiday
 
   scope :active,-> { where("accepted = true") }
 
@@ -37,5 +37,4 @@ class User < ActiveRecord::Base
     end
     tags
   end
-
 end

@@ -1,6 +1,5 @@
 # coding: UTF-8
 
-
 # Validator sprawdzający wilekość tablicy. Array 5 elementowy, zawierający arraye 2 elementowe
 class WeekValidator < ActiveModel::Validator
   def validate(record)
@@ -9,9 +8,8 @@ class WeekValidator < ActiveModel::Validator
   end
 end
 
-
+# 
 class DefaultWorkTime < ActiveRecord::Base
-  
   include GeneratingHours
 
   # pola: tablica arraów
@@ -40,7 +38,7 @@ class DefaultWorkTime < ActiveRecord::Base
   end
 
   def self.generate_few_weeks
-      (0..10).each do |counter|
+    (0..10).each do |counter|
       DefaultWorkTime.generate_hours_plans(counter)
     end
   end
